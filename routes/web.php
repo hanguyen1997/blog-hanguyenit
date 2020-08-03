@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('layout');
-});
+Route::get('/', 'HomeController@index');
+Route::get('/trang-chu', 'HomeController@index');
+
+
+/*begin : admin*/
+Route::get('/dashboard', 'AdminController@dashboard');
+Route::get('/index-posts', 'PostController@index');
