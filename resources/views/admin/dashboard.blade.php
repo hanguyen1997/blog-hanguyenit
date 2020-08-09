@@ -1,6 +1,5 @@
 @extends('admin_layout');
 @section('content')
-
 <!-- //market-->
 <div class="market-updates">
 	<div class="col-md-4 market-update-gd">

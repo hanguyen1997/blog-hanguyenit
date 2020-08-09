@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Ha Nguyen</title>
+  <title>Ha Nguyen IT</title>
   <meta content="" name="keywords">
   <meta content="" name="description">
 
@@ -56,7 +56,7 @@
           <li><a href="#header" class="smoothScroll">Trang Chủ</a></li>
           <li><a href="#about" class="smoothScroll">Thông Tin</a></li>
           <li><a href="#journal" class="smoothScroll">Blog</a></li>
-          <li><a href="#contact" class="smoothScroll">Contact</a></li>
+          <li><a href="#contact" class="smoothScroll">Liên hệ</a></li>
         </ul>
       </div>
     </div>

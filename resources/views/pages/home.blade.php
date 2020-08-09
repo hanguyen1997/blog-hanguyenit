@@ -27,7 +27,7 @@
       <div class="col-lg-4 ">
         <div class="div-img-bg">
           <div class="about-img">
-            <img src="{{asset('public/fontend/images/me (2).jpg')}}" class="img-responsive" alt="me">
+            <img src="{{asset('public/fontend/images/57161061_1682813328530900_5025365504462684160_n (1).jpg')}}" class="img-responsive" alt="me">
           </div>
         </div>
       </div>
@@ -53,31 +53,13 @@
   <div class="container">
       <div class="services-carousel owl-theme">
         <div class="services-block">
-            <img src="{{asset('public/fontend/images/me (2).jpg')}}"  style="width: 100%; height: auto;" class="" alt="me">
+            <img src="{{asset('public/fontend/images/83832023_1976637929148437_6660646337882619904_n.jpg')}}"  style="image-rendering: pixelated;width: 100%;object-fit: cover; height: 300px;" class="" alt="me">
         </div>
         <div class="services-block">
-            <img src="{{asset('public/fontend/images/me (2).jpg')}}"  style="width: 100%; height: auto;" class="" alt="me">
+            <img src="{{asset('public/fontend/images/48277896_1588746094604291_8441482367423479808_n.jpg')}}"  style="image-rendering: pixelated;object-fit: cover;width: 100%; height: 300px;" class="" alt="me">
         </div>
         <div class="services-block">
-            <img src="{{asset('public/fontend/images/me (2).jpg')}}"  style="width: 100%; height: auto;" class="" alt="me">
-        </div>
-        <div class="services-block">
-            <img src="{{asset('public/fontend/images/me (2).jpg')}}"  style="width: 100%; height: auto;" class="" alt="me">
-        </div>
-        <div class="services-block">
-            <img src="{{asset('public/fontend/images/me (2).jpg')}}"  style="width: 100%; height: auto;" class="" alt="me">
-        </div>
-        <div class="services-block">
-            <img src="{{asset('public/fontend/images/me (2).jpg')}}"  style="width: 100%; height: auto;" class="" alt="me">
-        </div>
-        <div class="services-block">
-            <img src="{{asset('public/fontend/images/me (2).jpg')}}"  style="width: 100%; height: auto;" class="" alt="me">
-        </div>
-        <div class="services-block">
-            <img src="{{asset('public/fontend/images/me (2).jpg')}}"  style="width: 100%; height: auto;" class="" alt="me">
-        </div>
-        <div class="services-block">
-            <img src="{{asset('public/fontend/images/me (2).jpg')}}"  style="width: 100%; height: auto;" class="" alt="me">
+            <img src="{{asset('public/fontend/images/me (2).jpg')}}"  style="object-fit: cover;width: 100%; height: 300px;" class="" alt="me">
         </div>
       </div>
   </div>
@@ -97,13 +79,13 @@
   <div class="container">
     <div class="journal-block">
       <div class="row">
-        @foreach ($array_post as $key => $post)
+        @foreach ($array_blog as $key => $post)
         <div class="col-lg-4 col-md-6">
           <div class="journal-info">
-            <a href="blog-single.html"><img src="{{asset('public/fontend/images/blog-post-1.jpg')}}" class="img-responsive" alt="img"></a>
+            <a href="blog-single.html"><img src="{{asset('public/uploads/'.$post->blog_image)}}" style="object-fit: cover;width:100%;height: 300px;" class="img-responsive" alt="img"></a>
             <div class="journal-txt">
-              <h4><a href="blog-single.html">{{$post->post_title}}</a></h4>
-              <p class="separator">{{$post->post_description}}</p>
+              <h4><a href="blog-single.html">{{$post->blog_title}}</a></h4>
+              <p style="width: 100%;overflow: hidden;text-overflow: ellipsis;-webkit-line-clamp: 10;display: -webkit-box;-webkit-box-orient: vertical;" class="separator">{{$post->blog_description}}</p>
             </div>
           </div>
         </div>

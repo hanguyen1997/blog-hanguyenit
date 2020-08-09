@@ -29,7 +29,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <header class="header fixed-top clearfix">
 <!--logo start-->
 <div class="brand">
-    <a href="index.html" class="logo">
+    <a href="{{URL::to('/')}}" class="logo">
         Hà Nguyên IT
     </a>
     <div class="sidebar-toggle-box">
@@ -79,13 +79,22 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <li class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                 <img alt="" src="{{asset('public/backend/images/2.png')}}">
-                <span class="username">John Doe</span>
+                 <span class="username">
+                <?php 
+                    $user_name = Session::get('user_name');
+                    if(isset($user_name))
+                    {
+                        echo $user_name;
+                    }
+
+                ?>
+                </span>
                 <b class="caret"></b>
             </a>
             <ul class="dropdown-menu extended logout">
                 <li><a href="#"><i class=" fa fa-suitcase"></i>Profile</a></li>
                 <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
-                <li><a href="login.html"><i class="fa fa-key"></i> Log Out</a></li>
+                <li><a href="{{URL::to('/logout')}}"><i class="fa fa-key"></i> Log Out</a></li>
             </ul>
         </li>
         <!-- user login dropdown end -->
@@ -113,8 +122,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <span>Bài viết</span>
                     </a>
                     <ul class="sub">
-						<li><a href="{{URL::to('/index-posts')}}">Danh sách bài viết</a></li>
-						<li><a href="{{URL::to('/add-posts')}}">Thêm bài viết</a></li>
+						<li><a href="{{URL::to('/all-blog')}}">Danh sách bài viết</a></li>
+						<li><a href="{{URL::to('/add-blog')}}">Thêm bài viết</a></li>
+                    </ul>
+                </li>
+                <li class="sub-menu">
+                    <a href="javascript:;">
+                        <i class="fa fa-picture-o"></i>
+                        <span>Hình ảnh slider trang chủ</span>
+                    </a>
+                    <ul class="sub">
+                        <li><a href="{{URL::to('/all-image-about')}}">Danh sách hình ảnh</a></li>
+                        <li><a href="{{URL::to('/add-image-about')}}">Thêm hình ảnh</a></li>
                     </ul>
                 </li>
             </ul>            
@@ -143,6 +162,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script src="{{asset('public/backend/js/scripts.js')}}"></script>
 <script src="{{asset('public/backend/js/jquery.slimscroll.js')}}"></script>
 <script src="{{asset('public/backend/js/jquery.nicescroll.js')}}"></script>
+<script src="{{asset('public/backend/ckeditor/ckeditor.js')}}"></script>
+<script src="{{asset('public/backend/ckeditor/ckfinder/ckfinder.js')}}"></script>
+<!-- gọi hàm ckeditor -->
+<script type="text/javascript">
+    CKEDITOR.replace('ckeditor',{
+        filebrowserBrowseUrl: '{{ asset('public/backend/ckeditor/ckfinder/ckfinder.html') }}',
+        filebrowserImageBrowseUrl: '{{ asset('public/backend/ckeditor/ckfinder/ckfinder.html?type=Images') }}',
+        filebrowserFlashBrowseUrl: '{{ asset('public/backend/ckeditor/ckfinder/ckfinder.html?type=Flash') }}',
+        filebrowserUploadUrl: '{{ asset('public/backend/ckeditor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files') }}',
+        filebrowserImageUploadUrl: '{{ asset('public/backend/ckeditor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images') }}',
+        filebrowserFlashUploadUrl: '{{ asset('public/backend/ckeditor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash') }}'
+       } );
+</script>
 <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="js/flot-chart/excanvas.min.js"></script><![endif]-->
 <script src="{{asset('public/backend/js/jquery.scrollTo.js')}}"></script>
 <!-- morris JavaScript -->	

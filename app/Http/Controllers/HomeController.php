@@ -10,8 +10,8 @@ class HomeController extends Controller
 	/*Trang chủ home*/
 	public function index()
 	{
-		$array_post = DB::table('tbl_posts')->get();
-    	return view('pages.home')->with("array_post", $array_post);
+		$array_blog = DB::table('tbl_blogs')->get();
+    	return view('pages.home')->with("array_blog", $array_blog);
     }
     /*End: public function index()*/
 }
