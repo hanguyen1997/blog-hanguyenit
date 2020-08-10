@@ -39,6 +39,18 @@ class ImageAboutController extends Controller
     }
     /*end: public function save_image(Request $require)*/
 
+    public function del($id)
+    {
+    	/*Kiểm tra đăng nhập*/
+        //$this->AuthLogin();
+
+        DB::table('tbl_about')->where('id', $id)->delete();
+
+        Session::put('message', 'Xoá thành công');
+        return Redirect::to('all-image-about');
+    	
+    }
+    /*end: public function save_image(Request $require)*/
 
 
 }

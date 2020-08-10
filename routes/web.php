@@ -34,6 +34,7 @@ Route::post('/save-blog', 'BlogController@save');
 /*image-about*/
 Route::get('/all-image-about', 'ImageAboutController@index');
 Route::post('/save-image-about', 'ImageAboutController@save_image');
+Route::get('/del-image-about/{id}', 'ImageAboutController@del');
 Route::get('/add-image-about', function () {
     return view('admin.image_about.add_image_about');
 });

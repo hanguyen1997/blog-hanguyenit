@@ -18,7 +18,6 @@
 </div>
 <!-- End section header -->
 
-
 <!-- start section about us -->
 <div id="about" class="paddsection">
   <div class="container">
@@ -52,15 +51,11 @@
 <div id="services">
   <div class="container">
       <div class="services-carousel owl-theme">
+        @foreach($array_image_blog as $key => $image)
         <div class="services-block">
-            <img src="{{asset('public/fontend/images/83832023_1976637929148437_6660646337882619904_n.jpg')}}"  style="image-rendering: pixelated;width: 100%;object-fit: cover; height: 300px;" class="" alt="me">
+            <img src="{{asset('public/uploads/'.$image->image)}}"  style="image-rendering: pixelated;width: 100%;object-fit: cover; height: 300px;" class="" alt="me">
         </div>
-        <div class="services-block">
-            <img src="{{asset('public/fontend/images/48277896_1588746094604291_8441482367423479808_n.jpg')}}"  style="image-rendering: pixelated;object-fit: cover;width: 100%; height: 300px;" class="" alt="me">
-        </div>
-        <div class="services-block">
-            <img src="{{asset('public/fontend/images/me (2).jpg')}}"  style="object-fit: cover;width: 100%; height: 300px;" class="" alt="me">
-        </div>
+        @endforeach
       </div>
   </div>
 

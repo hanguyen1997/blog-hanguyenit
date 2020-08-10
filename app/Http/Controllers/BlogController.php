@@ -49,4 +49,11 @@ class BlogController extends Controller
 	    //$array_blog_new['blog_image'] = $request->blog_image;
     }
     /*end: public function index()*/
+
+    /*begin: dell blog*/
+    public function dell(Request $request)
+    {	
+	   
+    }
+    /*end: public function index()*/
 }

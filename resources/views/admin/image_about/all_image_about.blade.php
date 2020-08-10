@@ -21,7 +21,7 @@
             <td><img src="public/uploads/{{$row->image}}" width = "300px" height="300px" style="object-fit: cover;"></td>
             <td>
               <?php
-                if($row->id == 1)
+                if($row->status == 1)
                 {
                   echo "Hiện thị";
                 }
@@ -35,7 +35,7 @@
               <a href="{{URL::to('/edit-brand-product/'.$row->id)}}" ui-toggle-class="">
                 <i class="fa fa-check text-success text-active">Sửa</i>
               </a>
-              <a onclick="return confirm('Bạn thật sự muốn xoá?')" href="{{URL::to('/del-brand-product/'.$row->id)}}">
+              <a onclick="return confirm('Bạn thật sự muốn xoá?')" href="{{URL::to('/del-image-about/'.$row->id)}}">
                 <i class="fa fa-times text-danger text">Xoá</i>
               </a>
             </td>
