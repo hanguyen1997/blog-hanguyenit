@@ -38,6 +38,13 @@ h1,h2,h3,h4,h5,h6{
 p{
 	margin:0;
 }
+
+.bs-example img{
+    display: block;
+    max-width: 100%;
+    height: auto !important;
+    margin: 2em auto;
+}
 ul,label{
 	margin:0;
 	padding:0;
@@ -254,7 +261,7 @@ ul.sidebar-menu li a.active i {
     position:relative;
 }
 a.logo {
-    font-size:25px;
+    font-size:20px;
     color:#fff;
     float:left;
     margin:20px 0 0 25px;
@@ -1440,7 +1447,7 @@ li.list-group-item1 {
 .grid_3 p{
 	line-height: 2em;
 	color: #888;
-	font-size: 0.9em;
+	font-size: 1.3em;
 	margin-bottom: 1em;
 	font-weight: 300;
 }

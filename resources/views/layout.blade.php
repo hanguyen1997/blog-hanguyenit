@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+ <head> 
+  <!-- alert css -->
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <!-- meta -->
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Ha Nguyen IT</title>
+  <title>Ha Nguyen blog</title>
   <meta content="" name="keywords">
   <meta content="" name="description">
 

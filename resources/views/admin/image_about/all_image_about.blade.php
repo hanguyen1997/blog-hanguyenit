@@ -2,7 +2,7 @@
 @section('content')
 <div class="table-agile-info">
   <div class="panel panel-default">
-    <div class="panel-heading">
+    <div style="font-size: 18px;" class="panel-heading">
       Danh sách hình ảnh about
     </div>
     <div class="table-responsive">
@@ -18,23 +18,19 @@
         <tbody>
           @foreach($array_image as $key => $row)
           <tr>
-            <td><img src="public/uploads/{{$row->image}}" width = "300px" height="300px" style="object-fit: cover;"></td>
+            <td><img src="public/uploads/{{$row->image}}" style="width:300px !important; height:300px !important;object-fit: cover;"></td>
             <td>
               <?php
                 if($row->status == 1)
-                {
-                  echo "Hiện thị";
-                }
-                else
-                {
-                  echo "Ẩn";
-                } 
+                { ?>
+                  <a href="{{URL::to('/active-image-about/'.$row->id)}}"><i class='fa fa-thumbs-up' ></i></a>
+                <?php }else
+                { ?>
+                  <a href="{{URL::to('/active-image-about/'.$row->id)}}" ><i class='fa fa-thumbs-o-up' ></i></a>
+                <?php } 
               ?>
             </td>
             <td>
-              <a href="{{URL::to('/edit-brand-product/'.$row->id)}}" ui-toggle-class="">
-                <i class="fa fa-check text-success text-active">Sửa</i>
-              </a>
               <a onclick="return confirm('Bạn thật sự muốn xoá?')" href="{{URL::to('/del-image-about/'.$row->id)}}">
                 <i class="fa fa-times text-danger text">Xoá</i>
               </a>
@@ -63,4 +59,6 @@
     </footer>
   </div>
 </div>
+
+
 @endsection

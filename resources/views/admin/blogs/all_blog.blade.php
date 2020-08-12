@@ -19,18 +19,21 @@
     </div>
     <div class="table-responsive">
       <table class="table table-striped b-t b-light">
+        <?php
+          $message = Session::get('message');
+
+          if(isset($message)) 
+          {
+            echo "<div><span style='color:blue; text-aline:center'>$message</span></div>";
+            Session::put('message', NULL);
+          }
+        ?>
         <thead>
           <tr>
-            <th style="width:20px;">
-              <label class="i-checks m-b-none">
-                <input type="checkbox"><i></i>
-              </label>
-            </th>
             <th>Tiêu đề</th>
             <th>Hình ảnh</th>
             <th>Mã</th>
             <th>Mô tả</th>
-            <th>Nội dung</th>
             <th>Hiển thị/Ẩn</th>
             <th>Tuỳ chọn</th>
             <th style="width:30px;"></th>
@@ -39,12 +42,10 @@
         <tbody>
           @foreach($array_blog as $key => $row)
           <tr>
-            <td><label class="i-checks m-b-none"><input type="checkbox" name="post[]"><i></i></label></td>
             <td>{{$row->blog_title}}</td>
             <td>{{$row->blog_title}}</td>
             <td>{{$row->blog_code}}</td>
             <td style="width: 100%;overflow:hidden;text-overflow:ellipsis;-webkit-line-clamp:5; display:-webkit-box;-webkit-box-orient:vertical;">{{$row->blog_description}}</td>
-            <td><a href="#">Chi tiết </a></td>
             <td>
               <?php
                 if($row->blog_status == 1)
@@ -58,10 +59,13 @@
               ?>
             </td>
             <td>
-              <a href="{{URL::to('/edit-brand-product/'.$row->id_blog)}}" ui-toggle-class="">
+              <a href="{{URL::to('/detail-blog-admin/'.$row->id_blog)}}">
+                <i class="fa fa-asterisk text-primary text">Chi tiết</i>
+              </a>
+              <a href="{{URL::to('/edit-blog/'.$row->id_blog)}}" ui-toggle-class="">
                 <i class="fa fa-check text-success text-active">Sửa</i>
               </a>
-              <a onclick="return confirm('Bạn thật sự muốn xoá?')" href="{{URL::to('/del-brand-product/'.$row->id_blog)}}">
+              <a onclick="return confirm('Bạn thật sự muốn xoá?')" href="{{URL::to('/dell-blog/'.$row->id_blog)}}">
                 <i class="fa fa-times text-danger text">Xoá</i>
               </a>
             </td>

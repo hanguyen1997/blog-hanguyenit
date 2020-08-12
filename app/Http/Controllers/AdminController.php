@@ -12,7 +12,7 @@ class AdminController extends Controller
     public function AuthLogin()
     {
         $user_id = Session::get('user_id');
-        if($user_id == "") return Redirect::to('/form-login')->send();
+        if($user_id == "") return Redirect::to('/admin')->send();
     }
     /*end: public function AuthLogin()*/
 
@@ -65,7 +65,7 @@ class AdminController extends Controller
     	Session::put('user_email', NULL);
 
     	/*Chuyển về trang đăng nhập*/
-    	return Redirect::to("form-login");	
+    	return Redirect::to("/admin");	
     }
     /*end: function dashboard()*/
 }

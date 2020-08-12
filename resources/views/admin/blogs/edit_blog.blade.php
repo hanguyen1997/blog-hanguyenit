@@ -1,14 +1,13 @@
 @extends('admin_layout');
 @section('content')
-<div class="row">
-    <div class="col-lg-12">
         <section class="panel">
             <header class="panel-heading">
                 Thêm bài viết
             </header>
             <div class="panel-body">
                 <div class="position-center">
-                    <form role="form" action="{{URL::to('/save-blog')}}" method="post" enctype="multipart/form-data">
+                    @foreach($array_blog_edit as $key => $value)
+                    <form role="form" action="{{URL::to('/update-blog')}}" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="_token" value="{{csrf_token()}}"> 
                     <div class="form-group">
                         <label for="exampleInputEmail1">Tiêu đề</label>
@@ -39,11 +38,10 @@
                     </div>
                     <button type="submit" name="add_category_product" class="btn btn-info">Thêm Bài viết mới</button>
                 </form>
+                @endforeach
                 </div>
             </div>
         </section>
-    </div>
-</div>
 
 <script language="javascript">
 

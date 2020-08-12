@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-<title>Admin | Hà Nguyên IT</title>
+<title>Admin | Hà Nguyên blog</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="Visitors Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
@@ -25,12 +25,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script src="{{asset('public/backend/js/jquery2.0.3.min.js')}}"></script>
 <script src="{{asset('public/backend/js/raphael-min.js')}}"></script>
 <script src="{{asset('public/backend/js/morris.js')}}"></script>
+<!-- alert css -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <!--header start-->
 <header class="header fixed-top clearfix">
 <!--logo start-->
 <div class="brand">
     <a href="{{URL::to('/')}}" class="logo">
-        Hà Nguyên IT
+        Hà Nguyên blog
     </a>
     <div class="sidebar-toggle-box">
         <div class="fa fa-bars"></div>

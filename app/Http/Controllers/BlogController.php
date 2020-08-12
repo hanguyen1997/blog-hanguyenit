@@ -8,10 +8,21 @@ session_start();
 
 class BlogController extends Controller
 {
+	/*check user, */
+    public function AuthLogin()
+    {
+        $user_id = Session::get('user_id');
+        if($user_id == "") return Redirect::to('/admin')->send();
+    }
+    /*end: public function AuthLogin()*/
+
 	/*begin: list all post blog*/
     public function index()
     {	
-    	$array_blog = DB::table('tbl_blogs')->get();
+    	/*Kiểm tra đăng nhập*/
+    	$this->AuthLogin();
+
+    	$array_blog = DB::table('tbl_blogs')->where("blog_status", "<>" , "3")->get();
     	return view('admin.blogs.all_blog')->with('array_blog', $array_blog);
     }
     /*end: public function index()*/
@@ -19,6 +30,9 @@ class BlogController extends Controller
     /*begin: save post blog new*/
     public function save(Request $request)
     {	
+    	/*Kiểm tra đăng nhập*/
+    	$this->AuthLogin();
+    	
 	    $array_blog_new = array();
 	    $array_blog_new['blog_title'] = $request->blog_title;
 	    $array_blog_new['blog_code'] = $request->blog_code;
@@ -48,12 +62,46 @@ class BlogController extends Controller
 	    return Redirect::to('all-blog');
 	    //$array_blog_new['blog_image'] = $request->blog_image;
     }
-    /*end: public function index()*/
+    /*end: function save(Request $request)*/
 
-    /*begin: dell blog*/
-    public function dell(Request $request)
+    /*begin: dell blog. Chuyển trạng thái sang 3*/
+    public function dell($id_blog)
     {	
-	   
+	   /*Kiểm tra đăng nhập*/
+    	$this->AuthLogin();
+
+    	$array_blog_new['blog_status'] = "3";
+    	Db::table('tbl_blogs')->where("id_blog", $id_blog)->update($array_blog_new);
+
+		Session::put('message','Xoá thành công');
+    	return Redirect('all-blog');
     }
-    /*end: public function index()*/
+    /*end: function dell($id_blog)*/
+
+    /*begin: detail blog in admin*/
+    public function detail_blog_admin($id_blog)
+    {	
+	   /*Kiểm tra đăng nhập*/
+    	$this->AuthLogin();
+
+    	/*Lấy thông tin chi tiết blog bằng id_blog*/
+    	$array_blog = Db::table('tbl_blogs')->where("id_blog", $id_blog)->get();
+
+    	return View('admin.blogs.detail_blog')->with("array_blog", $array_blog);
+    }
+    /*end: function detail_blog_admin($id_blog)*/
+
+
+    /*begin: cerate form edit blog*/
+    public function form_edit($id_blog)
+    {	
+	   /*Kiểm tra đăng nhập*/
+    	$this->AuthLogin();
+
+    	/*Lấy thông tin chi tiết blog bằng id_blog*/
+    	$array_blog_edit = Db::table('tbl_blogs')->where("id_blog", $id_blog)->first();
+
+    	return View('admin.blogs.edit_blog')->with("array_blog_edit", $array_blog_edit);
+    }
+    /*end: function detail_blog_admin($id_blog)*/
 }

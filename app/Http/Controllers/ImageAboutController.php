@@ -9,8 +9,18 @@ session_start();
 
 class ImageAboutController extends Controller
 {
+	/*check user, */
+    public function AuthLogin()
+    {
+        $user_id = Session::get('user_id');
+        if($user_id == "") return Redirect::to('/admin')->send();
+    }
+
 	public function index()
     {
+    	/*Kiểm tra đăng nhập*/
+		$this->AuthLogin();
+
     	$array_image = DB::table('tbl_about')->get();
     	return view('admin.image_about.all_image_about')->with("array_image", $array_image);
     }
@@ -19,6 +29,9 @@ class ImageAboutController extends Controller
     /*save imgae about page home in about*/
     public function save_image(Request $request)
     {
+    	/*Kiểm tra đăng nhập*/
+		$this->AuthLogin();
+
     	$get_image = $request->file('image_about');
 
 		$get_name_image = $get_image->getClientOriginalName();
@@ -42,7 +55,7 @@ class ImageAboutController extends Controller
     public function del($id)
     {
     	/*Kiểm tra đăng nhập*/
-        //$this->AuthLogin();
+        $this->AuthLogin();
 
         DB::table('tbl_about')->where('id', $id)->delete();
 
@@ -52,5 +65,33 @@ class ImageAboutController extends Controller
     }
     /*end: public function save_image(Request $require)*/
 
+    /*begin: un active image in about page home*/
+    public function active_or_unactive_image_about($id)
+    {
+    	/*Kiểm tra đăng nhập*/
+        $this->AuthLogin();
+
+        /*truy vấn dữ liệu để lấy thông tin hình ảnh theo id*/
+       	$array_image_about = DB::table('tbl_about')->where("id", $id)->first();
+
+       	if($array_image_about != NULL)
+       	{
+       		print_r($array_image_about);
+	       	$status_image = $array_image_about->status;
+
+	       	/*Nếu đã active thì unactive nếu chưa thì active thành status = 2*/
+	       	$array_update_image = array();
+	       	if($status_image == "2") $array_update_image['status'] = "1";
+			else $array_update_image['status'] = "2";
+			
+			DB::table('tbl_about')->where("id", $id)->update($array_update_image);
+	        Session::put('message', 'Chỉnh sửa thành công');
+	        return Redirect::to('all-image-about');
+    	}
+    	/*end: if($array_image_about != NULL)*/
+    	Session::put('message', 'Chỉnh sửa thất bại');
+    	return Redirect::to('all-image-about');
+    }
+    /*end: function active_or_unactive_image_about($id)*/
 
 }

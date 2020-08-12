@@ -1,5 +1,7 @@
 @extends('layout')
 @section('content')
+
+
 <!-- start section header -->
 <div id="header" class="home">
 
@@ -53,7 +55,7 @@
       <div class="services-carousel owl-theme">
         @foreach($array_image_blog as $key => $image)
         <div class="services-block">
-            <img src="{{asset('public/uploads/'.$image->image)}}"  style="image-rendering: pixelated;width: 100%;object-fit: cover; height: 300px;" class="" alt="me">
+            <img src="{{asset('public/uploads/'.$image->image)}}"  style="width: 100%;object-fit: cover; height: 300px;" class="" alt="me">
         </div>
         @endforeach
       </div>

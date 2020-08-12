@@ -30,7 +30,7 @@
         /*Kiểm tra truyền hình ảnh lên không*/
         if(document.getElementById("image_about").value == "" )
         {
-            alert('xin vui lòng chọn ảnh tải lên (*)');
+            swal("Gặp lỗi rồi !!!", "Vui lòng chọn hình ảnh muốn tải lên");
             return;
         }
         document.getElementById("form_save_image_about").submit();
