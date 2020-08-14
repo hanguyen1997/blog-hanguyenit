@@ -50,7 +50,7 @@ class AdminController extends Controller
     	/*Kiểm tra đăng nhập*/
         $this->AuthLogin();
 
-    	return view("admin.dashboard");
+    	return view("admin.dashboard.index");
     }
     /*end: function dashboard()*/
 

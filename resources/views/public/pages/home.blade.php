@@ -1,7 +1,27 @@
-@extends('layout')
+@extends('public.layouts.layout')
+@section('menu')
+<nav id="main-nav">
+  <div class="row">
+    <div class="container">
+
+      <div class="logo">
+        <a href="{{URL::to('/')}}"><img src="{{asset('public/fontend/images/logo-chữ-N-59.gif')}}" alt="logo"></a>
+      </div>
+
+      <div class="responsive"><i data-icon="m" class="ion-navicon-round"></i></div>
+
+      <ul class="nav-menu list-unstyled">
+        <li><a href="#header" class="smoothScroll">Trang Chủ</a></li>
+        <li><a href="#about" class="smoothScroll">Thông Tin</a></li>
+        <li><a href="#journal" class="smoothScroll">Blog</a></li>
+        <li><a href="#contact" class="smoothScroll">Liên hệ</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+@endsection('menu')
+
 @section('content')
-
-
 <!-- start section header -->
 <div id="header" class="home">
 

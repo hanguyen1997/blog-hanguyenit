@@ -1,4 +1,4 @@
-@extends('admin_layout');
+@extends('admin.layouts.admin_layout');
 @section('content')
         <section class="panel">
             <header class="panel-heading">

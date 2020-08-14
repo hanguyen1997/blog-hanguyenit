@@ -20,7 +20,7 @@ Route::get('/trang-chu', 'HomeController@index');
 Route::get('/admin', function () {
 	$user_id = Session::get('user_id');
 	if($user_id != "") return Redirect::to('/dashboard');
-    else return View('admin_login');
+    else return View('admin.auth.admin_login');
     
 });
 Route::get('/logout', 'AdminController@logout');
@@ -39,6 +39,9 @@ Route::post('/save-blog', 'BlogController@save');
 Route::get('/detail-blog-admin/{id_blog}', 'BlogController@detail_blog_admin');
 Route::get('/dell-blog/{id_blog}', 'BlogController@dell');
 Route::get('/edit-blog/{id_blog}', 'BlogController@form_edit');
+Route::get('/list-blog/', function(){
+    return view('pages.list_blog');
+});
 
 /*image-about*/
 Route::get('/all-image-about', 'ImageAboutController@index');

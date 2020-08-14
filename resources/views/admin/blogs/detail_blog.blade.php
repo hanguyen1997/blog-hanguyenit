@@ -1,4 +1,4 @@
-@extends('admin_layout')
+@extends('admin.layouts.admin_layout')
 @section('content')
 <div class="typo-agile">
 	<a href="{{URL::to('/all-blog')}}"><i class="fa fa-backward">Quay lại</i></a>

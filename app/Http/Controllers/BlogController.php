@@ -104,4 +104,15 @@ class BlogController extends Controller
     	return View('admin.blogs.edit_blog')->with("array_blog_edit", $array_blog_edit);
     }
     /*end: function detail_blog_admin($id_blog)*/
+
+//////////////////////////////////*PUBLICc*//////////////////////////////////
+    
+    /*begin: list blog*/
+    public function list_blog()
+    {   
+        $array_blog = Db::table('tbl_blogs')->where("blog_status", "1")->get();
+
+        return View('admin.blogs.edit_blog')->with("array_blog_edit", $array_blog_edit);
+    }
+    /*end: function detail_blog_admin($id_blog)*/
 }
