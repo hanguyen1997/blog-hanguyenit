@@ -37,11 +37,10 @@ Route::get('/add-blog', function () {
 });
 Route::post('/save-blog', 'BlogController@save');
 Route::get('/detail-blog-admin/{id_blog}', 'BlogController@detail_blog_admin');
-Route::get('/dell-blog/{id_blog}', 'BlogController@dell');
+Route::get('/dell-blog-admin/{id_blog}', 'BlogController@dell');
 Route::get('/edit-blog/{id_blog}', 'BlogController@form_edit');
-Route::get('/list-blog/', function(){
-    return view('pages.list_blog');
-});
+Route::get('/list-blog/', 'BlogController@list_blog');
+Route::get('/detail-blog/{blog_code}', 'BlogController@detail_blog_public');
 
 /*image-about*/
 Route::get('/all-image-about', 'ImageAboutController@index');

@@ -105,14 +105,23 @@ class BlogController extends Controller
     }
     /*end: function detail_blog_admin($id_blog)*/
 
-//////////////////////////////////*PUBLICc*//////////////////////////////////
+//////////////////////////////////*PUBLIC*//////////////////////////////////
     
     /*begin: list blog*/
     public function list_blog()
     {   
-        $array_blog = Db::table('tbl_blogs')->where("blog_status", "1")->get();
+        $array_blog = Db::table('tbl_blogs')->where("blog_status", "1")->orderBy("id_blog", "DESC")->get();
 
-        return View('admin.blogs.edit_blog')->with("array_blog_edit", $array_blog_edit);
+        return View('public.pages.list_blog')->with("array_blog", $array_blog);
     }
-    /*end: function detail_blog_admin($id_blog)*/
+    /*end: function list_blog()*/
+    
+
+    public function detail_blog_public($blog_code)
+    {
+        $array_detail_blog = Db::table('tbl_blogs')->where("blog_code", $blog_code)->get();
+
+        return View('public.pages.detail_blog')->with("array_detail_blog", $array_detail_blog);
+    }
+    /*end: function detail_blog_public()*/
 }

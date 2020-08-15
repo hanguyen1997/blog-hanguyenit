@@ -83,11 +83,12 @@ nav ul li a {
 }
 
 p {
-  margin: 25px 0;
+  margin: 20px 0;
   padding: 0;
-  font-size: 15px;
-  color: #999999;
-  line-height: 28px;
+  font-size: 17px;
+  color: #272727;
+  line-height: 25px;
+  font-family: 'Roboto';
 }
 
 ::-moz-selection {
@@ -151,12 +152,12 @@ p {
 }
 
 .paddsection {
-  padding-top: 90px;
+  padding-top: 20px;
   padding-bottom: 90px;
 }
 
 .paddsections {
-  padding-top: 90px;
+  padding-top: 150px;
   padding-bottom: 90px !important;
 }
 
@@ -486,8 +487,8 @@ nav ul li a {
 
 .journal-block .journal-info .journal-txt h4 a {
   display: block;
-  font-size: 19px;
-  line-height: 24px;
+  font-size: 25px;
+  line-height: 30px;
   margin: 0 0 13px 0;
   font-weight: 500;
   color: #292929;
@@ -508,8 +509,14 @@ nav ul li a {
 }
 
 .journal-block .journal-info .journal-txt p {
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 10;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
   margin: 0;
-  font-size: 14px;
+  font-size: 20px;
   line-height: 24px;
 }
 
@@ -574,6 +581,8 @@ nav ul li a {
 /*-----------------------------------------------------------------------------------*/
 
 #footer {
+  position: absolute;
+  width: 100%;
   background: #f7f7f7;
   padding-top: 50px;
   padding-bottom: 50px;

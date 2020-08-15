@@ -33,8 +33,8 @@
                     <div class="form-group">
                         <label for="exampleInputPassword1">Hiện thị</label>
                         <select name="blog_status" class="form-control input-sm m-bot15">
-                            <option value="0">Hiển thị</option>
-                            <option value="1">Ẩn</option>
+                            <option value="1">Hiển thị</option>
+                            <option value="0">Ẩn</option>
                         </select>
                     </div>
                     <button type="submit" name="add_category_product" class="btn btn-info">Thêm Bài viết mới</button>

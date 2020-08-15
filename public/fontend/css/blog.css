@@ -36,10 +36,24 @@
   width: 100%;
 }
 
+.container-main .block-main .content-main img{
+  width: 100%;
+}
+
+.content-main single-post padDiv p!important{
+  color: black
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 300;
+  text-decoration: none;
+  text-transform: none;
+  font-size: 15px;
+}
+
 .journal-txt h4 a {
   display: block;
-  font-size: 19px;
-  line-height: 24px;
+  font-size: 30px;
+  line-height: 40px;
   margin: 0 0 13px 0;
   font-weight: 500;
   color: #292929;
@@ -60,7 +74,7 @@
 }
 
 .post-meta ul li {
-  font-size: 12px;
+  font-size: 15px;
   font-weight: normal;
   margin-left: 8px;
   margin-right: 8px;

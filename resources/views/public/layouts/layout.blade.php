@@ -25,6 +25,7 @@
 
   <!-- Main Stylesheet File -->
   <link href="{{asset('public/fontend/css/style.css')}}" rel="stylesheet">
+  <link href="{{asset('public/fontend/css/blog.css')}}" rel="stylesheet">
 
   <!-- Responsive css -->
   <link href="{{asset('public/fontend/css/responsive.css')}}" rel="stylesheet">

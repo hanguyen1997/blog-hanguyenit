@@ -55,13 +55,10 @@
 
       <div class="col-lg-7">
         <div class="about-descr">
-
           <p class="p-heading">Xin chào ai đó ghé thăm blog này. </p>
-          <p class="separator">Mình là Nguyên, là một lập trình viên thích đọc và học. Mình bắt đầu với lập trình ở vị trí thực tập. Mình học lập trình qua các dự án, những lần ngồi nghe như “vịt nghe sấm” khi mọi người họp, “mắt tròn mắt dẹt” xem các anh em chém gió khi đi trà đá. Rồi từ những lần bắt viết code ngớ ngẩn, được nghe các anh các thầy trình bày, giải thích. Và những ngày tháng ngồi lại học sau giờ làm. Mình đã trải qua những tháng ngày đầu tiên đó theo cái cách vất vả nhất khi không có người hướng dẫn, training.
-
-          Đó là động lực để mình viết Blog, mình thật sự rất muốn mình của hiện tại có thể giúp được mình ở thời gian đó. Điều đó chắc chắn sẽ không thể thực hiện được, nhưng không sao sẽ còn rất nhiều các bạn mới vào nghề, cũng đi từng bước, cũng ngu ngơ nai tơ như vậy. Mình không dám chắc những điều mình viết là chuẩn nhất, đúng nhất, mà chỉ hi vọng blog này sẽ là một nơi đưa lại cho bạn cái nhìn cách gần gũi nhất của một lập trình viên.
-
-          Nếu bạn thấy những bài viết của mình giúp ích gì đó cho bạn mong các bạn đón nhận và tiếp tục đọc blog. Thanks!</p>
+          <p class="separator">Mình là Nguyên, là một lập trình viên thích đọc và học. Mình bắt đầu với lập trình ở vị trí thực tập. Mình học lập trình qua các dự án, những lần ngồi nghe như “vịt nghe sấm” khi mọi người họp, “mắt tròn mắt dẹt” xem các anh em chém gió khi đi trà đá. Rồi từ những lần bắt viết code ngớ ngẩn, được nghe các anh các thầy trình bày, giải thích. Và những ngày tháng ngồi lại học sau giờ làm. Mình đã trải qua những tháng ngày đầu tiên đó theo cái cách vất vả nhất khi không có người hướng dẫn, training.</p>
+          <p class="separator">Đó là động lực để mình viết Blog, mình thật sự rất muốn mình của hiện tại có thể giúp được mình ở thời gian đó. Điều đó chắc chắn sẽ không thể thực hiện được, nhưng không sao sẽ còn rất nhiều các bạn mới vào nghề, cũng đi từng bước, cũng ngu ngơ nai tơ như vậy. Mình không dám chắc những điều mình viết là chuẩn nhất, đúng nhất, mà chỉ hi vọng blog này sẽ là một nơi đưa lại cho bạn cái nhìn cách gần gũi nhất của một lập trình viên.</p>
+          <p class="separator">Nếu bạn thấy những bài viết của mình giúp ích gì đó cho bạn mong các bạn đón nhận và tiếp tục đọc blog. Thanks!</p>
         </div>
       </div>
     </div>
@@ -72,15 +69,14 @@
 <!-- start section services -->
 <div id="services">
   <div class="container">
-      <div class="services-carousel owl-theme">
-        @foreach($array_image_blog as $key => $image)
-        <div class="services-block">
-            <img src="{{asset('public/uploads/'.$image->image)}}"  style="width: 100%;object-fit: cover; height: 300px;" class="" alt="me">
-        </div>
-        @endforeach
+    <div class="services-carousel owl-theme">
+      @foreach($array_image_blog as $key => $image)
+      <div class="services-block">
+        <img src="{{asset('public/uploads/'.$image->image)}}"  style="width: 100%;object-fit: cover; height: 300px;" class="" alt="me">
       </div>
+      @endforeach
+    </div>
   </div>
-
 </div>
 <!-- end section services -->
 
@@ -99,10 +95,10 @@
         @foreach ($array_blog as $key => $post)
         <div class="col-lg-4 col-md-6">
           <div class="journal-info">
-            <a href="blog-single.html"><img src="{{asset('public/uploads/'.$post->blog_image)}}" style="object-fit: cover;width:100%;height: 300px;" class="img-responsive" alt="img"></a>
+            <a href="{{URL::to('detail-blog/'.$post->blog_code)}}"><img src="{{asset('public/uploads/'.$post->blog_image)}}" style="object-fit: cover;width:100%;height: 300px;" class="img-responsive" alt="img"></a>
             <div class="journal-txt">
-              <h4><a href="blog-single.html">{{$post->blog_title}}</a></h4>
-              <p style="width: 100%;overflow: hidden;text-overflow: ellipsis;-webkit-line-clamp: 10;display: -webkit-box;-webkit-box-orient: vertical;" class="separator">{{$post->blog_description}}</p>
+              <h4><a href="{{URL::to('detail-blog/'.$post->blog_code)}}">{{$post->blog_title}}</a></h4>
+              <p class="separator">{{$post->blog_description}}</p>
             </div>
           </div>
         </div>
@@ -110,7 +106,7 @@
 
       </div>
       <div class="text-center">
-        <a href="#">Xem thêm</a>
+        <a href="{{url::to('list-blog')}}">Xem thêm</a>
       </div>
     </div>
   </div>

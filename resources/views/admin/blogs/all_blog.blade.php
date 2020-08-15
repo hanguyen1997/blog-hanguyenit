@@ -65,7 +65,7 @@
               <a href="{{URL::to('/edit-blog/'.$row->id_blog)}}" ui-toggle-class="">
                 <i class="fa fa-check text-success text-active">Sửa</i>
               </a>
-              <a onclick="return confirm('Bạn thật sự muốn xoá?')" href="{{URL::to('/dell-blog/'.$row->id_blog)}}">
+              <a onclick="return confirm('Bạn thật sự muốn xoá?')" href="{{URL::to('/dell-blog-admin/'.$row->id_blog)}}">
                 <i class="fa fa-times text-danger text">Xoá</i>
               </a>
             </td>
