@@ -23,12 +23,16 @@
                         <input type="file" name="blog_image" class="form-control" id="exampleInputEmail1">
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputPassword1">Mô tả ngắn gọn</label>
+                        <label for="exampleInputPassword1">Mô tả </label>
                         <textarea class="form-control" name="blog_description" id=""  required placeholder="Mô tả sản phẩm"></textarea> 
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">Nội dung </label>
                         <textarea class="form-control" name="blog_content" id="ckeditor"  required placeholder="Nội dung bài viêt"></textarea> 
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Từ khoá seo</label>
+                        <textarea class="form-control" name="blog_keyword" id=""  required placeholder="Từ khoá seo"></textarea> 
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">Hiện thị</label>

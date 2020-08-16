@@ -10,7 +10,8 @@ class HomeController extends Controller
 	/*Trang chủ home*/
 	public function index()
 	{
-		$array_blog = DB::table('tbl_blogs')->where("blog_status", "1")->get();
+
+		$array_blog = DB::table('tbl_blogs')->where("blog_status", "1")->get()->random(3);
 
 		$array_image_blog = DB::table('tbl_about')->where("type", "image")->where("status", "1")->get();
 

@@ -23,7 +23,8 @@ class BlogController extends Controller
     	$this->AuthLogin();
 
     	$array_blog = DB::table('tbl_blogs')->where("blog_status", "<>" , "3")->get();
-    	return view('admin.blogs.all_blog')->with('array_blog', $array_blog);
+
+    	return view('admin.blogs.all_blog')->with(compact('array_blog'));
     }
     /*end: public function index()*/
 
@@ -37,8 +38,10 @@ class BlogController extends Controller
 	    $array_blog_new['blog_title'] = $request->blog_title;
 	    $array_blog_new['blog_code'] = $request->blog_code;
 	    $array_blog_new['blog_description'] = $request->blog_description;
-	    $array_blog_new['blog_content'] = $request->blog_content;
-	    $array_blog_new['blog_status'] = $request->blog_status;
+        $array_blog_new['blog_content'] = $request->blog_content;
+	    $array_blog_new['blog_keyword'] = $request->blog_keyword;
+        $array_blog_new['blog_status'] = $request->blog_status;
+	    $array_blog_new['created_at'] = date("Y-m-d H:i:s"); 
 	    $get_image = $request->file('blog_image');
 
 	    /*Kiểm tra có hình ảnh khong*/
@@ -121,7 +124,14 @@ class BlogController extends Controller
     {
         $array_detail_blog = Db::table('tbl_blogs')->where("blog_code", $blog_code)->get();
 
-        return View('public.pages.detail_blog')->with("array_detail_blog", $array_detail_blog);
+        foreach($array_detail_blog as $value)
+        {
+            $blog_title = $value->blog_title;
+            $blog_keyword = $value->blog_keyword;
+            $blog_description = $value->blog_description;
+        }
+
+        return View('public.pages.detail_blog')->with(compact('array_detail_blog','blog_title','blog_keyword','blog_description'));
     }
     /*end: function detail_blog_public()*/
 }

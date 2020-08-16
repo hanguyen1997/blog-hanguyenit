@@ -15,6 +15,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'HomeController@index');
 Route::get('/trang-chu', 'HomeController@index');
+Route::get('/about', function(){
+    return View('public.pages.about');
+});
 
 /*begin : admin*/
 Route::get('/admin', function () {

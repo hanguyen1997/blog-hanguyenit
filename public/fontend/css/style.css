@@ -157,7 +157,7 @@ p {
 }
 
 .paddsections {
-  padding-top: 150px;
+  padding-top: 50px;
   padding-bottom: 90px !important;
 }
 
@@ -182,7 +182,7 @@ nav {
   background: #fff;
   z-index: 1000;
   width: 100%;
-  padding: 20px;
+  padding: 10px;
   display: none;
   -webkit-box-shadow: 0px 2px 92px 0px rgba(0, 0, 0, 0.18);
   -moz-box-shadow: 0px 2px 92px 0px rgba(0, 0, 0, 0.18);
@@ -265,7 +265,7 @@ nav ul li a {
 }
 
 .header-content p {
-  font-size: 13px;
+  font-size: 20px;
   letter-spacing: 5px;
   margin-top: 0;
   margin-bottom: 30px;
@@ -281,7 +281,7 @@ nav ul li a {
 
 .header-content .list-social li i {
   color: #fff;
-  font-size: 15px;
+  font-size: 20px;
 }
 
 /*-----------------------------------------------------------------------------------*/
@@ -292,7 +292,7 @@ nav ul li a {
   width: 100%;
   height: auto;
   background: #f7f7f7;
-  padding-top: 190px;
+  padding-top: 100px;
 }
 
 #about .div-img-bg {
@@ -481,22 +481,9 @@ nav ul li a {
 }
 
 .journal-block .journal-info .journal-txt {
-  padding: 25px 0px;
+  padding: 15px;
+  background-color: #dde2e6;
   position: relative;
-}
-
-.journal-block .journal-info .journal-txt h4 a {
-  display: block;
-  font-size: 25px;
-  line-height: 30px;
-  margin: 0 0 13px 0;
-  font-weight: 500;
-  color: #292929;
-  -moz-transition: all 0.5s ease-in-out 0s;
-  -ms-transition: all 0.5s ease-in-out 0s;
-  -o-transition: all 0.5s ease-in-out 0s;
-  -webkit-transition: all 0.5s ease-in-out 0s;
-  transition: all 0.5s ease-in-out 0s;
 }
 
 .journal-block .journal-info .journal-txt h4 a:hover {
@@ -509,15 +496,7 @@ nav ul li a {
 }
 
 .journal-block .journal-info .journal-txt p {
-  width: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  -webkit-line-clamp: 10;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  margin: 0;
-  font-size: 20px;
-  line-height: 24px;
+  
 }
 
 /*-----------------------------------------------------------------------------------*/

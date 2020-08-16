@@ -1,4 +1,7 @@
 @extends('public.layouts.layout')
+@section('desc', "Mình là Nguyên, là một lập trình viên thích đọc và học, mình tạo ra blog này để chia sẽ về những câu chuyện xung quanh cuộc sống mình và cũng như trong công việc mà mình gặp phải.")
+@section('title', "Blog Hà Nguyên IT")
+@section('keyword', "blog-hanguyenit, blog, hanguyenit")
 @section('menu')
 <nav id="main-nav">
   <div class="row">
@@ -28,7 +31,7 @@
   <div class="container">
     <div class="header-content">
       <h1>I'm <span class="typed"></span></h1>
-      <p>Hà Nguyên, developeur, live in Đà Nẵng</p>
+      <p>Hà Nguyên, developer, live in Đà Nẵng</p>
 
       <ul class="list-unstyled list-social">
         <li><a href="https://www.facebook.com/profile.php?id=100004067478544"><i class="ion-social-facebook"></i></a></li>
@@ -60,6 +63,9 @@
           <p class="separator">Đó là động lực để mình viết Blog, mình thật sự rất muốn mình của hiện tại có thể giúp được mình ở thời gian đó. Điều đó chắc chắn sẽ không thể thực hiện được, nhưng không sao sẽ còn rất nhiều các bạn mới vào nghề, cũng đi từng bước, cũng ngu ngơ nai tơ như vậy. Mình không dám chắc những điều mình viết là chuẩn nhất, đúng nhất, mà chỉ hi vọng blog này sẽ là một nơi đưa lại cho bạn cái nhìn cách gần gũi nhất của một lập trình viên.</p>
           <p class="separator">Nếu bạn thấy những bài viết của mình giúp ích gì đó cho bạn mong các bạn đón nhận và tiếp tục đọc blog. Thanks!</p>
         </div>
+        <div class="text" style="margin-top: 20px">
+        <a href="{{url::to('/about')}}">Xem thêm về tôi</a>
+      </div>
       </div>
     </div>
   </div>

@@ -37,7 +37,7 @@
 }
 
 .container-main .block-main .content-main img{
-  width: 100%;
+  width: 100% !important;
 }
 
 .content-main single-post padDiv p!important{

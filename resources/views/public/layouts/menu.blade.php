@@ -7,7 +7,7 @@
       <div class="responsive"><i data-icon="m" class="ion-navicon-round"></i></div>
       <ul class="nav-menu list-unstyled">
         <li><a href="{{URL::to('/')}}" class="smoothScroll">Trang chủ</a></li>
-        <li><a href="#about" class="smoothScroll">Thông tin</a></li>
+        <li><a href="{{URL::to('/about')}}" class="smoothScroll">Thông tin</a></li>
         <li><a href="{{URL::to('/list-blog')}}" class="smoothScroll">Blog</a></li>
         <li><a href="#contact" class="smoothScroll">Liên hệ</a></li>
       </ul>

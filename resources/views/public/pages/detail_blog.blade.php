@@ -1,11 +1,10 @@
 @extends('public.layouts.layout')
-
-
-
+@section('desc', "$blog_description")
+@section('title', "$blog_title - HanguyenIT")
+@section('keyword', "$blog_keyword")
 @section('menu')
   @include('public/layouts/menu')
 @endsection('menu')
-
 @section('content')
 <!-- start section main content -->
 <div class="main-content paddsection">
@@ -24,9 +23,8 @@
                   </div>
                   <div class="post-meta">
                     <ul class="list-unstyled mb-0">
-                      <li class="author">by:<a href="#">medsign</a></li>
-                      <li class="date">date:<a href="#">March 31, 2017</a></li>
-                      <li class="commont"><i class="ion-ios-heart-outline"></i><a href="#">3 Comments</a></li>
+                      <li class="">Date : <?php echo date("d/m/Y", strtotime($blog_detail->created_at)); ?></li>
+                      <li class="commont"><i class="ion-ios-heart-outline"></i> 3 Comments</li>
                     </ul>
                   </div>
                   <p class="mb-30">{!!$blog_detail->blog_content!!}</p>
@@ -62,17 +60,6 @@
                           </div>
                         </li>
                       </ul>
-                    </li>
-                    <li>
-                      <div class="entry-comments-item">
-                        <img src="" class="entry-comments-avatar" alt="">
-                        <div class="entry-comments-body">
-                          <span class="entry-comments-author">Andrew Lupkin</span>
-                          <span><a href="#">fev 14, 2018 at 12:55 pm</a></span>
-                          <p class="mb-10">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam justo, ullamcorper tincidunt pellentesque in, condimentum ut enim. Aenean at pharetra diam, quis vulputate urna. </p>
-                          <a class="rep" href="#">Reply</a>
-                        </div>
-                      </div>
                     </li>
                   </ul>
                 </div>

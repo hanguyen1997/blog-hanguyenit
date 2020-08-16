@@ -1,15 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
  <head> 
+  <!-- Seo -->
+  <meta name="description" content="@yield('desc')"/>
+  <meta name="keywords" content="@yield('keyword')"/>
+  <meta name="robots" content="INDEX,FOLLOW"/>
+  <link  rel="canonical" href="<?php echo url()->previous();?>" />
+  <!-- end: Seo -->
+
   <!-- alert css -->
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <!-- meta -->
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Ha Nguyen blog</title>
-  <meta content="" name="keywords">
-  <meta content="" name="description">
+  <title>@yield('title')</title>
+
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Poppins:300,300i,400,400i,500,500i,600,600i,700,700i|Playfair+Display:400,400i,700,700i,900,900i" rel="stylesheet">
@@ -32,13 +38,6 @@
 
   <!-- Favicon -->
   <link rel="shortcut icon" href="{{asset('public/fontend/images/logo-chữ-N-59.gif')}}">
-
-  <!-- =======================================================
-    Theme Name: Folio
-    Theme URL: https://bootstrapmade.com/folio-bootstrap-portfolio-template/
-    Author: BootstrapMade.com
-    Author URL: https://bootstrapmade.com
-  ======================================================= -->
 </head>
 
 <body>

@@ -37,7 +37,7 @@ class AdminController extends Controller
     	{
     		/*không trùng tài khoản*/ 
 	        Session::put('message', "Tài khoản hoặc mật khẩu sai (vui lòng nhập lại)");
-	        return Redirect::to('/form-login');
+	        return Redirect::to('/admin');
     	}
     	/*end: if($array_user != NULL)*/
     }
