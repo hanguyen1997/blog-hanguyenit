@@ -16,7 +16,7 @@ class AdminController extends Controller
     }
     /*end: public function AuthLogin()*/
 
-	/*begin: check login form admin*/
+	/*begin: check login form đăng nhập dadmin*/
     public function check_login(Request $request)
     {
     	$user_email = $request->user_email;
@@ -41,8 +41,7 @@ class AdminController extends Controller
     	}
     	/*end: if($array_user != NULL)*/
     }
-    /*end: function dashboard()*/
-
+    /*end: function check_login(Request $request)*/
 
 	/*begin: trang dashboard*/
     public function dashboard()

@@ -1,7 +1,11 @@
 @extends('public.layouts.layout')
+
 @section('desc', "Mình là Nguyên, là một lập trình viên thích đọc và học, mình tạo ra blog này để chia sẽ về những câu chuyện xung quanh cuộc sống mình và cũng như trong công việc mà mình gặp phải.")
+
 @section('title', "Blog Hà Nguyên IT")
+
 @section('keyword', "blog-hanguyenit, blog, hanguyenit")
+
 @section('menu')
 <nav id="main-nav">
   <div class="row">
@@ -101,17 +105,17 @@
         @foreach ($array_blog as $key => $post)
         <div class="col-lg-4 col-md-6">
           <div class="journal-info">
-            <a href="{{URL::to('detail-blog/'.$post->blog_code)}}"><img src="{{asset('public/uploads/'.$post->blog_image)}}" style="object-fit: cover;width:100%;height: 300px;" class="img-responsive" alt="img"></a>
+            <a href="{{URL::to('detail-blog/'.$post->blog_code)}}"><img src="{{asset('public/uploads/'.$post->blog_image)}}" style="object-fit: cover;width:100%;height: 200px;" class="img-responsive" alt="img"></a>
             <div class="journal-txt">
-              <h4><a href="{{URL::to('detail-blog/'.$post->blog_code)}}">{{$post->blog_title}}</a></h4>
-              <p class="separator">{{$post->blog_description}}</p>
+              <h4 style="height: 67px;"><a style="overflow: hidden;-webkit-line-clamp: 2;display: -webkit-box;-webkit-box-orient: vertical; line-height: 32px;" href="{{URL::to('detail-blog/'.$post->blog_code)}}">{{$post->blog_title}}</a></h4>
+              <p style="overflow: hidden;-webkit-line-clamp: 5;display: -webkit-box; -webkit-box-orient: vertical;" class="separator">{{$post->blog_description}}</p>
             </div>
           </div>
         </div>
         @endforeach
 
       </div>
-      <div class="text-center">
+      <div style="margin-top: 15px;" class="text-center">
         <a href="{{url::to('list-blog')}}">Xem thêm</a>
       </div>
     </div>

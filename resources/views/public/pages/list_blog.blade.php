@@ -1,6 +1,9 @@
 @extends('public.layouts.layout')
+
 @section('desc', "Mình là Nguyên, là một lập trình viên thích đọc và học, mình tạo ra blog này để chia sẽ về những câu chuyện xung quanh cuộc sống mình và cũng như trong công việc mà mình gặp phải.")
+
 @section('title',"Danh sách blog - Hà nguyên IT")
+
 @section('keyword', "blog-hanguyenit, blog, hanguyenit,list blog, blog it")
 
 @section('menu')
@@ -26,7 +29,7 @@
             <div class="journal-txt">
               <h4><a href="{{URL::to('detail-blog/'.$blog->blog_code)}}">{{$blog->blog_title}}</a></h4>
               <div>
-                <span>Date:  1/1/2020,</span>
+                <span>Date: <?php echo date('d/m/Y', strtotime($blog->created_at));?></span>
                 <span><i class="ion-ios-heart-outline"></i> 3 Comments</span>
               </div>
               <p class="separator">{{$blog->blog_description}}

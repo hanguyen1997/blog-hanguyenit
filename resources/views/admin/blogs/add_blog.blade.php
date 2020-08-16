@@ -51,7 +51,7 @@
 
 <script language="javascript">
 
-    /*Khi thay đổi tiêu đề bài viết thì cập nhật giá trị url_key*/
+    /*Khi thay đổi tiêu đề bài viết thì cập nhật giá trị nội dung vào ô url_key*/
     $(document).ready(function()
     {
         $("#post_title").blur(function(){
@@ -70,7 +70,5 @@
             $("#post_code").val(str);
         })
     });
-    
-    
 </script>
 @endsection

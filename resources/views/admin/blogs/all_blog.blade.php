@@ -20,8 +20,10 @@
     <div class="table-responsive">
       <table class="table table-striped b-t b-light">
         <?php
+          /*Lấy Thông báo Session::get*/
           $message = Session::get('message');
 
+          /*Kiểm tra nếu có thông báo thì hiển thị*/
           if(isset($message)) 
           {
             echo "<div><span style='color:blue; text-aline:center'>$message</span></div>";

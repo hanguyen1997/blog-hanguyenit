@@ -2,13 +2,14 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
+use App\blog;
 use Session;
 use Illuminate\Support\Facades\Redirect;
 session_start();
 
 class BlogController extends Controller
 {
-	/*check user, */
+	/*check user */
     public function AuthLogin()
     {
         $user_id = Session::get('user_id');
@@ -16,12 +17,13 @@ class BlogController extends Controller
     }
     /*end: public function AuthLogin()*/
 
-	/*begin: list all post blog*/
+	/*begin: list all post blog in page admin*/
     public function index()
     {	
     	/*Kiểm tra đăng nhập*/
     	$this->AuthLogin();
 
+        /*blogs_tatus =  3)-> dell*/
     	$array_blog = DB::table('tbl_blogs')->where("blog_status", "<>" , "3")->get();
 
     	return view('admin.blogs.all_blog')->with(compact('array_blog'));
@@ -44,7 +46,7 @@ class BlogController extends Controller
 	    $array_blog_new['created_at'] = date("Y-m-d H:i:s"); 
 	    $get_image = $request->file('blog_image');
 
-	    /*Kiểm tra có hình ảnh khong*/
+	    /*Kiểm tra có hình ảnh khong, nếu không có thì lưu rỗng*/
 		if($get_image)
 		{
 			$get_name_image = $get_image->getClientOriginalName();
@@ -76,12 +78,13 @@ class BlogController extends Controller
     	$array_blog_new['blog_status'] = "3";
     	Db::table('tbl_blogs')->where("id_blog", $id_blog)->update($array_blog_new);
 
+        /*Đặt lại note thành công và chuyển trang*/
 		Session::put('message','Xoá thành công');
     	return Redirect('all-blog');
     }
     /*end: function dell($id_blog)*/
 
-    /*begin: detail blog in admin*/
+    /*begin: detail blog in page admin*/
     public function detail_blog_admin($id_blog)
     {	
 	   /*Kiểm tra đăng nhập*/
@@ -89,7 +92,6 @@ class BlogController extends Controller
 
     	/*Lấy thông tin chi tiết blog bằng id_blog*/
     	$array_blog = Db::table('tbl_blogs')->where("id_blog", $id_blog)->get();
-
     	return View('admin.blogs.detail_blog')->with("array_blog", $array_blog);
     }
     /*end: function detail_blog_admin($id_blog)*/
@@ -103,7 +105,6 @@ class BlogController extends Controller
 
     	/*Lấy thông tin chi tiết blog bằng id_blog*/
     	$array_blog_edit = Db::table('tbl_blogs')->where("id_blog", $id_blog)->first();
-
     	return View('admin.blogs.edit_blog')->with("array_blog_edit", $array_blog_edit);
     }
     /*end: function detail_blog_admin($id_blog)*/
@@ -113,8 +114,8 @@ class BlogController extends Controller
     /*begin: list blog*/
     public function list_blog()
     {   
+        /*blog_status = 1 -> hiển thị , blog_status = 2 -> ko hiển thị */
         $array_blog = Db::table('tbl_blogs')->where("blog_status", "1")->orderBy("id_blog", "DESC")->get();
-
         return View('public.pages.list_blog')->with("array_blog", $array_blog);
     }
     /*end: function list_blog()*/
@@ -124,14 +125,20 @@ class BlogController extends Controller
     {
         $array_detail_blog = Db::table('tbl_blogs')->where("blog_code", $blog_code)->get();
 
+        /*lấy dữ liệu chi tiết blog trong mảng $array_detail_blog*/
         foreach($array_detail_blog as $value)
         {
             $blog_title = $value->blog_title;
             $blog_keyword = $value->blog_keyword;
             $blog_description = $value->blog_description;
-        }
+            $blog_image = $value->blog_image;
 
-        return View('public.pages.detail_blog')->with(compact('array_detail_blog','blog_title','blog_keyword','blog_description'));
+            /*Link đường dẩn ảnh <meta property="og:image" content="" /> share */
+            $url_image = "http://localhost/blog-hanguyenit/public/uploads/".$blog_image;
+        }
+        /*end: foreach($array_detail_blog as $value)*/
+
+        return View('public.pages.detail_blog')->with(compact('array_detail_blog','blog_title','blog_keyword','blog_description','url_image'));
     }
     /*end: function detail_blog_public()*/
 }

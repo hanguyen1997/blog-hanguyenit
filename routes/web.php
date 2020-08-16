@@ -1,25 +1,22 @@
 <?php
-
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
+/*home*/
 Route::get('/', 'HomeController@index');
 Route::get('/trang-chu', 'HomeController@index');
+/*thông tin chi tiết*/
 Route::get('/about', function(){
     return View('public.pages.about');
 });
+/*blog*/
+Route::get('/list-blog/', 'BlogController@list_blog');
+Route::get('/detail-blog/{blog_code}', 'BlogController@detail_blog_public');
+/*liên hệ*/
+Route::get('/contact/', function(){
+    return View('public.pages.about');
+});
 
-/*begin : admin*/
+///////////////*begin : admin*/////////////////////////
 Route::get('/admin', function () {
 	$user_id = Session::get('user_id');
 	if($user_id != "") return Redirect::to('/dashboard');
@@ -42,8 +39,7 @@ Route::post('/save-blog', 'BlogController@save');
 Route::get('/detail-blog-admin/{id_blog}', 'BlogController@detail_blog_admin');
 Route::get('/dell-blog-admin/{id_blog}', 'BlogController@dell');
 Route::get('/edit-blog/{id_blog}', 'BlogController@form_edit');
-Route::get('/list-blog/', 'BlogController@list_blog');
-Route::get('/detail-blog/{blog_code}', 'BlogController@detail_blog_public');
+
 
 /*image-about*/
 Route::get('/all-image-about', 'ImageAboutController@index');

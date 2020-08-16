@@ -19,14 +19,14 @@
           @foreach($array_image as $key => $row)
           <tr>
             <td><img src="public/uploads/{{$row->image}}" style="width:300px !important; height:300px !important;object-fit: cover;"></td>
-            <td>
+            <td style="font-size: 30px;">
               <?php
                 if($row->status == 1)
                 { ?>
                   <a href="{{URL::to('/active-image-about/'.$row->id)}}"><i class='fa fa-thumbs-up' ></i></a>
                 <?php }else
                 { ?>
-                  <a href="{{URL::to('/active-image-about/'.$row->id)}}" ><i class='fa fa-thumbs-o-up' ></i></a>
+                  <a href="{{URL::to('/active-image-about/'.$row->id)}}" ><i class='fa fa-thumbs-o-down' ></i></a>
                 <?php } 
               ?>
             </td>

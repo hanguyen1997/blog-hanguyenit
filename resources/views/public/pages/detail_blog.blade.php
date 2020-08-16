@@ -1,12 +1,16 @@
 @extends('public.layouts.layout')
+
 @section('desc', "$blog_description")
+
 @section('title', "$blog_title - HanguyenIT")
+
 @section('keyword', "$blog_keyword")
+
 @section('menu')
   @include('public/layouts/menu')
 @endsection('menu')
+
 @section('content')
-<!-- start section main content -->
 <div class="main-content paddsection">
   <div class="s">
     <div class="row justify-content-center">
@@ -24,85 +28,30 @@
                   <div class="post-meta">
                     <ul class="list-unstyled mb-0">
                       <li class="">Date : <?php echo date("d/m/Y", strtotime($blog_detail->created_at)); ?></li>
-                      <li class="commont"><i class="ion-ios-heart-outline"></i> 3 Comments</li>
+                      <li class="commont">
+                        <i class="ion-ios-heart-outline"></i> 
+                        <!-- count comment -->
+                        <span class="fb-comments-count" data-href="<?php echo url()->current();?>"></span>
+                        Comments
+                      </li>
                     </ul>
                   </div>
                   <p class="mb-30">{!!$blog_detail->blog_content!!}</p>
+                  <!-- like and share facebook -->
+                  <div class="fb-like" data-href="<?php echo url()->current();?>" data-width="" data-layout="button_count" data-action="like" data-size="small" data-share="true"></div>
                 </div>
               </div>
             </div>
             @endforeach
-            <div class="col-md-12">
-              <div class="comments text-left padDiv mb-30">
-                <div class="entry-comments">
-                  <h6 class="mb-30">4 comments</h6>
-                  <ul class="entry-comments-list list-unstyled">
-                    <li>
-                      <div class="entry-comments-item">
-                        <img src="" class="entry-comments-avatar" alt="">
-                        <div class="entry-comments-body">
-                          <span class="entry-comments-author">Sommer Christian</span>
-                          <span><a href="#">fev 14, 2018 at 12:48 pm</a></span>
-                          <p class="mb-10">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam justo, ullamcorper tincidunt pellentesque in, condimentum ut enim. Aenean at pharetra diam, quis vulputate urna. </p>
-                          <a class="rep" href="#">Reply</a>
-                        </div>
-                      </div>
-                      <ul class="entry-comments-reply list-unstyled">
-                        <li>
-                          <div class="entry-comments-item">
-                            <img src="" class="entry-comments-avatar" alt="">
-                            <div class="entry-comments-body">
-                              <span class="entry-comments-author">Sara Smith</span>
-                              <span><a href="#">fev 14, 2018 at 12:51 pm</a></span>
-                              <p class="mb-10">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam justo, ullamcorper tincidunt pellentesque in, condimentum ut enim. Aenean at pharetra diam, quis vulputate urna.</p>
-                              <a class="rep" href="#">Reply</a>
-                            </div>
-                          </div>
-                        </li>
-                      </ul>
-                    </li>
-                  </ul>
-                </div>
-              </div>
+            <!-- commnet facebook -->
+            <div class="fb-comments" data-href="<?php echo url()->current();?>" data-numposts="20" style="padding: 20px;" data-width="100%">
             </div>
-            <div class="col-lg-12">
-              <div class="cmt padDiv">
-                <form id="comment-form" method="post" action="" role="form">
-                  <div class="row">
-                      <div class="col-lg-6">
-                        <div class="form-group">
-                          <input id="form_name" type="text" name="name" class="form-control" placeholder="Name *" required="required">
-                        </div>
-                      </div>
-                      <div class="col-lg-6">
-                        <div class="form-group">
-                          <input id="form_email" type="email" name="email" class="form-control" placeholder="email *" required="required">
-                        </div>
-                      </div>
-                      <div class="col-md-12">
-                        <div class="form-group">
-                          <input id="form_name" type="text" name="website" class="form-control" placeholder="Website">
-                        </div>
-                      </div>
-                      <div class="col-lg-12">
-                        <div class="form-group">
-                          <textarea id="form_message" name="message" class="form-control" placeholder="Message *" style="height: 200px;" required="required"></textarea>
-                        </div>
-                      </div>
-                      <div class="col-lg-12">
-                        <input type="submit" class="btn btn-defeault btn-send" value="Send message">
-                      </div>
-                  </div>
-                </form>
-              </div>
-            </div>
+            <!-- end: commnet facebook -->
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-<!--  </div> -->
-<!-- start section main content -->
+<!--  </div class="main-content paddsection"> -->
 @endsection

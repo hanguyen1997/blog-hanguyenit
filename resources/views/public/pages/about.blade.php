@@ -1,12 +1,9 @@
 @extends('public.layouts.layout')
-
 @section('title', "HanguyenIT")
-
 @section('menu')
   @include('public/layouts/menu')
 @endsection('menu')
 @section('content')
-
 <div id="about" class="paddsection">
   <div class="container">
     <div class="row justify-content-between">
@@ -30,5 +27,4 @@
     </div>
   </div>
 </div>
-
 @endsection

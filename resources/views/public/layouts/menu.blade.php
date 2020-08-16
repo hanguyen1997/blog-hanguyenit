@@ -1,4 +1,4 @@
-<nav id="main-nav-subpages" class="subpage-nav" style="display: block;">
+<nav id="main-nav-subpages" style="display: block;">
   <div class="row">
     <div class="container">
       <div class="logo">

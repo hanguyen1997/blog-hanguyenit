@@ -9,7 +9,7 @@ session_start();
 
 class ImageAboutController extends Controller
 {
-	/*check user, */
+	/*check user*/
     public function AuthLogin()
     {
         $user_id = Session::get('user_id');
@@ -24,16 +24,15 @@ class ImageAboutController extends Controller
     	$array_image = DB::table('tbl_about')->get();
     	return view('admin.image_about.all_image_about')->with("array_image", $array_image);
     }
-    /*end: public function save_image(Request $require)*/
+    /*end: function index()*/
 
-    /*save imgae about page home in about*/
+    /*save image about in about page home*/
     public function save_image(Request $request)
     {
     	/*Kiểm tra đăng nhập*/
 		$this->AuthLogin();
 
     	$get_image = $request->file('image_about');
-
 		$get_name_image = $get_image->getClientOriginalName();
 
 		/*Hàm current lấy thâm số đầu sau dấu chấm của ảnh*/
@@ -58,14 +57,13 @@ class ImageAboutController extends Controller
         $this->AuthLogin();
 
         DB::table('tbl_about')->where('id', $id)->delete();
-
         Session::put('message', 'Xoá thành công');
         return Redirect::to('all-image-about');
     	
     }
-    /*end: public function save_image(Request $require)*/
+    /*end: public function del($id)*/
 
-    /*begin: un active image in about page home*/
+    /*begin: un active or active image in about page home*/
     public function active_or_unactive_image_about($id)
     {
     	/*Kiểm tra đăng nhập*/
@@ -74,21 +72,24 @@ class ImageAboutController extends Controller
         /*truy vấn dữ liệu để lấy thông tin hình ảnh theo id*/
        	$array_image_about = DB::table('tbl_about')->where("id", $id)->first();
 
+        /*kiểm tra id có tồn tại không*/
        	if($array_image_about != NULL)
        	{
-       		print_r($array_image_about);
+            /*lấy trạng thái status*/
 	       	$status_image = $array_image_about->status;
 
-	       	/*Nếu đã active thì unactive nếu chưa thì active thành status = 2*/
+	       	/*Nếu đã active thì unactive nếu chưa thì active*/
 	       	$array_update_image = array();
 	       	if($status_image == "2") $array_update_image['status'] = "1";
-			else $array_update_image['status'] = "2";
+			if($status_image == "1") $array_update_image['status'] = "2";
 			
+            /*Lưu lại và đặt thông báo chuyển trang danh sách hình ảnh thông tin ở trang chủ*/
 			DB::table('tbl_about')->where("id", $id)->update($array_update_image);
 	        Session::put('message', 'Chỉnh sửa thành công');
 	        return Redirect::to('all-image-about');
     	}
     	/*end: if($array_image_about != NULL)*/
+
     	Session::put('message', 'Chỉnh sửa thất bại');
     	return Redirect::to('all-image-about');
     }
