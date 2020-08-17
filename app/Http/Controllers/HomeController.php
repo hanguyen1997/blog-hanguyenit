@@ -18,4 +18,14 @@ class HomeController extends Controller
     	return view('public.pages.home')->with("array_blog", $array_blog)->with("array_image_blog", $array_image_blog);
     }
     /*End: public function index()*/
+
+    /*liên hệ ajax*/
+	public function contact(Request $request)
+	{
+		$array_contact = $request->all();
+
+		echo "oke";
+    }
+    /*End: public function index()*/
+    
 }

@@ -2,43 +2,46 @@
 @section('content')
         <section class="panel">
             <header class="panel-heading">
-                Thêm bài viết
+                Chỉnh sửa bài viết
             </header>
             <div class="panel-body">
                 <div class="position-center">
-                    @foreach($array_blog_edit as $key => $value)
-                    <form role="form" action="{{URL::to('/update-blog')}}" method="post" enctype="multipart/form-data">
+                    <form role="form" action="{{URL::to('/update-blog/'.$array_blog_edit->id_blog)}}" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="_token" value="{{csrf_token()}}"> 
                     <div class="form-group">
                         <label for="exampleInputEmail1">Tiêu đề</label>
-                        <input type="text" name="blog_title" class="form-control" id="post_title" required  placeholder="Tiêu đề bài viết">
+                        <input type="text" name="blog_title" class="form-control" id="post_title" required  placeholder="Tiêu đề bài viết" value="{{$array_blog_edit->blog_title}}">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Mã</label>
-                        <input type="text" name="blog_code" class="form-control" id="post_code">
+                        <input type="text" name="blog_code" class="form-control" id="post_code" value="{{$array_blog_edit->blog_code}}">
                     </div>
+                    <img style="width: auto; height: 300px;" src="{{asset('public/uploads/'.$array_blog_edit->blog_image)}}"></img>
                     <div class="form-group">
                         <label for="exampleInputPassword1">Hình ảnh tiêu đề</label>
-                        <input type="file" name="blog_image" class="form-control" id="exampleInputEmail1">
+                        <input type="file" name="blog_image" class="form-control" id="blog_image" value="{!!$array_blog_edit->blog_image!!}">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">Mô tả ngắn gọn</label>
-                        <textarea class="form-control" name="blog_description" id=""  required placeholder="Mô tả sản phẩm"></textarea> 
+                        <textarea class="form-control" name="blog_description" id=""  required placeholder="Mô tả sản phẩm">{{$array_blog_edit->blog_description}}</textarea> 
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">Nội dung </label>
-                        <textarea class="form-control" name="blog_content" id="ckeditor"  required placeholder="Nội dung bài viêt"></textarea> 
+                        <textarea class="form-control" name="blog_content" id="ckeditor"  required placeholder="Nội dung bài viêt">{!!$array_blog_edit->blog_content!!}</textarea> 
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Từ khoá seo</label>
+                        <textarea class="form-control" name="blog_keyword" id=""  required placeholder="Từ khoá seo">{{$array_blog_edit->blog_keyword}}</textarea> 
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">Hiện thị</label>
                         <select name="blog_status" class="form-control input-sm m-bot15">
-                            <option value="0">Hiển thị</option>
-                            <option value="1">Ẩn</option>
+                            <option <?php if($array_blog_edit->blog_status == '1'){echo("selected");}?> value="1" >Hiển thị</option>
+                            <option <?php if($array_blog_edit->blog_status == '0'){echo("selected");}?> value="0">Ẩn</option>
                         </select>
                     </div>
-                    <button type="submit" name="add_category_product" class="btn btn-info">Thêm Bài viết mới</button>
+                    <button type="submit" name="add_category_product" class="btn btn-info">Chỉnh sửa bài viết mới</button>
                 </form>
-                @endforeach
                 </div>
             </div>
         </section>

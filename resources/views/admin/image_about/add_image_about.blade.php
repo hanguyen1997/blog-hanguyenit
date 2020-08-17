@@ -34,6 +34,7 @@
             return;
         }
         document.getElementById("form_save_image_about").submit();
+        
     }
 
 </script>

@@ -1,14 +1,10 @@
 @extends('public.layouts.layout')
 
 @section('desc', "Mình là Nguyên, là một lập trình viên thích đọc và học, mình tạo ra blog này để chia sẽ về những câu chuyện xung quanh cuộc sống mình và cũng như trong công việc mà mình gặp phải.")
-
 @section('title',"Danh sách blog - Hà nguyên IT")
-
 @section('keyword', "blog-hanguyenit, blog, hanguyenit,list blog, blog it")
-
 @section('menu')
   @include('public/layouts/menu')
-  <!-- End section navbar -->
 @endsection('menu')
 
 @section('content')

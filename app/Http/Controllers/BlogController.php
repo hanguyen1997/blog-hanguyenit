@@ -2,7 +2,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
-use App\blog;
+use App\Blog;
 use Session;
 use Illuminate\Support\Facades\Redirect;
 session_start();
@@ -23,9 +23,8 @@ class BlogController extends Controller
     	/*Kiểm tra đăng nhập*/
     	$this->AuthLogin();
 
-        /*blogs_tatus =  3)-> dell*/
-    	$array_blog = DB::table('tbl_blogs')->where("blog_status", "<>" , "3")->get();
-
+        /*(blogs_tatus =  3) -> dell*/
+        $array_blog = Blog::where("blog_status" ,"<>","3")->get();
     	return view('admin.blogs.all_blog')->with(compact('array_blog'));
     }
     /*end: public function index()*/
@@ -75,10 +74,13 @@ class BlogController extends Controller
 	   /*Kiểm tra đăng nhập*/
     	$this->AuthLogin();
 
-    	$array_blog_new['blog_status'] = "3";
-    	Db::table('tbl_blogs')->where("id_blog", $id_blog)->update($array_blog_new);
+        /*select * form tbl_blogs where id_blog = $id_blog*/
+        $array_del_blog = Blog::find($id_blog);
+        $array_del_blog->blog_status = "3";
+        /*update tbl_blog set blog_status = 3 where id_blog = $id_blog*/
+        $array_del_blog->save();
 
-        /*Đặt lại note thành công và chuyển trang*/
+        /*Đặt thông báo thành công và chuyển trang*/
 		Session::put('message','Xoá thành công');
     	return Redirect('all-blog');
     }
@@ -91,7 +93,8 @@ class BlogController extends Controller
     	$this->AuthLogin();
 
     	/*Lấy thông tin chi tiết blog bằng id_blog*/
-    	$array_blog = Db::table('tbl_blogs')->where("id_blog", $id_blog)->get();
+    	//$array_blog = Db::table('tbl_blogs')->where("id_blog", $id_blog)->get();
+        $array_blog = Blog::where("id_blog",$id_blog)->get();
     	return View('admin.blogs.detail_blog')->with("array_blog", $array_blog);
     }
     /*end: function detail_blog_admin($id_blog)*/
@@ -104,8 +107,39 @@ class BlogController extends Controller
     	$this->AuthLogin();
 
     	/*Lấy thông tin chi tiết blog bằng id_blog*/
-    	$array_blog_edit = Db::table('tbl_blogs')->where("id_blog", $id_blog)->first();
+    	$array_blog_edit = Blog::find($id_blog);
     	return View('admin.blogs.edit_blog')->with("array_blog_edit", $array_blog_edit);
+    }
+    /*end: function detail_blog_admin($id_blog)*/
+
+    /*begin: update blog*/
+    public function update_blog(Request $request, $id_blog)
+    {   
+       /*Kiểm tra đăng nhập*/
+        $this->AuthLogin();
+
+        /*Lấy thông tin chi tiết blog bằng id_blog*/
+        $array_blog_edit = Blog::find($id_blog);
+        $array_blog_edit->blog_code = $request->blog_code;
+        $array_blog_edit->blog_title = $request->blog_title;
+        $array_blog_edit->blog_keyword = $request->blog_keyword;
+        $array_blog_edit->blog_description = $request->blog_description;
+        $array_blog_edit->blog_content = $request->blog_content;
+        $array_blog_edit->created_at = date("Y-m-d H:i:s");
+        $array_blog_edit->blog_status = $request->blog_status;
+        
+        $get_image = $request->file('blog_image');
+        $get_name_image = $get_image->getClientOriginalName();
+
+        /*Hàm current lấy thâm số đầu sau dấu chấm của ảnh*/
+        $name_image = current(explode(".", $get_name_image));
+        $new_image = $name_image.rand(0,99).".".$get_image->getClientOriginalExtension();
+        $get_image->move('public/uploads', $new_image);
+        $array_blog_edit->blog_image = $new_image;
+        $array_blog_edit->save();
+        
+        Session::put('message','Thành công');
+        return Redirect('/all-blog');
     }
     /*end: function detail_blog_admin($id_blog)*/
 
@@ -115,15 +149,15 @@ class BlogController extends Controller
     public function list_blog()
     {   
         /*blog_status = 1 -> hiển thị , blog_status = 2 -> ko hiển thị */
-        $array_blog = Db::table('tbl_blogs')->where("blog_status", "1")->orderBy("id_blog", "DESC")->get();
+        $array_blog = Blog::where("blog_status", "1")->orderBy("id_blog", "DESC")->get();
         return View('public.pages.list_blog')->with("array_blog", $array_blog);
     }
     /*end: function list_blog()*/
     
-
+    /*trang chi tiết blog*/
     public function detail_blog_public($blog_code)
     {
-        $array_detail_blog = Db::table('tbl_blogs')->where("blog_code", $blog_code)->get();
+        $array_detail_blog = Blog::where("blog_code", $blog_code)->get();
 
         /*lấy dữ liệu chi tiết blog trong mảng $array_detail_blog*/
         foreach($array_detail_blog as $value)

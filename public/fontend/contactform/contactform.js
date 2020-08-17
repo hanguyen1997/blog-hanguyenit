@@ -1,118 +1,50 @@
-jQuery(document).ready(function($) {
-  "use strict";
-
+$(document).ready(function(){
+    
   //Contact
   $('form.contactForm').submit(function() {
-    var f = $(this).find('.form-group'),
-      ferror = false,
-      emailExp = /^[^\s()<>@,;:\/]+@\w[\w\.-]+\.[a-z]{2,}$/i;
-
-    f.children('input').each(function() { // run all inputs
-
-      var i = $(this); // current input
-      var rule = i.attr('data-rule');
-
-      if (rule !== undefined) {
-        var ierror = false; // error flag for current input
-        var pos = rule.indexOf(':', 0);
-        if (pos >= 0) {
-          var exp = rule.substr(pos + 1, rule.length);
-          rule = rule.substr(0, pos);
-        } else {
-          rule = rule.substr(pos + 1, rule.length);
-        }
-
-        switch (rule) {
-          case 'required':
-            if (i.val() === '') {
-              ferror = ierror = true;
-            }
-            break;
-
-          case 'minlen':
-            if (i.val().length < parseInt(exp)) {
-              ferror = ierror = true;
-            }
-            break;
-
-          case 'email':
-            if (!emailExp.test(i.val())) {
-              ferror = ierror = true;
-            }
-            break;
-
-          case 'checked':
-            if (! i.is(':checked')) {
-              ferror = ierror = true;
-            }
-            break;
-
-          case 'regexp':
-            exp = new RegExp(exp);
-            if (!exp.test(i.val())) {
-              ferror = ierror = true;
-            }
-            break;
-        }
-        i.next('.validation').html((ierror ? (i.attr('data-msg') !== undefined ? i.attr('data-msg') : 'wrong Input') : '')).show('blind');
-      }
-    });
-    f.children('textarea').each(function() { // run all inputs
-
-      var i = $(this); // current input
-      var rule = i.attr('data-rule');
-
-      if (rule !== undefined) {
-        var ierror = false; // error flag for current input
-        var pos = rule.indexOf(':', 0);
-        if (pos >= 0) {
-          var exp = rule.substr(pos + 1, rule.length);
-          rule = rule.substr(0, pos);
-        } else {
-          rule = rule.substr(pos + 1, rule.length);
-        }
-
-        switch (rule) {
-          case 'required':
-            if (i.val() === '') {
-              ferror = ierror = true;
-            }
-            break;
-
-          case 'minlen':
-            if (i.val().length < parseInt(exp)) {
-              ferror = ierror = true;
-            }
-            break;
-        }
-        i.next('.validation').html((ierror ? (i.attr('data-msg') != undefined ? i.attr('data-msg') : 'wrong Input') : '')).show('blind');
-      }
-    });
-    if (ferror) return false;
-    else var str = $(this).serialize();
-    var action = $(this).attr('action');
-    if( ! action ) {
-      action = 'contactform/contactform.php';
+    var name_contact = $('#name_contact').val();
+    if(name_contact == "" ) {
+      swal("Đã Có lỗi !!!", "Vui lòng nhập tên của bạn");return false;
     }
-    $.ajax({
-      type: "POST",
-      url: action,
-      data: str,
-      success: function(msg) {
-        // alert(msg);
-        if (msg == 'OK') {
-          $("#sendmessage").addClass("show");
-          $("#errormessage").removeClass("show");
-          $('.contactForm').find("input, textarea").val("");
-        } else {
-          $("#sendmessage").removeClass("show");
-          $("#errormessage").addClass("show");
-          $('#errormessage').html(msg);
-        }
+    
+    /*Kiểm tra email ó hợp lệ không*/
+    var email_contact = $('#email_contact').val();
+    var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/; 
+    if (!filter.test(email_contact)) { 
+      swal("Đã Có lỗi !!!", "Vui lòng nhập địa chị email hợp lệ");return false;
+    }
 
+    /*Kiểm tra nội dung*/ 
+    var message_contact =  $.trim($("#message_contact").val())
+    if(message_contact == "") {
+      swal("Đã Có lỗi !!!", "Vui lòng nhập nội dung tin nhắn");return false;
+    }
+    /*Kiểm tra nội dung nếu kis tự < 4 thì thông báo*/
+    var message_contact_count = message_contact.length;
+    if(message_contact_count <= 4) {
+      swal("Đã Có lỗi !!!", "Nội dung tin nhắn không phù hợp");return false;
+    }
+    /*token*/
+    var _token = $('input[name="_token"]').val();
+    $.ajax({
+      type: "post",
+      url: 'http://localhost/blog-hanguyenit/contact',
+      data: {
+        _token:_token,
+        name_contact:name_contact,
+        email_contact:email_contact,
+        message_contact:message_contact
+      },
+      success:function(data){
+        if(data == "oke")
+        {
+          swal("Thành công", "Mình rất vui khi nhận được sự góp ý của bạn", "success");
+        }
+        else{
+          swal("Có gì đó không ổn, vui lòng thử lại");
+        }
       }
     });
     return false;
   });
-
 });

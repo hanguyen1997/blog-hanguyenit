@@ -64,7 +64,7 @@
               <a href="{{URL::to('/detail-blog-admin/'.$row->id_blog)}}">
                 <i class="fa fa-asterisk text-primary text">Chi tiết</i>
               </a>
-              <a href="{{URL::to('/edit-blog/'.$row->id_blog)}}" ui-toggle-class="">
+              <a href="{{URL::to('/form-edit-blog/'.$row->id_blog)}}" ui-toggle-class="">
                 <i class="fa fa-check text-success text-active">Sửa</i>
               </a>
               <a onclick="return confirm('Bạn thật sự muốn xoá?')" href="{{URL::to('/dell-blog-admin/'.$row->id_blog)}}">

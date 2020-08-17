@@ -1,8 +1,13 @@
 @extends('public.layouts.layout')
-@section('title', "HanguyenIT")
+
+@section('desc', "Trang danh sách blog")
+@section('title', "Danh sách blog - HanguyenIT")
+@section('keyword', "blog, hanguyenit, hanguyen")
+
 @section('menu')
   @include('public/layouts/menu')
 @endsection('menu')
+
 @section('content')
 <div id="about" class="paddsection">
   <div class="container">

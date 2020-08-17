@@ -1,11 +1,8 @@
 @extends('public.layouts.layout')
 
 @section('desc', "$blog_description")
-
 @section('title', "$blog_title - HanguyenIT")
-
 @section('keyword', "$blog_keyword")
-
 @section('menu')
   @include('public/layouts/menu')
 @endsection('menu')

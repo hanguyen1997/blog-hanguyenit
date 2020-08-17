@@ -22,8 +22,7 @@
   <meta property="og:title" content="@yield('title')" />
   <meta property="og:url" content="<?php echo url()->current();?>" />
   <meta property="og:type" content="website" />
-  <!-- alert css -->
-  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  
   <!-- meta -->
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -44,6 +43,7 @@
   <link href="{{asset('public/fontend/css/responsive.css')}}" rel="stylesheet">
   <!-- Favicon -->
   <link rel="shortcut icon" href="{{asset('public/fontend/images/logo-chữ-N-59.gif')}}">
+  <!-- alert css -->
 </head>
 <body>
   <!-- start section navbar -->
@@ -64,10 +64,14 @@
   <script src="{{asset('public/fontend/lib/owlcarousel/owl.carousel.min.js')}}"></script>
   <script src="{{asset('public/fontend/lib/magnific-popup/magnific-popup.min.js')}}"></script>
   <script src="{{asset('public/fontend/lib/isotope/isotope.pkgd.min.js')}}"></script>
+
+  <!-- thư viện alert css -->
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
   <!-- Contact Form JavaScript File -->
   <script src="{{asset('public/fontend/contactform/contactform.js')}}"></script>
   <!-- Template Main Javascript File -->
   <script src="{{asset('public/fontend/js/main.js')}}"></script>
+ 
   <div id="fb-root"></div>
   <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v8.0&appId=219426959419501&autoLogAppEvents=1" nonce="e4T6g9wP"></script>
 </body>

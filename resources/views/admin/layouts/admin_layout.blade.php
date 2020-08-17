@@ -25,8 +25,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script src="{{asset('public/backend/js/jquery2.0.3.min.js')}}"></script>
 <script src="{{asset('public/backend/js/raphael-min.js')}}"></script>
 <script src="{{asset('public/backend/js/morris.js')}}"></script>
-<!-- alert css -->
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <!--header start-->
 <header class="header fixed-top clearfix">
 <!--logo start-->
@@ -127,6 +125,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script src="{{asset('public/backend/js/jquery.nicescroll.js')}}"></script>
 <script src="{{asset('public/backend/ckeditor/ckeditor.js')}}"></script>
 <script src="{{asset('public/backend/ckeditor/ckfinder/ckfinder.js')}}"></script>
+<!-- alert css -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <!-- gọi hàm ckeditor -->
 <script type="text/javascript">
     CKEDITOR.replace('ckeditor',{

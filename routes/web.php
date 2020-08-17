@@ -12,9 +12,7 @@ Route::get('/about', function(){
 Route::get('/list-blog/', 'BlogController@list_blog');
 Route::get('/detail-blog/{blog_code}', 'BlogController@detail_blog_public');
 /*liên hệ*/
-Route::get('/contact/', function(){
-    return View('public.pages.about');
-});
+Route::post('/contact', 'HomeController@contact');
 
 ///////////////*begin : admin*/////////////////////////
 Route::get('/admin', function () {
@@ -24,7 +22,7 @@ Route::get('/admin', function () {
     
 });
 Route::get('/logout', 'AdminController@logout');
-Route::POST('/check-login', 'AdminController@check_login');
+Route::post('/check-login', 'AdminController@check_login');
 Route::get('/dashboard', 'AdminController@dashboard');
 
 /*blogs*/
@@ -38,7 +36,8 @@ Route::get('/add-blog', function () {
 Route::post('/save-blog', 'BlogController@save');
 Route::get('/detail-blog-admin/{id_blog}', 'BlogController@detail_blog_admin');
 Route::get('/dell-blog-admin/{id_blog}', 'BlogController@dell');
-Route::get('/edit-blog/{id_blog}', 'BlogController@form_edit');
+Route::get('/form-edit-blog/{id_blog}', 'BlogController@form_edit');
+Route::post('/update-blog/{id_blog}', 'BlogController@update_blog');
 
 
 /*image-about*/
