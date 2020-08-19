@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use App\Contact;
 
 class HomeController extends Controller
 {
@@ -22,10 +23,19 @@ class HomeController extends Controller
     /*liên hệ ajax*/
 	public function contact(Request $request)
 	{
-		$array_contact = $request->all();
+		/*Lấy dữ liệu về bằng request*/
+		$data = $request->all();
 
+		/*lưu vào vào data model Contact*/
+		$array_contact = new Contact();
+		$array_contact->user_name = $data['name_contact'];
+		$array_contact->email = $data['email_contact'];
+		$array_contact->message = $data['message_contact'];
+		$array_contact->save();
+
+		/*in ra oke để trả về ajax*/
 		echo "oke";
     }
-    /*End: public function index()*/
+    /*End: function contact(Request $request)*/
     
 }

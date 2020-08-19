@@ -38,6 +38,7 @@ Route::get('/detail-blog-admin/{id_blog}', 'BlogController@detail_blog_admin');
 Route::get('/dell-blog-admin/{id_blog}', 'BlogController@dell');
 Route::get('/form-edit-blog/{id_blog}', 'BlogController@form_edit');
 Route::post('/update-blog/{id_blog}', 'BlogController@update_blog');
+Route::post('/check-title', 'BlogController@check_title');
 
 
 /*image-about*/
@@ -51,3 +52,10 @@ Route::get('/add-image-about', function () {
     if($user_id == "") return Redirect::to('/admin')->send();
     else return view('admin.image_about.add_image_about');
 });
+
+/*contact*/
+Route::get('/ajax-list-contact', 'ContactController@index');
+Route::get('/list-contact', function(){
+    return View('admin.contacts.index');
+});
+Route::get('/dell-contact', 'ContactController@ajax_del');

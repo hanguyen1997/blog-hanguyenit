@@ -16,7 +16,7 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Mã</label>
-                        <input type="text" name="blog_code" class="form-control" id="blog_code">
+                        <input type="text" name="blog_code" class="form-control" id="blog_code" readonly>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">Hình ảnh tiêu đề</label>
@@ -55,19 +55,50 @@
     $(document).ready(function()
     {
         $("#blog_title").blur(function(){
-            var str = (document.getElementById("blog_title").value);
-            str= str.toLowerCase();
-            str= str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g,"a");
-            str= str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g,"e");
-            str= str.replace(/ì|í|ị|ỉ|ĩ/g,"i");
-            str= str.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g,"o");
-            str= str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g,"u");
-            str= str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g,"y");
-            str= str.replace(/đ/g,"d");
-            str= str.replace(/!|@|\$|%|\^|\*|\(|\)|\+|\=|\<|\>|\?|\/|,|\.|\:|\'| |\"|\&|\#|\[|\]|~/g,"-");
-            str= str.replace(/-+-/g,"-"); //thay thế 2- thành 1-
-            str= str.replace(/^\-+|\-+$/g,"");//cắt bỏ ký tự - ở đầu và cuối chuỗi
-            $("#blog_code").val(str);
+            var _token = $('input[name="_token"]').val();
+            var title = (document.getElementById("blog_title").value);
+            
+
+            /*Kiểm tra và tiêu đề mã có bị trùng không bằng ajax*/
+            $.ajax({
+                type:"post",
+                url: "{{url('/check-title')}}",
+                data: {blog_title:title,_token:_token},
+                success:function(data){
+                    /*Đã tồn tại tiêu đề xoá bắt nhập lại*/
+                    if(data == "exist")
+                    {
+                        swal("Đã có lỗi", "Tiêu đề đã tồn tại");
+                        $("#blog_title").val("");
+                        $("#blog_code").val("");
+                        return;
+                    }
+                    /*end: if(data == "exist")*/
+
+                    /*nếu chưa tồn tại thì tạo mã blog*/
+                    if(data == "check_ok")
+                    {
+                        var str= title.toLowerCase();
+                        str= str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g,"a");
+                        str= str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g,"e");
+                        str= str.replace(/ì|í|ị|ỉ|ĩ/g,"i");
+                        str= str.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g,"o");
+                        str= str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g,"u");
+                        str= str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g,"y");
+                        str= str.replace(/đ/g,"d");
+                        str= str.replace(/!|@|\$|%|\^|\*|\(|\)|\+|\=|\<|\>|\?|\/|,|\.|\:|\'| |\"|\&|\#|\[|\]|~/g,"-");
+                        str= str.replace(/-+-/g,"-"); //thay thế 2- thành 1-
+                        str= str.replace(/^\-+|\-+$/g,"");//cắt bỏ ký tự - ở đầu và cuối chuỗi
+                        $("#blog_code").val(str);
+                    }
+                }
+            })
+
+            
+
+            
+
+            
         })
     });
 

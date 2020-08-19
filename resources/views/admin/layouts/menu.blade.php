@@ -29,6 +29,12 @@
                         <li><a href="{{URL::to('/add-image-about')}}">Thêm hình ảnh</a></li>
                     </ul>
                 </li>
+                <li class="sub-menu">
+                    <a href="{{URL::to('/list-contact')}}">
+                        <i class="fa fa-compress"></i>
+                        <span></span>Danh sách liên hệ</span>
+                    </a>
+                </li>
             </ul>            
         </div>
         <!-- sidebar menu end-->

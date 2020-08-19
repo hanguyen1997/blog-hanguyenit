@@ -68,7 +68,7 @@ class BlogController extends Controller
     }
     /*end: function save(Request $request)*/
 
-    /*begin: dell blog. Chuyển trạng thái sang 3*/
+    /*begin: dell blog */
     public function dell($id_blog)
     {	
 	   /*Kiểm tra đăng nhập*/
@@ -76,9 +76,7 @@ class BlogController extends Controller
 
         /*select * form tbl_blogs where id_blog = $id_blog*/
         $array_del_blog = Blog::find($id_blog);
-        $array_del_blog->blog_status = "3";
-        /*update tbl_blog set blog_status = 3 where id_blog = $id_blog*/
-        $array_del_blog->save();
+        $array_del_blog->delete();
 
         /*Đặt thông báo thành công và chuyển trang*/
 		Session::put('message','Xoá thành công');
@@ -111,6 +109,23 @@ class BlogController extends Controller
     	return View('admin.blogs.edit_blog')->with("array_blog_edit", $array_blog_edit);
     }
     /*end: function detail_blog_admin($id_blog)*/
+
+    /*begin: kiểm tra title blog có trùng không*/
+    public function check_title(Request $request)
+    {   
+       /*Kiểm tra đăng nhập*/
+        $this->AuthLogin();
+        /*Lấy dữ liệu bằng request*/
+        $blog_title = $request->blog_title;
+        /*thực hiện câu truy vấn where blog-titile = $blog_title truyền lên trong model Blog*/
+        $array_ckeck_title = Blog::where("blog_title",$blog_title)->first();
+
+        /*Nếu có dữ liệu rồi thì exist, chưa thì check_ok*/
+        if($array_ckeck_title != Null) echo "exist";
+        if($array_ckeck_title == Null) echo "check_ok";
+
+    }
+    /*end: function check_title(Request $request)*/
 
     /*begin: update blog*/
     public function update_blog(Request $request, $id_blog)

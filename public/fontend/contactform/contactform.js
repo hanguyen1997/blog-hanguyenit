@@ -38,7 +38,8 @@ $(document).ready(function(){
       success:function(data){
         if(data == "oke")
         {
-          swal("Thành công", "Mình rất vui khi nhận được sự góp ý của bạn", "success");
+          swal("Thành công", "Cảm ơn bạn đã gửi liên hệ đến mình ^^", "success");
+          return;
         }
         else{
           swal("Có gì đó không ổn, vui lòng thử lại");
