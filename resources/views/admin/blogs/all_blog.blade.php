@@ -1,5 +1,14 @@
 @extends('admin.layouts.admin_layout')
 @section('content')
+<style type="text/css">
+  .head_table tr th{
+    text-align: center;
+    border: solid #d2cece;
+  }
+  .body_table tr td{
+    border: solid #d2cece;
+  }
+</style>
 <div class="table-agile-info">
   <div class="panel panel-default">
     <div class="panel-heading">
@@ -17,8 +26,8 @@
       <div class="col-sm-4">
       </div>
     </div>
-    <div class="table-responsive">
-      <table class="table table-striped b-t b-light">
+    <div class="table">
+      <table class="">
         <?php
           /*Lấy Thông báo Session::get*/
           $message = Session::get('message');
@@ -30,24 +39,21 @@
             Session::put('message', NULL);
           }
         ?>
-        <thead>
+        <thead class="head_table">
           <tr>
             <th>Tiêu đề</th>
-            <th>Hình ảnh</th>
             <th>Mã</th>
             <th>Mô tả</th>
             <th>Hiển thị/Ẩn</th>
             <th>Tuỳ chọn</th>
-            <th style="width:30px;"></th>
           </tr>
         </thead>
-        <tbody>
+        <tbody class="body_table">
           @foreach($array_blog as $key => $row)
           <tr>
             <td>{{$row->blog_title}}</td>
-            <td>{{$row->blog_title}}</td>
             <td>{{$row->blog_code}}</td>
-            <td style="width: 100%;overflow:hidden;text-overflow:ellipsis;-webkit-line-clamp:5; display:-webkit-box;-webkit-box-orient:vertical;">{{$row->blog_description}}</td>
+            <td>{{$row->blog_description}}</td>
             <td>
               <?php
                 if($row->blog_status == 1)
@@ -61,15 +67,21 @@
               ?>
             </td>
             <td>
-              <a href="{{URL::to('/detail-blog-admin/'.$row->id_blog)}}">
-                <i class="fa fa-asterisk text-primary text">Chi tiết</i>
-              </a>
-              <a href="{{URL::to('/form-edit-blog/'.$row->id_blog)}}" ui-toggle-class="">
-                <i class="fa fa-check text-success text-active">Sửa</i>
-              </a>
-              <a onclick="return confirm('Bạn thật sự muốn xoá?')" href="{{URL::to('/dell-blog-admin/'.$row->id_blog)}}">
-                <i class="fa fa-times text-danger text">Xoá</i>
-              </a>
+              <button class="button">
+                <a href="{{URL::to('/detail-blog-admin/'.$row->id_blog)}}">
+                  <i class="fa fa-asterisk text-primary text"> Chi tiết</i>
+                </a>
+              </button>
+              <button class="button">
+                <a href="{{URL::to('/form-edit-blog/'.$row->id_blog)}}" ui-toggle-class="">
+                  <i class="fa fa-check text-success text-active">Sửa</i>
+                </a>
+              </button>
+               <button class="button">
+                <a onclick="return confirm('Bạn thật sự muốn xoá?')" href="{{URL::to('/dell-blog-admin/'.$row->id_blog)}}">
+                  <i class="fa fa-times text-danger text">Xoá</i>
+                </a>
+              </button>
             </td>
           </tr>
           @endforeach

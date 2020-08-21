@@ -1,5 +1,13 @@
 @extends('admin.layouts.admin_layout')
 @section('content')
+<style type="text/css">
+  thead tr th {
+      border: solid 1px;  
+  }
+  .ajax-data tr td {
+      border: solid 1px;  
+  }
+</style>
 <div class="table-agile-info">
   <div class="panel panel-default">
     <div class="panel-heading">

@@ -41,10 +41,18 @@ Route::post('/update-blog/{id_blog}', 'BlogController@update_blog');
 Route::post('/check-title', 'BlogController@check_title');
 
 
-/*image-about*/
-Route::get('/all-image-about', 'ImageAboutController@index');
+/*trang-danh-sach-image-about*/
+Route::get('/all-image-about',  function () {
+    /*Kiểm tra đăng nhập*/
+    $user_id = Session::get('user_id');
+    if($user_id == "") return Redirect::to('/admin')->send();
+    else return view('admin.image_about.all_image_about');
+});
+/*hiển thị trang danh sách bằng ajax*/
+Route::get('/all-image-about-ajax',  'ImageAboutController@index');
+
 Route::post('/save-image-about', 'ImageAboutController@save_image');
-Route::get('/del-image-about/{id}', 'ImageAboutController@del');
+Route::get('/del-image-about', 'ImageAboutController@del');
 Route::get('/active-image-about/{id}', 'ImageAboutController@active_or_unactive_image_about');
 Route::get('/add-image-about', function () {
     /*kiểm tra đăng nhập*/

@@ -21,8 +21,40 @@ class ImageAboutController extends Controller
     	/*Kiểm tra đăng nhập*/
 		$this->AuthLogin();
 
-    	$array_image = DB::table('tbl_about')->get();
-    	return view('admin.image_about.all_image_about')->with("array_image", $array_image);
+    	$array_image = DB::table('tbl_about')->orderBy("id","DESC")->get();
+
+        if($array_image == null)
+        {
+            echo "<tr><td colspan='3' style='text-align: center;>Không có dữ liệu</td></tr>";
+
+            
+        }
+        else
+        {
+    	// return view('admin.image_about.all_image_about')->with("array_image", $array_image);
+            foreach ($array_image as $key => $value) {
+                $content = "<tr>
+                                <td>
+                                <img src='public/uploads/".$value->image."'style='width:300px !important; height:300px !important;object-fit: cover;'>
+                                </td>
+                                <td style='font-size: 30px;'>";
+                if($value->status == 1)
+                { 
+                    $content .= "<a name='active'><i class='fa fa-thumbs-up' data-id='".$value->id."' ></i></a";
+                }else
+                { 
+                   $content .=  "<a name='active'><i class='fa fa-thumbs-o-down' data-id='".$value->id."'></i></a";
+                } 
+                $content .= "</td>
+                              <td>
+                                <button data-id='".$value->id."' style='color: red;' id='button_del_image' name='button_del_image'>Xoá
+                                </button>
+                                </td>
+                            </tr>";
+               
+                echo $content;
+            }
+        }
     }
     /*end: function index()*/
 
@@ -51,14 +83,14 @@ class ImageAboutController extends Controller
     }
     /*end: public function save_image(Request $require)*/
 
-    public function del($id)
+    public function del(Request $request)
     {
     	/*Kiểm tra đăng nhập*/
         $this->AuthLogin();
+        $id = $request->id;
 
         DB::table('tbl_about')->where('id', $id)->delete();
-        Session::put('message', 'Xoá thành công');
-        return Redirect::to('all-image-about');
+        echo "done";
     	
     }
     /*end: public function del($id)*/

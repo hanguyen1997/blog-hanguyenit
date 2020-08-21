@@ -1,5 +1,32 @@
 @extends('admin.layouts.admin_layout')
 @section('content')
+<style type="text/css">
+  #image_name img{
+    width: 100%;
+  }
+</style>
+<div class="row">
+    <div class="col-lg-12">
+        <section class="panel">
+            <header class="panel-heading">
+                Thêm hình ảnh giới thiệu trang chủ
+            </header>
+            <div class="panel-body">
+                <div class="position-center">
+                    <form id="form_save_image_about" role="form" action="{{URL::to('/save-image-about')}}" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="_token" value="{{csrf_token()}}"> 
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Hình ảnh tiêu đề</label>
+                        <input type="file" name="image_about" class="form-control" id="image_about" onchange="show_image()">
+                        <div  id="image_name"></div>
+                    </div>
+                    <button onclick="checkform()" type="button" name="add_category_product" class="btn btn-info">Thêm hình ảnh mới</button>
+                </form>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
 <div class="table-agile-info">
   <div class="panel panel-default">
     <div style="font-size: 18px;" class="panel-heading">
@@ -15,28 +42,8 @@
             <th style="width:30px;"></th>
           </tr>
         </thead>
-        <tbody>
-          @foreach($array_image as $key => $row)
-          <tr>
-            <td><img src="public/uploads/{{$row->image}}" style="width:300px !important; height:300px !important;object-fit: cover;"></td>
-            <td style="font-size: 30px;">
-              <?php
-                if($row->status == 1)
-                { ?>
-                  <a href="{{URL::to('/active-image-about/'.$row->id)}}"><i class='fa fa-thumbs-up' ></i></a>
-                <?php }else
-                { ?>
-                  <a href="{{URL::to('/active-image-about/'.$row->id)}}" ><i class='fa fa-thumbs-o-down' ></i></a>
-                <?php } 
-              ?>
-            </td>
-            <td>
-              <a onclick="return confirm('Bạn thật sự muốn xoá?')" href="{{URL::to('/del-image-about/'.$row->id)}}">
-                <i class="fa fa-times text-danger text">Xoá</i>
-              </a>
-            </td>
-          </tr>
-          @endforeach
+        <tbody id="all_image_about">
+          
         </tbody>
       </table>
     </div>
@@ -59,6 +66,87 @@
     </footer>
   </div>
 </div>
+<script type="text/javascript">
+$(document).ready(function(){
+  /*dùng ajax để hiện thị danh sách*/
+  function fetch_data(){
+    $.ajax({
+      method: 'get',
+      url: "{{URL('/all-image-about-ajax')}}",
+      success:function(data){
+        $('#all_image_about').html(data);
+      }
+    })
+  }
+
+  fetch_data();
+
+  /*Xoá contact bằng ajax*/
+    $(document).on('click','#button_del_image',function(){
+      /*Lấy id_contact*/
+      var id = $(this).data('id');
+
+      /*Hiển thị thông báo xác nhận xoá*/
+      swal({
+        title: "Bạn có muốn xoá hình ảnh này không ?",
+        text: "Nếu đã xoá thì sẽ không khôi phục được, vui lòng suy nghĩ kĩ",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+      .then((willDelete) => {
+        if(willDelete)
+        {
+          /*Nếu đồng ý thì xoá dữ liệu bằng ajax*/
+          $.ajax({
+            method: "GET",
+            url: "{{URL('/del-image-about')}}",
+            data:{id:id},
+            success:function(data){
+              if(data == "done")
+              {
+                /*gọi hàm làm mới lại danh sách và thông báo xoá thành công*/
+                fetch_data();
+                swal("Đã xoá thành công", {icon: "success",});
+              }
+            }
+          })
+        }
+      });
+    })
 
 
+})
+/*Hiển thị ảnh trước khi upload lên sever*/ 
+function show_image(){
+  /*Lấy tên file*/
+  var imageSelected = document.getElementById('image_about').files;
+
+  /*kiểm tra file khác rỗng*/
+  if (imageSelected.length > 0) {
+      var imageToLoad = imageSelected[0];
+      var imageReader = new FileReader();
+      imageReader.onload = function(fileLoaderEvent) {
+          /*đường dẫn file khiw chưa lưu trên máy*/
+          var srcData = fileLoaderEvent.target.result;
+          var newImage = document.createElement('img');
+          newImage.src = srcData;
+          document.getElementById('image_name').innerHTML = newImage.outerHTML;
+      }
+      imageReader.readAsDataURL(imageToLoad);
+  }
+}
+
+/*Kiểm tra form*/ 
+function checkform() {
+  /*Kiểm tra truyền hình ảnh lên không*/
+  if(document.getElementById("image_about").value == "" )
+  {
+      swal("Gặp lỗi rồi !!!", "Vui lòng chọn hình ảnh muốn tải lên");
+      return;
+  }
+  document.getElementById("form_save_image_about").submit();
+}
+
+</script>
 @endsection

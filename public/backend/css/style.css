@@ -794,7 +794,7 @@ ul.top-menu>li>a:hover,ul.top-menu>li>a:focus {
     line-height: 57px;
     letter-spacing: 0.2px;
     color: #000;
-    font-size: 18px;
+    font-size: 15px;
     font-weight: 400;
     padding: 0 16px;
     background:#ddede0;
@@ -1464,7 +1464,7 @@ section#tables  p {
 	background-color: #ffffff;
 }
 .table td, .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
-	padding: 15px!important;
+	padding: 5px!important;
 }
 .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
 	font-size: 0.9em;
