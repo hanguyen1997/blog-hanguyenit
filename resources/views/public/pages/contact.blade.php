@@ -2,22 +2,17 @@
   <div class="container">
     <div class="contact-block1">
       <div class="row">
-
         <div class="col-lg-6">
           <div class="contact-contact">
-
             <h2 class="mb-30">Liên Hệ Tôi</h2>
-
             <ul class="contact-details">
               <li><span>304 Lê Văn Hiến, Street</span></li>
               <li><span>Đà Nẵng , Việt Nam</span></li>
               <li><span>+84 935.410.769</span></li>
               <li><span>truongbahanguyen@gmail.com</span></li>
             </ul>
-
           </div>
         </div>
-
         <div class="col-lg-6">
           <form action="" method="post" role="form" class="contactForm">
             @csrf

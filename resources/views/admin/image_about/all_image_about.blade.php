@@ -83,9 +83,10 @@ $(document).ready(function(){
   }
   /*end: function fetch_data()*/
 
+  /*hàm gọi ajax khi load trang*/
   fetch_data();
 
-  /*Hiển thị hoặc ẩn hình ảnh bên ngoài*/
+  /*Hiển thị hoặc ẩn hình ảnh phía bên ngoài*/
   $(document).on('click','#active',function(){
     /*Lấy id_contact*/
     var id = $(this).data('id');
@@ -186,8 +187,10 @@ $(document).ready(function(){
       }
     });
   })
+  /*end:  $(document).on('click','#button_del_image',function()*/
 })
-/*end:  $(document).on('click','#button_del_image',function()*/
+/*end: $(document).ready(function()*/
+
 
 /*Hiển thị ảnh trước khi upload lên sever*/ 
 function show_image(){
@@ -210,7 +213,7 @@ function show_image(){
 }
 /*end: function show_image()*/
 
-/*Kiểm tra form*/ 
+/*Kiểm tra form có hình ảnh không*/ 
 function checkform(){
   /*Kiểm tra truyền hình ảnh lên không*/
   if(document.getElementById("image_about").value == "" )
