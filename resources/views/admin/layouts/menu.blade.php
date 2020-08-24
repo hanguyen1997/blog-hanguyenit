@@ -20,14 +20,10 @@
                     </ul>
                 </li>
                 <li class="sub-menu">
-                    <a href="javascript:;">
+                    <a href="{{URL::to('/all-image-about')}}">
                         <i class="fa fa-picture-o"></i>
                         <span>Hình ảnh slider trang chủ</span>
                     </a>
-                    <ul class="sub">
-                        <li><a href="{{URL::to('/all-image-about')}}">Danh sách hình ảnh</a></li>
-                        <li><a href="{{URL::to('/add-image-about')}}">Thêm hình ảnh</a></li>
-                    </ul>
                 </li>
                 <li class="sub-menu">
                     <a href="{{URL::to('/list-contact')}}">

@@ -40,10 +40,10 @@ class ImageAboutController extends Controller
                                 <td style='font-size: 30px;'>";
                 if($value->status == 1)
                 { 
-                    $content .= "<a name='active'><i class='fa fa-thumbs-up' data-id='".$value->id."' ></i></a";
+                    $content .= "<a id='active' data-id='".$value->id."'  data-status='".$value->status."'><i class='fa fa-thumbs-up'></i></a";
                 }else
                 { 
-                   $content .=  "<a name='active'><i class='fa fa-thumbs-o-down' data-id='".$value->id."'></i></a";
+                   $content .=  "<a id='active' data-id='".$value->id."' data-status='".$value->status."'><i class='fa fa-thumbs-o-down' ></i></a";
                 } 
                 $content .= "</td>
                               <td>
@@ -96,11 +96,12 @@ class ImageAboutController extends Controller
     /*end: public function del($id)*/
 
     /*begin: un active or active image in about page home*/
-    public function active_or_unactive_image_about($id)
+    public function active_or_unactive_image_about(Request $request)
     {
     	/*Kiểm tra đăng nhập*/
         $this->AuthLogin();
 
+        $id = $request->id;
         /*truy vấn dữ liệu để lấy thông tin hình ảnh theo id*/
        	$array_image_about = DB::table('tbl_about')->where("id", $id)->first();
 
@@ -117,8 +118,9 @@ class ImageAboutController extends Controller
 			
             /*Lưu lại và đặt thông báo chuyển trang danh sách hình ảnh thông tin ở trang chủ*/
 			DB::table('tbl_about')->where("id", $id)->update($array_update_image);
-	        Session::put('message', 'Chỉnh sửa thành công');
-	        return Redirect::to('all-image-about');
+	        echo "done";
+            return;
+
     	}
     	/*end: if($array_image_about != NULL)*/
 

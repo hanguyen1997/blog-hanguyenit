@@ -53,7 +53,7 @@ Route::get('/all-image-about-ajax',  'ImageAboutController@index');
 
 Route::post('/save-image-about', 'ImageAboutController@save_image');
 Route::get('/del-image-about', 'ImageAboutController@del');
-Route::get('/active-image-about/{id}', 'ImageAboutController@active_or_unactive_image_about');
+Route::get('/active-image-about', 'ImageAboutController@active_or_unactive_image_about');
 Route::get('/add-image-about', function () {
     /*kiểm tra đăng nhập*/
     $user_id = Session::get('user_id');

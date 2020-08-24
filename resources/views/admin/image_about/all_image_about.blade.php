@@ -2,7 +2,9 @@
 @section('content')
 <style type="text/css">
   #image_name img{
-    width: 100%;
+    width: 70%;
+    height: auto;
+    object-fit: unset;
   }
 </style>
 <div class="row">
@@ -68,6 +70,7 @@
 </div>
 <script type="text/javascript">
 $(document).ready(function(){
+
   /*dùng ajax để hiện thị danh sách*/
   function fetch_data(){
     $.ajax({
@@ -78,18 +81,21 @@ $(document).ready(function(){
       }
     })
   }
+  /*end: function fetch_data()*/
 
   fetch_data();
 
-  /*Xoá contact bằng ajax*/
-    $(document).on('click','#button_del_image',function(){
-      /*Lấy id_contact*/
-      var id = $(this).data('id');
-
+  /*Hiển thị hoặc ẩn hình ảnh bên ngoài*/
+  $(document).on('click','#active',function(){
+    /*Lấy id_contact*/
+    var id = $(this).data('id');
+    var status = $(this).data('status');
+    /*nếu status = 1 thì hiển thị thông báo unactive và 2 thì ngược lại*/
+    if(status = "1")
+    {
       /*Hiển thị thông báo xác nhận xoá*/
       swal({
-        title: "Bạn có muốn xoá hình ảnh này không ?",
-        text: "Nếu đã xoá thì sẽ không khôi phục được, vui lòng suy nghĩ kĩ",
+        title: "Bạn có muốn ẩn hình ảnh này bên ngoài không ?",
         icon: "warning",
         buttons: true,
         dangerMode: true,
@@ -100,23 +106,89 @@ $(document).ready(function(){
           /*Nếu đồng ý thì xoá dữ liệu bằng ajax*/
           $.ajax({
             method: "GET",
-            url: "{{URL('/del-image-about')}}",
+            url: "{{URL('/active-image-about')}}",
             data:{id:id},
             success:function(data){
               if(data == "done")
               {
                 /*gọi hàm làm mới lại danh sách và thông báo xoá thành công*/
                 fetch_data();
-                swal("Đã xoá thành công", {icon: "success",});
+                swal("Thành công", {icon: "success",});
               }
             }
           })
         }
       });
+    }
+    else
+    {
+      /*Hiển thị thông báo xác nhận xoá*/
+      swal({
+        title: "Bạn có muốn hiển thị hình ảnh này ra bên ngoài không ?",
+        text: "Hình ảnh sẽ được hiển thị ở trang chủ phần thông tin about",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+      .then((willDelete) => {
+        if(willDelete)
+        {
+          /*Nếu đồng ý thì xoá dữ liệu bằng ajax*/
+          $.ajax({
+            method: "GET",
+            url: "{{URL('/active-image-about')}}",
+            data:{id:id},
+            success:function(data){
+              if(data == "done")
+              {
+                /*gọi hàm làm mới lại danh sách và thông báo xoá thành công*/
+                fetch_data();
+                swal("Thành công", {icon: "success",});
+              }
+            }
+          })
+        }
+      });
+    }
+  })
+  /*end: $(document).on('click','#active',function()*/
+
+  /*Xoá hình ảnh bằng ajax*/
+  $(document).on('click','#button_del_image',function(){
+    /*Lấy id_contact*/
+    var id = $(this).data('id');
+
+    /*Hiển thị thông báo xác nhận xoá*/
+    swal({
+      title: "Bạn có muốn xoá hình ảnh này không ?",
+      text: "Nếu đã xoá thì sẽ không khôi phục được, vui lòng suy nghĩ kĩ",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
     })
-
-
+    .then((willDelete) => {
+      if(willDelete)
+      {
+        /*Nếu đồng ý thì xoá dữ liệu bằng ajax*/
+        $.ajax({
+          method: "GET",
+          url: "{{URL('/del-image-about')}}",
+          data:{id:id},
+          success:function(data){
+            if(data == "done")
+            {
+              /*gọi hàm làm mới lại danh sách và thông báo xoá thành công*/
+              fetch_data();
+              swal("Thành công", {icon: "success",});
+            }
+          }
+        })
+      }
+    });
+  })
 })
+/*end:  $(document).on('click','#button_del_image',function()*/
+
 /*Hiển thị ảnh trước khi upload lên sever*/ 
 function show_image(){
   /*Lấy tên file*/
@@ -136,9 +208,10 @@ function show_image(){
       imageReader.readAsDataURL(imageToLoad);
   }
 }
+/*end: function show_image()*/
 
 /*Kiểm tra form*/ 
-function checkform() {
+function checkform(){
   /*Kiểm tra truyền hình ảnh lên không*/
   if(document.getElementById("image_about").value == "" )
   {
@@ -147,6 +220,7 @@ function checkform() {
   }
   document.getElementById("form_save_image_about").submit();
 }
+/*end: function checkform()*/
 
 </script>
 @endsection
