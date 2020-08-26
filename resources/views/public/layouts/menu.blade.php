@@ -9,7 +9,7 @@
         <li><a href="{{URL::to('/')}}" class="smoothScroll">Trang chủ</a></li>
         <li><a href="{{URL::to('/about')}}" class="smoothScroll">Thông tin</a></li>
         <li><a href="{{URL::to('/list-blog')}}" class="smoothScroll">Blog</a></li>
-        <li><a href="#contact" class="smoothScroll">Liên hệ</a></li>
+        <li><a href="{{URL::to('/contact')}}" class="smoothScroll">Liên hệ</a></li>
       </ul>
     </div>
   </div>

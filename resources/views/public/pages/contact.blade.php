@@ -1,6 +1,17 @@
+@extends('public.layouts.layout')
+
+@section('desc', "Trang liên hệ")
+@section('title', "Contact blog - HanguyenIT")
+@section('keyword', "blog, hanguyenit, hanguyen, contact")
+
+@section('menu')
+  @include('public/layouts/menu')
+@endsection('menu')
+
+@section('content')
 <div id="contact" class="paddsection">
-  <div class="container">
-    <div class="contact-block1">
+  <div class="container" style="margin-top: 60px;">
+    <div class="contact-block1" style="padding-top: 70px;">
       <div class="row">
         <div class="col-lg-6">
           <div class="contact-contact">
@@ -43,5 +54,9 @@
         </div>
       </div>
     </div>
+    <div style="margin-top: 50px">
+      <h1 style="text-align:center;font-size: 18px;">Nếu có gì cần liên hệ các bạn có thể gửi mail cho mình đến địa chỉ <a href="#">truongbahanguyen@gmail.com</a> hoặc có thể để lại thông tin ở bên trên. Cảm ơn !<h1>
+    </div>
   </div>
 </div>
+@endsection

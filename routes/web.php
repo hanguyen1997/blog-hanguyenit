@@ -8,6 +8,10 @@ Route::get('/trang-chu', 'HomeController@index');
 Route::get('/about', function(){
     return View('public.pages.about');
 });
+/*Liên hệ*/
+Route::get('/contact', function(){
+    return View('public.pages.contact');
+});
 /*blog*/
 Route::get('/list-blog/', 'BlogController@list_blog');
 Route::get('/detail-blog/{blog_code}', 'BlogController@detail_blog_public');
