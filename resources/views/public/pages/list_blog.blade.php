@@ -20,7 +20,7 @@
     <div class="journal-block">
       <div class="row">
         @foreach ($array_blog as $blog)
-        <div class="box-blog">
+        <div class="box-blog" style="width: 100%;">
           <div class="journal-info mb-30">
             <div class="journal-txt">
               <h4><a href="{{URL::to('detail-blog/'.$blog->blog_code)}}">{{$blog->blog_title}}</a></h4>

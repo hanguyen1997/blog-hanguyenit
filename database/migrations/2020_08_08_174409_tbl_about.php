@@ -18,6 +18,7 @@ class TblAbout extends Migration
             $table->string('type');
             $table->string('image');
             $table->string('content');
+            $table->string('status');
             $table->timestamps();
         });
     }

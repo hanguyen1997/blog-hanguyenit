@@ -21,7 +21,7 @@ class TblBlogs extends Migration
             $table->text('blog_description');
             $table->text('blog_content');
             $table->string('blog_image');
-            $table->integer('post_status');
+            $table->integer('blog_status');
             $table->timestamps();
         });
     }
