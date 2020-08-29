@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use Session;
+use App\Contact;
 use Illuminate\Support\Facades\Redirect;
 session_start();
 
@@ -49,7 +50,13 @@ class AdminController extends Controller
     	/*Kiểm tra đăng nhập*/
         $this->AuthLogin();
 
-    	return view("admin.dashboard.index");
+        // Đếm toàn bộ số rows liên hệ gửi đến web trong table contact
+        $count_contact =  Contact::count();
+
+        // Đếm toàn bộ số bài viết hiện thị trên trang web table tbl_blog
+        $count_blog =  DB::table('tbl_blogs')->where("blog_status", "=", "1")->count();
+
+    	return view("admin.dashboard.index")->with("count_contact", $count_contact)->with("count_blog", $count_blog);
     }
     /*end: function dashboard()*/
 

@@ -8,7 +8,7 @@
 				<i class="fa fa-eye"> </i>
 			</div>
 			 <div class="col-md-8 market-update-left">
-			 <h4>Sô lượt truy cập</h4>
+			 <h4>Sô lượt truy cập bài viết</h4>
 			<h3>500</h3>
 		  </div>
 		  <div class="clearfix"> </div>
@@ -21,7 +21,7 @@
 			</div>
 			<div class="col-md-8 market-update-left">
 			<h4>Tổng số bài viết</h4>
-				<h3>2,500</h3>
+				<h3>{{$count_blog}}</h3>
 			</div>
 		  <div class="clearfix"> </div>
 		</div>
@@ -32,8 +32,8 @@
 				<i class="fa fa-connectdevelop" style="font-size:3em; color:#fff; text-align:left;"></i>
 			</div>
 			<div class="col-md-8 market-update-left">
-				<h4>Tổng số liên hê</h4>
-				<h3>1,500</h3>
+				<h4>Tổng số liên hệ</h4>
+				<h3>{{$count_contact}}</h3>
 			</div>
 		  <div class="clearfix"> </div>
 		</div>
