@@ -43,9 +43,13 @@ class BlogController extends Controller
 	    $array_blog_new['blog_keyword'] = $request->blog_keyword;
         $array_blog_new['blog_status'] = $request->blog_status;
 	    $array_blog_new['created_at'] = date("Y-m-d H:i:s"); 
-	    $get_image = $request->file('blog_image');
+        $array_blog_new['viewcount'] = "0";
 
+        /*Lấy id của người đăng bài*/
+        $array_blog_new['id_user_create'] = Session::get('user_id');
+	    
 	    /*Kiểm tra có hình ảnh khong, nếu không có thì lưu rỗng*/
+        $get_image = $request->file('blog_image');
 		if($get_image)
 		{
 			$get_name_image = $get_image->getClientOriginalName();
@@ -61,7 +65,8 @@ class BlogController extends Controller
 		}
 		/*End: if($get_image)*/
 		
-		$array_blog_new['blog_image'] = "";
+        $array_blog_new['blog_image'] = "";
+        
 	    db::table('tbl_blogs')->insert($array_blog_new);
 	    return Redirect::to('all-blog');
 	    //$array_blog_new['blog_image'] = $request->blog_image;

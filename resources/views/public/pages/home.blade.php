@@ -104,6 +104,16 @@
             <a href="{{URL::to('detail-blog/'.$post->blog_code)}}"><img src="{{asset('public/uploads/'.$post->blog_image)}}" style="object-fit: cover;width:100%;height: 200px;" class="img-responsive" alt="img"></a>
             <div class="journal-txt">
               <h4 style="height: 67px;"><a style="overflow: hidden;-webkit-line-clamp: 2;display: -webkit-box;-webkit-box-orient: vertical; line-height: 32px;" href="{{URL::to('detail-blog/'.$post->blog_code)}}">{{$post->blog_title}}</a></h4>
+              <div style="margin-top: 10px">
+                <span>
+                  <i class="ion-android-calendar" ></i> <?php echo date('d/m/Y', strtotime($post->created_at));?>
+                </span>
+                <span style="padding-left: 5px;">
+                   <i class="ion-android-chat" ></i>
+                  <span class="fb-comments-count" data-href="{{URL::to('detail-blog/'.$post->blog_code)}}"></span>
+                </span>
+                <span style="padding-left: 5px;"><i class="ion-android-person"></i> {{$post->user->name}}</span>
+              </div>
               <p style="overflow: hidden;-webkit-line-clamp: 5;display: -webkit-box; -webkit-box-orient: vertical;" class="separator">{{$post->blog_description}}</p>
             </div>
           </div>

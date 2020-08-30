@@ -25,8 +25,17 @@
             <div class="journal-txt">
               <h4><a href="{{URL::to('detail-blog/'.$blog->blog_code)}}">{{$blog->blog_title}}</a></h4>
               <div>
-                <span>Date: <?php echo date('d/m/Y', strtotime($blog->created_at));?></span>
-                <span><i class="ion-ios-heart-outline"></i> 3 Comments</span>
+                <span>
+                  <i class="ion-android-calendar" ></i> <?php echo date('d/m/Y', strtotime($blog->created_at));?>
+                </span>
+                <span style="padding-left: 15px;">
+                  <span class="fb-comments-count" data-href="{{URL::to('detail-blog/'.$blog->blog_code)}}"></span> Comment 
+                </span>
+                <span style="padding-left: 15px;">
+                  <i class="ion-android-person"></i> 
+                  {{$blog->user->name}}
+                </span>
+                
               </div>
               <p class="separator">{{$blog->blog_description}}
               </p>
