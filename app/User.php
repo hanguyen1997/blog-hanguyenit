@@ -11,4 +11,6 @@ class User extends Authenticatable
     protected $filltable = ['user_group_id','name','email','password'];
     protected $primarykey = "user_id";
     protected $table = "tbl_users";
+
+    
 }

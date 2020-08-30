@@ -24,13 +24,14 @@
                   </div>
                   <div class="post-meta">
                     <ul class="list-unstyled mb-0">
-                      <li class="">Date : <?php echo date("d/m/Y", strtotime($blog_detail->created_at)); ?></li>
+                      <li class=""><i class="ion-android-calendar" ></i> <?php echo date("d/m/Y", strtotime($blog_detail->created_at)); ?></li>
                       <li class="commont">
-                        <i class="ion-ios-heart-outline"></i> 
                         <!-- count comment -->
                         <span class="fb-comments-count" data-href="<?php echo url()->current();?>"></span>
                         Comments
                       </li>
+                      <li class="">
+                        <i class="ion-android-person"></i> {{$blog_detail->user->name}}</li>
                     </ul>
                   </div>
                   <p class="mb-30">{!!$blog_detail->blog_content!!}</p>
