@@ -27,7 +27,7 @@
       </div>
     </div>
     <div class="table">
-      <table class="">
+      <table style="width: 100%;">
         <?php
           /*Lấy Thông báo Session::get*/
           $message = Session::get('message');

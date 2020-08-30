@@ -12,12 +12,12 @@
   <div class="s">
     <div class="row justify-content-center">
       <div class="col-md-8 col-md-offset-2">
-        <div class="row">
+        <div class="row" style="margin-top: 80px;">
           @foreach ($array_detail_blog as $key => $blog_detail)
           <div class="container-main single-main">
             <div class="col-md-12">
               <div class="block-main mb-30">
-                <img style="width: 100%;height: 500px;object-fit: contain;margin-bottom: 20px;" src="{{asset('public/uploads/'.$blog_detail->blog_image)}}" class="img-responsive" alt="reviews2">
+                <img style="width: 100%;object-fit: contain;margin-bottom: 20px;" src="{{asset('public/uploads/'.$blog_detail->blog_image)}}" class="img-responsive" alt="reviews2">
                 <div class="content-main single-post padDiv">
                   <div class="journal-txt">
                     <h4 style="text-align: center;"><a href="#">{{$blog_detail->blog_title}}</a></h4>
