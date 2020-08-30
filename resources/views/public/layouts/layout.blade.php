@@ -43,7 +43,6 @@
   <link href="{{asset('public/fontend/css/responsive.css')}}" rel="stylesheet">
   <!-- Favicon -->
   <link rel="shortcut icon" href="{{asset('public/fontend/images/logo-chữ-N-59.gif')}}">
-  <!-- alert css -->
 </head>
 <body>
   <!-- start section navbar -->
