@@ -55,7 +55,7 @@ class AdminController extends Controller
 
         // Đếm toàn bộ số bài viết hiện thị trên trang web table tbl_blog
         $count_blog =  DB::table('tbl_blogs')->where("blog_status", "=", "1")->count();
-
+        
     	return view("admin.dashboard.index")->with("count_contact", $count_contact)->with("count_blog", $count_blog);
     }
     /*end: function dashboard()*/
