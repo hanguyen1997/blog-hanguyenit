@@ -71,3 +71,9 @@ Route::get('/list-contact', function(){
     return View('admin.contacts.index');
 });
 Route::get('/dell-contact', 'ContactController@ajax_del');
+
+/*User*/
+Route::get('/list-user', function(){
+    return View('admin.user.index');
+});
+Route::get('/ajax-list-user', 'UserController@index');
