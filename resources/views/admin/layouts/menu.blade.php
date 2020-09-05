@@ -27,8 +27,14 @@
                 </li>
                 <li class="sub-menu">
                     <a href="{{URL::to('/list-contact')}}">
-                        <i class="fa fa-compress"></i>
+                        <i class="fa fa-comments"></i>
                         <span></span>Danh sách liên hệ</span>
+                    </a>
+                </li>
+                <li class="sub-menu">
+                    <a href="{{URL::to('/list-user')}}">
+                        <i class="fa fa-user-plus"></i>
+                        <span></span>Danh sách người dùng</span>
                     </a>
                 </li>
             </ul>            
