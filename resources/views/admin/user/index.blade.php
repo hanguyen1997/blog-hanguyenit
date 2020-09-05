@@ -27,6 +27,24 @@
           </tr>
         </thead>
         <tbody class ="ajax-data" >
+          @foreach($array_user as $key => $user)
+          <tr>
+            <td>{{$user->name}}</td>
+            <td>{{$user->email}}</td>
+            <td>Admin</td>
+            <td>
+            <button style='background:red;'>
+              <a style='color:white' href='#' data-id='".$user->id."' >Xoá</a>
+            </button>
+            <button  style='background:#6464f3;'>
+              <a style='color:white' href='{{URL('detail_user')}}' data-id='".$user->id."'>Chi tiết</a>
+            </button>
+            <button  style='background:#57a957;'>
+              <a style='color:white' href='#' data-id='".$user->id."'>Đổi mật khẩu</a>
+            </button>
+            </td>
+          </tr>
+          @endforeach
         </tbody>
       </table>
     </div>
