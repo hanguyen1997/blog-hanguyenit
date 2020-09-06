@@ -31,12 +31,21 @@
                         <span></span>Danh sách liên hệ</span>
                     </a>
                 </li>
+                <?php 
+                /*if the user is an admin, show menu list user admin is user_group_id = 1*/ 
+                $user_group_id = Session::get('user_group_id');
+                if($user_group_id == "1")
+                {;
+                ?>
                 <li class="sub-menu">
                     <a href="{{URL::to('/list-user')}}">
                         <i class="fa fa-user-plus"></i>
                         <span></span>Danh sách người dùng</span>
                     </a>
                 </li>
+                <?php 
+                }
+                ?>
             </ul>            
         </div>
         <!-- sidebar menu end-->
