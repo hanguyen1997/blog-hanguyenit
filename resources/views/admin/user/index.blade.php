@@ -11,6 +11,18 @@
     color: initial;
   }
 </style>
+<div>
+  <?php
+    /*Nếu có thông báo thì hiển thị*/
+    $message = Session::get("message");
+    if($message)
+    {
+      echo "<div style='text-align: center;font-size: 15px;color: #5050f0;' class='alert alert-info'>$message</div>";
+      Session::put("message", NULL);
+    }
+    /*end: if($message)*/
+  ?>
+</div>
 <div class="table-agile-info">
   <div class="panel panel-default">
     <div class="panel-heading">
@@ -34,10 +46,10 @@
             <td>Admin</td>
             <td>
             <button style='background:red;'>
-              <a style='color:white' href='#' data-id='".$user->id."' >Xoá</a>
+              <a style='color:white' href="{{URL('del-user/'.$user->user_id)}}" >Xoá</a>
             </button>
             <button  style='background:#6464f3;'>
-              <a style='color:white' href='{{URL('detail_user')}}' data-id='".$user->id."'>Chi tiết</a>
+              <a style='color:white' href="{{URL('detail_user')}}" >Chi tiết</a>
             </button>
             <button  style='background:#57a957;'>
               <a style='color:white' href='#' data-id='".$user->id."'>Đổi mật khẩu</a>
@@ -50,60 +62,4 @@
     </div>
   </div>
 </div>
-<script type="text/javascript">
-  $(document).ready(function(){
-
-    /*Load dữ liệu danh sách contact bằng ajax*/
-    function fetch_data(){
-      $.ajax({
-        method: "GET",
-        url: "{{URL('/ajax-list-user')}}",
-        success:function(data){
-          $('.ajax-data').html(data);
-        }
-      })
-    }
-    fetch_data();
-
-    /*Xoá contact bằng ajax*/
-    $(document).on('click','#button_del_contact',function(){
-      /*Lấy id_contact*/
-      var id_contact = $(this).data('id_contact');
-
-      /*Hiển thị thông báo xác nhận xoá*/
-      swal({
-        title: "Bạn có muốn xoá liên hệ này không ?",
-        text: "Nếu đã xoá thì sẽ không khôi phục được, vui lòng suy nghĩ kĩ",
-        icon: "warning",
-        buttons: true,
-        dangerMode: true,
-      })
-      .then((willDelete) => {
-        if(willDelete)
-        {
-          /*Nếu đồng ý thì xoá dữ liệu bằng ajax*/
-          $.ajax({
-            method: "GET",
-            url: "{{URL('/dell-contact')}}",
-            data:{id_contact:id_contact},
-            success:function(data){
-              if(data == "done")
-              {
-                /*gọi hàm làm mới lại danh sách và thông báo xoá thành công*/
-                fetch_data();
-                swal("Đã xoá thành công", {icon: "success",});
-              }
-            }
-          })
-        }else
-        {
-          swal("Quay lại");
-        }
-        /*end: if (willDelete)*/
-      });
-    })
-
-
-  })
-</script>
 @endsection
