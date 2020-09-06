@@ -8,8 +8,22 @@ session_start();
 
 class UserController extends Controller
 {
+	/*check user*/
+    public function AuthLogin()
+    {
+        $user_id = Session::get('user_id');
+        $user_group_id = Session::get('user_group_id');
+
+        /*if the user is an admin, allow access, admin is user_group_id = 1*/ 
+        if($user_group_id != "1") return Redirect::to('/admin')->send();
+        if($user_id == "") return Redirect::to('/admin')->send();
+    }
+
 	/*begin: show list user*/
     public function index(){
+    	/*Kiểm tra đăng nhập*/
+        $this->AuthLogin();
+
     	$array_user = User::all();
         return view('admin.user.index')->with("array_user", $array_user);
     }
@@ -17,6 +31,9 @@ class UserController extends Controller
 
     /*begin: delete user*/
     public function delete($user_id){
+    	/*Kiểm tra đăng nhập*/
+        $this->AuthLogin();
+
     	/*DELETE FROM tbl_users where user_id = $user_id*/ 
     	$array_user = User::where("user_id",$user_id)->delete();
     	Session::put("message", "Xoá thành công");

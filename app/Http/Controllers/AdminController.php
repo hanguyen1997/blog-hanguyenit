@@ -29,7 +29,8 @@ class AdminController extends Controller
     	{
     		Session::put("user_name", $array_user->name);
     		Session::put("user_email", $user_email);
-    		Session::put("user_id", $array_user->user_id);
+            Session::put("user_id", $array_user->user_id);
+    		Session::put("user_group_id", $array_user->user_group_id);
 
     		/*Chuyển đến trang dasboard*/
     		return Redirect('/dashboard');
@@ -68,7 +69,8 @@ class AdminController extends Controller
     	
     	Session::put('user_id', NULL);
     	Session::put('user_name', NULL);
-    	Session::put('user_email', NULL);
+        Session::put('user_email', NULL);
+    	Session::put('user_group_id', NULL);
 
     	/*Chuyển về trang đăng nhập*/
     	return Redirect::to("/admin");	
