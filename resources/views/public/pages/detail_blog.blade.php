@@ -9,7 +9,7 @@
 
 @section('content')
 <div class="main-content paddsection">
-  <div class="s">
+  <div class="container">
     <div class="row justify-content-center">
       <div class="col-md-8 col-md-offset-2">
         <div class="row" style="margin-top: 80px;">
@@ -42,7 +42,9 @@
             </div>
             @endforeach
             <!-- commnet facebook -->
-            <div class="fb-comments" data-href="<?php echo url()->current();?>" data-numposts="20" style="padding: 20px;" data-width="100%">
+            <div class="content-main single-post padDiv">
+              <div class="fb-comments" data-href="<?php echo url()->current();?>" data-numposts="20" data-width="100%">
+              </div>
             </div>
             <!-- end: commnet facebook -->
           </div>
