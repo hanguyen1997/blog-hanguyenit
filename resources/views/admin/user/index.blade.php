@@ -43,7 +43,7 @@
           <tr>
             <td>{{$user->name}}</td>
             <td>{{$user->email}}</td>
-            <td>Admin</td>
+            <td>{{$user->user_group->user_group_name}}</td>
             <td>
             <button style='background:red;'>
               <a style='color:white' href="{{URL('del-user/'.$user->user_id)}}" >Xoá</a>

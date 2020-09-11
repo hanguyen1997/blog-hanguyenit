@@ -1,16 +1,16 @@
 <?php
-
 namespace App;
+use Illuminate\Database\Eloquent\Model;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-
-class User extends Authenticatable
+class User extends Model
 {
     protected $filltable = ['user_group_id','name','email','password'];
     protected $primarykey = "user_id";
     protected $table = "tbl_users";
 
-    
+    /*Liên kết 1-1 khoá ngoại user_group_id đến khoá chính id_user_group trong bảng tbl_user_groups bằng phương thức beLongTo*/ 
+    public function user_group(){
+    	return $this->belongsTo("App\UserGroup","user_group_id","id_user_group");
+    }
+    /*end: public function user_group()*/
 }

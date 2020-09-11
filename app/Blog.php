@@ -14,4 +14,5 @@ class Blog extends Model
     public function user(){
     	return $this->belongsTo('App\User', 'id_user_create', 'user_id');
     }
+    /*end: public function user()*/
 }

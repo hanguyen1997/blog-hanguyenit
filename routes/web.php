@@ -75,3 +75,6 @@ Route::get('/dell-contact', 'ContactController@ajax_del');
 /*User*/
 Route::get('/list-user', 'UserController@index');
 Route::get('/del-user/{user_id}', 'UserController@delete');
+
+/*User group*/
+Route::get('/list-user-group', 'UserGroupController@index');
