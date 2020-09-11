@@ -37,12 +37,16 @@
                 if($user_group_id == "1")
                 {;
                 ?>
-                    <li class="sub-menu">
-                        <a href="{{URL::to('/list-user')}}">
-                            <i class="fa fa-user-plus"></i>
-                            <span></span>Danh sách người dùng</span>
-                        </a>
-                    </li>
+                <li class="sub-menu">
+                    <a href="javascript:;">
+                        <i class="fa fa-user-plus"></i>
+                        <span>Người dùng</span>
+                    </a>
+                    <ul class="sub">
+                        <li><a href="{{URL::to('/list-user')}}">Danh sách người dùng</a></li>
+                        <li><a href="{{URL::to('/list-user-group')}}">Danh sách nhóm người dùng</a></li>
+                    </ul>
+                </li>
                 <?php 
                 }
                 ?>
