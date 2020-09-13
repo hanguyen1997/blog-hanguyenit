@@ -35,6 +35,5 @@ class HomeController extends Controller
 		/*in ra oke để trả về ajax*/
 		echo "oke";
     }
-    /*End: function contact(Request $request)*/
-    
+    /*End: function contact(Request $request)*/   
 }

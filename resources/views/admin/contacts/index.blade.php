@@ -82,8 +82,6 @@
         /*end: if (willDelete)*/
       });
     })
-
-
   })
 </script>
 @endsection

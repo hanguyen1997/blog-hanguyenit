@@ -102,7 +102,6 @@ class BlogController extends Controller
     }
     /*end: function detail_blog_admin($id_blog)*/
 
-
     /*begin: cerate form edit blog*/
     public function form_edit($id_blog)
     {	
@@ -128,7 +127,6 @@ class BlogController extends Controller
         /*Nếu có dữ liệu rồi thì exist, chưa thì check_ok*/
         if($array_ckeck_title != Null) echo "exist";
         if($array_ckeck_title == Null) echo "check_ok";
-
     }
     /*end: function check_title(Request $request)*/
 

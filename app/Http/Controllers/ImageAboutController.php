@@ -26,8 +26,6 @@ class ImageAboutController extends Controller
         if($array_image == null)
         {
             echo "<tr><td colspan='3' style='text-align: center;>Không có dữ liệu</td></tr>";
-
-            
         }
         else
         {
@@ -54,7 +52,9 @@ class ImageAboutController extends Controller
                
                 echo $content;
             }
+            /*end: foreach ($array_image as $key => $value) */
         }
+        /*end: if($array_image == null)*/
     }
     /*end: function index()*/
 
@@ -83,6 +83,7 @@ class ImageAboutController extends Controller
     }
     /*end: public function save_image(Request $require)*/
 
+    /*del img*/
     public function del(Request $request)
     {
     	/*Kiểm tra đăng nhập*/
@@ -91,7 +92,6 @@ class ImageAboutController extends Controller
 
         DB::table('tbl_about')->where('id', $id)->delete();
         echo "done";
-    	
     }
     /*end: public function del($id)*/
 
@@ -128,5 +128,4 @@ class ImageAboutController extends Controller
     	return Redirect::to('all-image-about');
     }
     /*end: function active_or_unactive_image_about($id)*/
-
 }

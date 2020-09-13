@@ -5,7 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class UserGroup extends Model
 {
-    protected $filltable = ["user_group_name"];
+    protected $filltable = ["user_group_name","user_group_des"];
     protected $primarykey = "id_user_group";
     protected $table = "tbl_user_groups";
 
