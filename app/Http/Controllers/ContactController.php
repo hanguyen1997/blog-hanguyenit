@@ -46,7 +46,6 @@ class ContactController extends Controller
 		    /*end: foreach ($array_contact as $key => $value)*/      
     	}
     	/*end: if(!$array_contact)*/
-    	
    	}
    	/*end: function index()*/
 

@@ -16,6 +16,7 @@ class TblUserGroups extends Migration
         Schema::create('tbl_user_groups', function (Blueprint $table) {
             $table->increments('id_user_group');
             $table->string('user_group_name');
+            $table->string('user_group_des');
             $table->timestamps();
         });
     }

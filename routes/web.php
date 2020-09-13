@@ -77,4 +77,8 @@ Route::get('/list-user', 'UserController@index');
 Route::get('/del-user/{user_id}', 'UserController@delete');
 
 /*User group*/
-Route::get('/list-user-group', 'UserGroupController@index');
+Route::get('/list-user-group', function(){
+    return view('admin.user_group.index');
+});
+Route::get('/index-user-group-name', 'UserGroupController@index');
+Route::post('/check-user-group-name', 'UserGroupController@check_name_user_group');
