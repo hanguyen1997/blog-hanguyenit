@@ -78,7 +78,13 @@ Route::get('/del-user/{user_id}', 'UserController@delete');
 
 /*User group*/
 Route::get('/list-user-group', function(){
+    /*kiểm tra đăng nhập*/
+    $user_id = Session::get('user_id');
+    $user_group_id = Session::get('user_group_id');
+    if(($user_id == "") && ($user_group_id  != "1")) return Redirect::to('/admin')->send();
+
     return view('admin.user_group.index');
 });
 Route::get('/index-user-group-name', 'UserGroupController@index');
 Route::post('/check-user-group-name', 'UserGroupController@check_name_user_group');
+Route::get('/del-user-group-name', 'UserGroupController@del_name_user_group');

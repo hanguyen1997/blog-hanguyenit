@@ -43,11 +43,11 @@ class UserGroupController extends Controller
 			            <td>".$value->user_group_name."</td>
 			            <td>".$value->user_group_des."</td>
 			            <td>
-			            	<button  style='background:#57a957;'>
+			            	<button style='background:#57a957;'>
 				              <a style='color:white' href='#' >Sửa</a>
 				            </button>
-				            <button style='background:red;'>
-				              <a style='color:white' href=''>Xoá</a>
+				            <button name='button_del_user_group' data-id_user_group='".$value->id_user_group."' id='button_del_user_group' style='background:red;'>
+				              Xoá
 				            </button>
 			            </td>
 			          </tr>";
@@ -64,8 +64,29 @@ class UserGroupController extends Controller
     	$user_group_name = $request->user_group_name;
     	$check_user_group_name = UserGroup::Where("user_group_name", "$user_group_name")->get();
 
-    	if($check_user_group_name == "") echo "check_ok";
+    	if($check_user_group_name == "") echo "done";
     	else echo "check_not_ok";
     }
     /*end: public function check_name_user_group(Request $request)*/
+
+    /*begin: del user_name_group by ajax*/
+    public function del_name_user_group(Request $request){
+
+    	/*check user*/
+    	$this->AuthLogin();
+
+    	/*Lấy id từ request trả về*/
+    	$id_user_group = $request->id_user_group;
+
+    	/*nếu id_user_group == 1 là admin thì không thể xoá admin đc và id_user_group không đc bằng rỗng*/
+    	if($id_user_group == "1" || $id_user_group == "") echo "not_done";
+    	else
+    	{
+	    	/*del user_group = id*/
+	    	$del_user_group = UserGroup::Where("id_user_group", $id_user_group)->delete();
+	    	echo "done";
+	    }
+	    /*end: if($id_user_group == "1" || $id_user_group == "")*/
+    }
+    /*end: function del_name_user_group*/
 }
