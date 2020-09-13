@@ -81,6 +81,8 @@ class BlogController extends Controller
 
         /*select * form tbl_blogs where id_blog = $id_blog*/
         $array_del_blog = Blog::find($id_blog);
+
+        /*delete form tbl_blogs where id_blog = $id_blog*/
         $array_del_blog->delete();
 
         /*Đặt thông báo thành công và chuyển trang*/
