@@ -7,6 +7,13 @@
 	.b-light th {
 		text-align: center;
 	} 
+  .check_dont_ok
+  {
+    color: red;
+  }
+  .check_ok{
+    color: blue;
+  }
 </style>
 <div class="row">
     <div class="col-lg-12">
@@ -85,12 +92,12 @@ $(document).ready(function(){
     		url: "{{URL('/check-user-group-name')}}",
     		data: {user_group_name:user_group_name},
     		success:function(data){
-    			if(data = "check_ok")
+    			if(data == "check_dont_ok")
     			{
-            $('#notify_user_name_group').html("<p>Nhóm này có thể sữ dụng</p>");
+            $('#notify_user_name_group').html("<p class='check_dont_ok' id='check_name'>Nhóm này đã tồn tại, không thể sữ dụng tển này</p>");
     			}
     			else{
-    				$('#notify_user_name_group').html("<p>Nhóm này có thể sữ dụng</p>");
+    				$('#notify_user_name_group').html("<p class='check_ok' id='check_name'>Bạn có thể sữ dụng nhóm này</p>");
     			}
 			    /*end: if(data = "check_oke")*/
     		}
@@ -142,16 +149,21 @@ $(document).on('click','#button_del_user_group',function(){
       });
   })
 })
-/*kiểm tra form*/
+/*kiểm tra form và sumbit*/
 function checkform(){
   var user_group_name = document.getElementById("user_group_name").value;
   var user_group_desc = document.getElementById("user_groupg_desc").value;
-
+  
   if(user_group_name == "")
   {
     swal("Vui lòng nhập tên nhóm người dùng mới");
   }
-  /*end: if(document.getElementById("user_group_name").value == "")*/
+
+  if(user_group_desc == "")
+  {
+    swal("Vui lòng nhập mô tả nhóm người dùng mới");
+  }
+  
   
   /*submit form save user_group by ajax*/
   $.ajax({
@@ -167,13 +179,13 @@ function checkform(){
         swal("Thành công", {icon: "success",});
         document.getElementById("form_save_user_group").reset();
       }
+      /*end: if(data == "save")*/
+      
+      if(data == "exit") swal("Tên nhóm đã tồn lại");
     }
   })
   /*end:  $.ajax({})*/
 }
 /*end: function checkform()*/
-
-
-
 </script>
 @endsection
