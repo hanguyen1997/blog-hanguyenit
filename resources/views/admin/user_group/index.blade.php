@@ -20,12 +20,12 @@
                     <input type="hidden" name="_token" value="{{csrf_token()}}"> 
                     <div class="form-group">
                         <label for="exampleInputPassword1">Tên Nhóm người dùng mới</label>
-                        <div id='notify_user_name_group'></div>
                         <input type="text" name="user_group_name" class="form-control" id="user_group_name">
+                        <span id='notify_user_name_group'></span>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">Mô tả </label>
-                        <textarea class="form-control" name="blog_description" id="blog_desc"  required ></textarea> 
+                        <textarea class="form-control" name="user_group_des" id="user_groupg_desc"  required ></textarea> 
                     </div>
                     <button onclick="checkform()" type="button" name="add_category_product" class="btn btn-info">Thêm nhóm người dùng mới</button>
                 </form>
@@ -58,20 +58,19 @@
 </div>
 
 <script type="text/javascript">
+/*dùng ajax để hiện thị danh sách*/
+function fetch_data(){
+  $.ajax({
+    method: 'get',
+    url: "{{URL('/index-user-group-name')}}",
+    success:function(data){
+      $('#ajax-data').html(data);
+      }
+    })
+}
+/*end: function fetch_data()*/
+
 $(document).ready(function(){
-
-	/*dùng ajax để hiện thị danh sách*/
-	function fetch_data(){
-		$.ajax({
-		  method: 'get',
-		  url: "{{URL('/index-user-group-name')}}",
-		  success:function(data){
-		    $('#ajax-data').html(data);
-    		}
-    	})
-	}
-	/*end: function fetch_data()*/
-
 	/*gọi hàm load danh sách nhóm user by ajax*/
 	fetch_data();
 
@@ -81,78 +80,100 @@ $(document).ready(function(){
 		if(user_group_name != "")
 		{
 			/*check user_group_name by ajax*/
-        	$.ajax({
-        		type: "post",
-        		url: "{{URL('/check-user-group-name')}}",
-        		data: {user_group_name:user_group_name},
-        		success:function(data){
-        			if(data = "check_ok")
-        			{
-        				document.getElementById("notify_user_name_group").html("Nhóm này có thể sữ dụng");
-        			}
-        			else{
-        				document.getElementById("notify_user_name_group").html("Nhóm này đã tồn tại");
-        			}
-					/*end: if(data = "check_oke")*/
-        		}
-        	})
+    	$.ajax({
+    		type: "get",
+    		url: "{{URL('/check-user-group-name')}}",
+    		data: {user_group_name:user_group_name},
+    		success:function(data){
+    			if(data = "check_ok")
+    			{
+            $('#notify_user_name_group').html("<p>Nhóm này có thể sữ dụng</p>");
+    			}
+    			else{
+    				$('#notify_user_name_group').html("<p>Nhóm này có thể sữ dụng</p>");
+    			}
+			    /*end: if(data = "check_oke")*/
+    		}
+    	})
 		}
+    else
+    {
+      $('#notify_user_name_group').html("");
+    }
 	})
+/*Xoá nhóm bằng ajax*/
+$(document).on('click','#button_del_user_group',function(){
+    /*Lấy id_contact*/
+    var id_user_group = $(this).data('id_user_group');
 
-    /*Xoá nhóm bằng ajax*/
-    $(document).on('click','#button_del_user_group',function(){
-        /*Lấy id_contact*/
-        var id_user_group = $(this).data('id_user_group');
-
-        /*Hiển thị thông báo xác nhận xoá*/
-        swal({
-          title: "Bạn có muốn xoá hình ảnh này không ?",
-          text: "Nếu đã xoá thì sẽ không khôi phục được!",
-          icon: "warning",
-          buttons: true,
-          dangerMode: true,
-        })
-        .then((willDelete) => {
-            if(willDelete)
-            {
-                /*Nếu đồng ý thì xoá dữ liệu bằng ajax*/
-                $.ajax({
-                  method: "get",
-                  url: "{{URL('/del-user-group-name')}}",
-                  data:{id_user_group:id_user_group},
-                  success:function(data){
-                    if(data == "done")
-                    {
-                      /*gọi hàm làm mới lại danh sách và thông báo xoá thành công*/
-                      fetch_data();
-                      swal("Thành công", {icon: "success",});
-                    }
-                    else
-                    {
-                      /*không thể xoá admin hoặc không có id*/
-                      swal("Không thể xoá admin !!");
-                    }
-                    /*end: if(data == "done")*/
-                  }
-                })
-                /*end:  $.ajax({})*/
-            }
-        });
+    /*Hiển thị thông báo xác nhận xoá*/
+    swal({
+      title: "Bạn có muốn xoá hình ảnh này không ?",
+      text: "Nếu đã xoá thì sẽ không khôi phục được!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
     })
+    .then((willDelete) => {
+        if(willDelete)
+        {
+          /*Nếu đồng ý thì xoá dữ liệu bằng ajax*/
+          $.ajax({
+            method: "get",
+            url: "{{URL('/del-user-group-name')}}",
+            data:{id_user_group:id_user_group},
+            success:function(data){
+              if(data == "done")
+              {
+                /*gọi hàm làm mới lại danh sách và thông báo xoá thành công*/
+                fetch_data();
+                swal("Thành công", {icon: "success",});
+              }
+              else
+              {
+                /*không thể xoá admin hoặc không có id*/
+                swal("Không thể xoá admin !!");
+              }
+              /*end: if(data == "done")*/
+            }
+          })
+          /*end:  $.ajax({})*/
+        }
+      });
+  })
 })
-
 /*kiểm tra form*/
 function checkform(){
-	if(document.getElementById("user_group_name").value == "")
-	{
-		swal("Vui lòng nhập tên nhóm người dùng mới ");
-	}
-	/*end: if(document.getElementById("user_group_name").value == "")*/
+  var user_group_name = document.getElementById("user_group_name").value;
+  var user_group_desc = document.getElementById("user_groupg_desc").value;
 
-	/*submit form*/
-	document.getElementById("form_save_user_group").submit();
+  if(user_group_name == "")
+  {
+    swal("Vui lòng nhập tên nhóm người dùng mới");
+  }
+  /*end: if(document.getElementById("user_group_name").value == "")*/
+  
+  /*submit form save user_group by ajax*/
+  $.ajax({
+    method: "get",
+    url: "{{URL('/save-user-group')}}",
+    data:{user_group_name:user_group_name,
+          user_group_desc:user_group_desc},
+    success:function(data){
+      if(data == "save")
+      {
+        // gọi hàm làm mới lại danh sách và thông báo xoá thành công
+        fetch_data();
+        swal("Thành công", {icon: "success",});
+        document.getElementById("form_save_user_group").reset();
+      }
+    }
+  })
+  /*end:  $.ajax({})*/
 }
 /*end: function checkform()*/
+
+
 
 </script>
 @endsection

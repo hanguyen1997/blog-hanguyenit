@@ -62,12 +62,28 @@ class UserGroupController extends Controller
     /*begin: check user_name_group by ajax*/
     public function check_name_user_group(Request $request){
     	$user_group_name = $request->user_group_name;
-    	$check_user_group_name = UserGroup::Where("user_group_name", "$user_group_name")->get();
-
-    	if($check_user_group_name == "") echo "done";
-    	else echo "check_not_ok";
+    	$check_user_group_name = UserGroup::Where("user_group_name", $user_group_name)->get();
+        
+        /*if $check_user_group_name != null name already exists and if $check_user_group_name == null name oke*/
+    	if(!$check_user_group_name) echo "check_not_oke";
+    	else echo "check_ok";
     }
     /*end: public function check_name_user_group(Request $request)*/
+
+    /*begin: save user_group by ajax*/
+    public function save_user_group(Request $request){
+        $user_group_name = $request->user_group_name;
+        $user_group_desc = $request->user_group_desc;
+
+        $array_user_group = null;
+        $array_user_group["user_group_name"] = $user_group_name;
+        $array_user_group["user_group_des"] = $user_group_desc;
+
+        UserGroup::insert($array_user_group);
+
+        echo "save";
+    }
+    /*end: public function save_user_group(Request $request)*/
 
     /*begin: del user_name_group by ajax*/
     public function del_name_user_group(Request $request){
