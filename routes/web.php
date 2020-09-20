@@ -89,4 +89,4 @@ Route::get('/index-user-group-name', 'UserGroupController@index');
 Route::get('/check-user-group-name', 'UserGroupController@check_name_user_group');
 Route::get('/del-user-group-name', 'UserGroupController@del_name_user_group');
 Route::get('/save-user-group', 'UserGroupController@save_user_group');
-
+Route::get('/edit-user-group', 'UserGroupController@eidt_user_group');
