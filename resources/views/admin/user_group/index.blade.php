@@ -14,6 +14,9 @@
   .check_ok{
     color: blue;
   }
+  button{
+    color: white;
+  }
 </style>
 <div class="row">
     <div class="col-lg-12">
@@ -23,7 +26,7 @@
             </header>
             <div class="panel-body">
                 <div class="position-center">
-                    <form id="form_save_user_group" role="form" action="{{URL::to('/save-user-group')}}" method="post" enctype="multipart/form-data">
+                    <form id="form_save_user_group" role="form" action="{{URL::to('/save-user-group')}}" method="get" enctype="multipart/form-data">
                     <input type="hidden" name="_token" value="{{csrf_token()}}"> 
                     <div class="form-group">
                         <label for="exampleInputPassword1">Tên Nhóm người dùng mới</label>
@@ -32,8 +35,9 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">Mô tả </label>
-                        <textarea class="form-control" name="user_group_des" id="user_groupg_desc"  required ></textarea> 
+                        <textarea class="form-control" name="user_group_des" id="user_group_des"  required ></textarea> 
                     </div>
+                    <input type="hidden" name="id_user_group" id="id_user_group">
                     <button onclick="checkform()" type="button" name="add_category_product" class="btn btn-info">Thêm nhóm người dùng mới</button>
                 </form>
                 </div>
@@ -84,7 +88,9 @@ $(document).ready(function(){
 	/*Check if the user_group_name already exists ?*/
 	$('#user_group_name').blur(function(){
 		var user_group_name = (document.getElementById("user_group_name").value);
-		if(user_group_name != "")
+    var id_user_group = document.getElementById("id_user_group").value;
+
+		if(user_group_name != "" &&  id_user_group == "")
 		{
 			/*check user_group_name by ajax*/
     	$.ajax({
@@ -108,8 +114,9 @@ $(document).ready(function(){
       $('#notify_user_name_group').html("");
     }
 	})
-/*Xoá nhóm bằng ajax*/
-$(document).on('click','#button_del_user_group',function(){
+
+  /*Xoá nhóm bằng ajax*/
+  $(document).on('click','#button_del_user_group',function(){
     /*Lấy id_contact*/
     var id_user_group = $(this).data('id_user_group');
 
@@ -122,65 +129,90 @@ $(document).on('click','#button_del_user_group',function(){
       dangerMode: true,
     })
     .then((willDelete) => {
-        if(willDelete)
-        {
-          /*Nếu đồng ý thì xoá dữ liệu bằng ajax*/
-          $.ajax({
-            method: "get",
-            url: "{{URL('/del-user-group-name')}}",
-            data:{id_user_group:id_user_group},
-            success:function(data){
-              if(data == "done")
-              {
-                /*gọi hàm làm mới lại danh sách và thông báo xoá thành công*/
-                fetch_data();
-                swal("Thành công", {icon: "success",});
-              }
-              else
-              {
-                /*không thể xoá admin hoặc không có id*/
-                swal("Không thể xoá admin !!");
-              }
-              /*end: if(data == "done")*/
+      if(willDelete)
+      {
+        /*Nếu đồng ý thì xoá dữ liệu bằng ajax*/
+        $.ajax({
+          method: "get",
+          url: "{{URL('/del-user-group-name')}}",
+          data:{id_user_group:id_user_group},
+          success:function(data){
+            if(data == "done")
+            {
+              /*gọi hàm làm mới lại danh sách và thông báo xoá thành công*/
+              fetch_data();
+              swal("Thành công", {icon: "success",});
             }
-          })
-          /*end:  $.ajax({})*/
+            else
+            {
+              /*không thể xoá admin hoặc không có id*/
+              swal("Không thể xoá admin !!");
+            }
+            /*end: if(data == "done")*/
+          }
+        })
+        /*end:  $.ajax({})*/
+      }
+    });
+  })
+
+  /*Xoá nhóm bằng ajax*/
+  $(document).on('click','#button_edit_user_group',function(){
+    /*Lấy id_contact*/
+    var id_user_group = $(this).data('id_user_group');
+
+    $.ajax({
+      type: "get",
+      url: "{{URL('/edit-user-group')}}",
+      data: {id_user_group:id_user_group},
+      success:function(data){
+        if(data != "")
+        {
+          /*huyển đổi json thành một đối tượng JavaScript*/
+          var json_user_group_edit = JSON.parse(data);
+          $('#user_group_name').val(json_user_group_edit[0].user_group_name);
+          $('#user_group_des').val(json_user_group_edit[0].user_group_des);
+         $ ('#id_user_group').val(json_user_group_edit[0].id_user_group);
         }
-      });
+        /*end if(!data)*/
+      }
+    })
   })
 })
+
 /*kiểm tra form và sumbit*/
 function checkform(){
   var user_group_name = document.getElementById("user_group_name").value;
-  var user_group_desc = document.getElementById("user_groupg_desc").value;
+  var user_group_desc = document.getElementById("user_group_des").value;
+  var id_user_group = document.getElementById("id_user_group").value;
   
-  if(user_group_name == "")
+  if(user_group_name == "" || user_group_name.trim().length == 0)
   {
-    swal("Vui lòng nhập tên nhóm người dùng mới");
+    swal("Vui lòng không để trống tên nhóm người dùng mới");
   }
 
-  if(user_group_desc == "")
+  if(user_group_desc == "" || user_group_desc.trim().length == 0)
   {
-    swal("Vui lòng nhập mô tả nhóm người dùng mới");
+    swal("Vui lòng không để trống mô tả nhóm người dùng");
   }
-  
   
   /*submit form save user_group by ajax*/
   $.ajax({
     method: "get",
     url: "{{URL('/save-user-group')}}",
     data:{user_group_name:user_group_name,
-          user_group_desc:user_group_desc},
+          user_group_desc:user_group_desc,
+          id_user_group:id_user_group},
     success:function(data){
-      if(data == "save")
+      if(data == "save" || data == "update")
       {
-        // gọi hàm làm mới lại danh sách và thông báo xoá thành công
+        // gọi hàm làm mới lại danh sách và thông báo xoá thành công+
         fetch_data();
         swal("Thành công", {icon: "success",});
         document.getElementById("form_save_user_group").reset();
+        $('#notify_user_name_group').html("");
       }
-      /*end: if(data == "save")*/
-      
+      /*end: if(data == "save" || data == "eidt")*/
       if(data == "exit") swal("Tên nhóm đã tồn lại");
     }
   })
