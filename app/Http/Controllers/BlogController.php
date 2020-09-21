@@ -24,7 +24,7 @@ class BlogController extends Controller
     	$this->AuthLogin();
 
         /*(blogs_tatus =  3) -> dell*/
-        $array_blog = Blog::where("blog_status" ,"<>","3")->get();
+        $array_blog = Blog::where("blog_status" ,"<>","3")->paginate(10);
     	return view('admin.blogs.all_blog')->with(compact('array_blog'));
     }
     /*end: public function index()*/
