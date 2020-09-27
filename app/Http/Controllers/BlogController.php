@@ -169,7 +169,7 @@ class BlogController extends Controller
     public function list_blog()
     {   
         /*blog_status = 1 -> hiển thị , blog_status = 2 -> ko hiển thị */
-        $array_blog = Blog::where("blog_status", "1")->orderBy("id_blog", "DESC")->get();
+        $array_blog = Blog::where("blog_status", "1")->orderBy("id_blog", "DESC")->paginate(1);
         return View('public.pages.list_blog')->with("array_blog", $array_blog);
     }
     /*end: function list_blog()*/
