@@ -45,11 +45,12 @@
             </div>
           </div>
         </div>
-
         @endforeach
       </div>
+      {{ $array_blog->links() }}
     </div>
   </div>
 </div>
+
 <!-- End section journal -->
 @endsection
