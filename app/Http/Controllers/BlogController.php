@@ -179,6 +179,7 @@ class BlogController extends Controller
     {
         $array_detail_blog = Blog::where("blog_code", $blog_code)->get();
 
+         $array_more_blog = NULL;
         /*lấy dữ liệu chi tiết blog trong mảng $array_detail_blog*/
         foreach($array_detail_blog as $value)
         {
@@ -186,13 +187,17 @@ class BlogController extends Controller
             $blog_keyword = $value->blog_keyword;
             $blog_description = $value->blog_description;
             $blog_image = $value->blog_image;
+            $id_blog = $value->id_blog;
 
             /*Link đường dẩn ảnh <meta property="og:image" content="" /> share */
             $url_image = "http://localhost/blog-hanguyenit/public/uploads/".$blog_image;
+
+            /*Lấy thêm 3 blog bất kỳ khác với blog đang hiện thị*/
+            $array_more_blog = Blog::where("id_blog", "<>", $id_blog)->get();
         }
         /*end: foreach($array_detail_blog as $value)*/
 
-        return View('public.pages.detail_blog')->with(compact('array_detail_blog','blog_title','blog_keyword','blog_description','url_image'));
+        return View('public.pages.detail_blog')->with(compact('array_detail_blog','blog_title','blog_keyword','blog_description','url_image', 'array_more_blog'));
     }
     /*end: function detail_blog_public()*/
 }

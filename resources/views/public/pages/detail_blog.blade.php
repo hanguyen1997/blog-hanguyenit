@@ -20,7 +20,7 @@
                 <img style="width: 100%;object-fit: contain;margin-bottom: 20px;" src="{{asset('public/uploads/'.$blog_detail->blog_image)}}" class="img-responsive" alt="reviews2">
                 <div class="content-main single-post padDiv">
                   <div class="journal-txt">
-                    <h4 style="text-align: center;"><a href="#">{{$blog_detail->blog_title}}</a></h4>
+                    <h1 style="text-align: center;"><a href="#">{{$blog_detail->blog_title}}</a></h1>
                   </div>
                   <div class="post-meta">
                     <ul class="list-unstyled mb-0">
@@ -50,6 +50,32 @@
           </div>
         </div>
       </div>
+    </div>
+  </div>
+  <!-- more blog -->
+  <div class="container">
+    <div class="row">
+      @foreach ($array_more_blog as $key => $blog)
+      <div class="col-lg-4 col-md-6" style="margin-top: 20px">
+        <div class="journal-info">
+          <a href="{{URL::to('detail-blog/'.$blog->blog_code)}}"><img src="{{asset('public/uploads/'.$blog->blog_image)}}" style="object-fit: cover;width:100%;height: 200px;" class="img-responsive" alt="img"></a>
+          <div class="journal-txt" style="margin: 10px;">
+            <h4 style="height: 67px;"><a style="overflow: hidden;-webkit-line-clamp: 2;display: -webkit-box;-webkit-box-orient: vertical; line-height: 32px;font-size: 20px;" href="{{URL::to('detail-blog/'.$blog->blog_code)}}">{{$blog->blog_title}}</a></h4>
+            <div style="margin-top: 10px">
+              <span>
+                <i class="ion-android-calendar" ></i> <?php echo date('d/m/Y', strtotime($blog->created_at));?>
+              </span>
+              <span style="padding-left: 5px;">
+                 <i class="ion-android-chat" ></i>
+                <span class="fb-comments-count" data-href="{{URL::to('detail-blog/'.$blog->blog_code)}}"></span>
+              </span>
+              <span style="padding-left: 5px;"><i class="ion-android-person"></i> {{$blog->user->name}}</span>
+            </div>
+            <p style="overflow: hidden;-webkit-line-clamp: 5;display: -webkit-box; -webkit-box-orient: vertical;" class="separator">{{$blog->blog_description}}</p>
+          </div>
+        </div>
+      </div>
+      @endforeach
     </div>
   </div>
 </div>
