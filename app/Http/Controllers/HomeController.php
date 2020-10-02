@@ -10,7 +10,6 @@ class HomeController extends Controller
 	/*Trang chủ home*/
 	public function index()
 	{
-
 		/*truy vấn dữ liệu tbl_blogs*/ 
 		$array_blog = Blog::where("blog_status", "1")->get();
 

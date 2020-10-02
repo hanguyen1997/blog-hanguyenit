@@ -99,10 +99,6 @@
     <div class="journal-block">
       <div class="row">
         <?php 
-        // echo "<pre>";
-        // print_r($array_blog);
-        // echo "</pre>";
-
         if($array_blog == NULL || (count($array_blog) == 0)) echo "<div style='margin: 0 auto;margin-bottom: 20px'><span>Dữ liệu đang cập nhập</span></div>";
         else 
         {
