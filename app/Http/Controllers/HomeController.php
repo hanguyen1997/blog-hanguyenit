@@ -10,8 +10,14 @@ class HomeController extends Controller
 	/*Trang chủ home*/
 	public function index()
 	{
-		/*truy vấn dữ liệu tbl_blogs ramdom 3 and trạng thái: hiển thị*/
-		$array_blog = Blog::where("blog_status", "1")->get()->random(3);
+
+		/*truy vấn dữ liệu tbl_blogs*/ 
+		$array_blog = Blog::where("blog_status", "1")->get();
+
+		/*ramdom 3 and trạng thái: hiển thị*/
+		if (!$array_blog->isEmpty() && count($array_blog) > 3) {
+		    $array_blog = $array_blog->random(3);
+		}
 
 		/*select tbl_about hiển thị type image and trạng thái: hiển thị*/
 		$array_image_blog = DB::table('tbl_about')->where("type", "image")->where("status", "1")->get();
