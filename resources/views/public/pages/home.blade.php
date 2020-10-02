@@ -98,6 +98,11 @@
   <div class="container">
     <div class="journal-block">
       <div class="row">
+        <?php 
+        if($array_blog == NULL || (count($array_blog) == 0)) echo "<div style='margin: 0 auto;margin-bottom: 20px'><span>Dữ liệu đang cập nhập</span></div>";
+        else 
+        {
+        ?>
         @foreach ($array_blog as $key => $post)
         <div class="col-lg-4 col-md-6">
           <div class="journal-info">
@@ -119,11 +124,13 @@
           </div>
         </div>
         @endforeach
-
       </div>
       <div style="margin-top: 15px;" class="text-center">
         <a href="{{url::to('list-blog')}}">Xem thêm</a>
       </div>
+      <?php 
+          }/*end: if($array_blog == NULL)*/
+        ?>
     </div>
   </div>
 </div>
