@@ -170,6 +170,7 @@ class BlogController extends Controller
     {   
         /*blog_status = 1 -> hiển thị , blog_status = 2 -> ko hiển thị */
         $array_blog = Blog::where("blog_status", "1")->orderBy("id_blog", "DESC")->paginate(6);
+
         return View('public.pages.list_blog')->with("array_blog", $array_blog);
     }
     /*end: function list_blog()*/
