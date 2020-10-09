@@ -43,7 +43,13 @@
           <tr>
             <td>{{$user->name}}</td>
             <td>{{$user->email}}</td>
-            <td>{{$user->user_group->user_group_name}}</td>
+
+            <?php 
+              /*check user_group_name != ""*/
+              if(isset($user->user_group->user_group_name) != NULL)  echo "<td>{{$user->user_group->user_group_name}}</td>";
+              else echo "<td>Nhóm này chưa xác định (hoặc đã xoá)</td>";
+            ?>
+          
             <td>
             <button style='background:red;'>
               <a style='color:white' href="{{URL('del-user/'.$user->user_id)}}" >Xoá</a>
