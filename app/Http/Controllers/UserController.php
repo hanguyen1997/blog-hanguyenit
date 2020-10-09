@@ -24,7 +24,7 @@ class UserController extends Controller
     	/*Kiểm tra đăng nhập*/
         $this->AuthLogin();
 
-    	$array_user = User::all();
+    	$array_user = User::where("status", "<>", "2")->get();
         return view('admin.user.index')->with("array_user", $array_user);
     }
     /*end: public function index(){*/
@@ -35,8 +35,21 @@ class UserController extends Controller
         $this->AuthLogin();
 
     	/*DELETE FROM tbl_users where user_id = $user_id*/ 
-    	$array_user = User::where("user_id",$user_id)->delete();
-    	Session::put("message", "Xoá thành công");
+    	$array_user = User::where("user_id",$user_id)->get();
+
+        /*check user*/
+        if($array_user != null)
+        {
+            $array_delete = null;
+            $array_delete['status'] = "2";
+            User::where("user_id",$user_id)->update($array_delete);
+            
+            Session::put("message", "Xoá thành công");
+            return redirect('/list-user');
+        }
+        /*end if($array_user != null)*/
+
+    	Session::put("message", "Xoá không thành công");
         return redirect('/list-user');
     }
     /*end: public function delete($user_id)*/

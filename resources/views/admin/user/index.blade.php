@@ -10,6 +10,9 @@
     text-decoration: none;
     color: initial;
   }
+  thead tr th{
+    text-align: center;
+  }
 </style>
 <div>
   <?php
@@ -29,7 +32,7 @@
       Danh sách người dùng
     </div>
     <div class="table-responsive">
-      <table class="table table-striped b-t b-light">
+      <table class="table table-striped b-t b-light" style="text-align: center;">
         <thead>
           <tr>
             <th>Họ và tên</th>
@@ -46,13 +49,13 @@
 
             <?php 
               /*check user_group_name != ""*/
-              if(isset($user->user_group->user_group_name) != NULL)  echo "<td>{{$user->user_group->user_group_name}}</td>";
-              else echo "<td>Nhóm này chưa xác định (hoặc đã xoá)</td>";
+              if(isset($user->user_group->user_group_name) != NULL)  echo "<td>{$user->user_group->user_group_name}</td>";
+              else echo "<td>Nhóm này chưa xác định hoặc đã xoá </td>";
             ?>
           
             <td>
             <button style='background:red;'>
-              <a style='color:white' href="{{URL('del-user/'.$user->user_id)}}" >Xoá</a>
+              <a style='color:white' id="delete_user" type="button" href="{{URL('del-user/'.$user->user_id)}}" onclick="return confirm('Bạn có chắc chắn muốn xóa không?')">Xoá</a>
             </button>
             <button  style='background:#6464f3;'>
               <a style='color:white' href="{{URL('detail_user')}}" >Chi tiết</a>
