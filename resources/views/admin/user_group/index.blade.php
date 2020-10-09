@@ -122,7 +122,7 @@ $(document).ready(function(){
 
     /*Hiển thị thông báo xác nhận xoá*/
     swal({
-      title: "Bạn có muốn xoá hình ảnh này không ?",
+      title: "Bạn có muốn nhóm người dùng này không ?",
       text: "Nếu đã xoá thì sẽ không khôi phục được!",
       icon: "warning",
       buttons: true,
@@ -206,7 +206,7 @@ function checkform(){
     success:function(data){
       if(data == "save" || data == "update")
       {
-        // gọi hàm làm mới lại danh sách và thông báo xoá thành công+
+        // gọi hàm làm mới lại danh sách và thông báo thêm thành công+
         fetch_data();
         swal("Thành công", {icon: "success",});
         document.getElementById("form_save_user_group").reset();
