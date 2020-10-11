@@ -20,6 +20,7 @@ class TblUsers extends Migration
             $table->string('email');
             $table->string('password');
             $table->integer('status');
+            $table->integer('sex');
             $table->timestamps();
         });
     }

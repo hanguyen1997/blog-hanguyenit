@@ -1,4 +1,4 @@
-@extends('admin.layouts.admin_layout');
+@extends('admin.layouts.admin_layout')
 @section('content')
 <!-- //market-->
 <div class="market-updates">

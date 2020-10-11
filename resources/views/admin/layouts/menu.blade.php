@@ -40,11 +40,12 @@
                 <li class="sub-menu">
                     <a href="javascript:;">
                         <i class="fa fa-user-plus"></i>
-                        <span>Người dùng</span>
+                        <span>Thành viên</span>
                     </a>
                     <ul class="sub">
-                        <li><a href="{{URL::to('/list-user')}}">Danh sách người dùng</a></li>
-                        <li><a href="{{URL::to('/list-user-group')}}">Danh sách nhóm người dùng</a></li>
+                        <li><a href="{{URL::to('/list-user')}}">Danh sách thành viên</a></li>
+                        <li><a href="{{URL::to('/form-add-user')}}">Thêm thành viên mới</a></li>
+                        <li><a href="{{URL::to('/list-user-group')}}">Danh sách nhóm thành viên</a></li>
                     </ul>
                 </li>
                 <?php 
