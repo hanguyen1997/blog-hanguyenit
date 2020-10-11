@@ -1,5 +1,6 @@
 <?php
 use Illuminate\Support\Facades\Route;
+use App\UserGroup;
 
 /*home*/
 Route::get('/', 'HomeController@index');
@@ -75,9 +76,10 @@ Route::get('/dell-contact', 'ContactController@ajax_del');
 /*User*/
 Route::get('/list-user', 'UserController@index');
 Route::get('/form-add-user', function(){
-    return View('admin.user.add');
+    $array_user_group = UserGroup::orderBy("id_user_group", "DESC")->get();
+    return View('admin.user.add')->with("array_user_group", $array_user_group);
 });
-Route::get('/save-user', 'UserController@save');
+Route::post('/save-user', 'UserController@save');
 Route::get('/ajax-check-email-user', 'UserController@check_email_user');
 Route::get('/del-user/{user_id}', 'UserController@delete');
 

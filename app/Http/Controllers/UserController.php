@@ -30,9 +30,43 @@ class UserController extends Controller
     /*end: public function index(){*/
 
     /*Begin: save user new*/
-    public function save(){
+    public function save(Request $request){
         /*Kiểm tra đăng nhập*/
         $this->AuthLogin();
+
+        /*Kiểm tra email đã tồn tại chưa*/
+        $user_email = $request->user_email;
+        $array_check_user = User::where("email", $user_email)->first();
+
+        /*kiểm tra tồn tại email không và hiển thị thông báo*/
+        if($array_check_user != null)
+        {
+            Session::put("message", "Thêm mới thành viên không thành công, email này đã tồn tại");
+            return redirect('/form-add-user');
+        }
+
+        /*Xác thực mật khẩu*/
+        $password = $request->user_password;
+        $check_user_password = $request->check_user_password;
+        if($password != $check_user_password)
+        {
+            Session::put("message", "Thêm mới thành viên không thành công, email xác thực không đúng");
+            return redirect('/form-add-user');
+        }
+
+        /*lưu vào bảng user*/
+        $array_save_user = null;
+        $array_save_user['name'] = $request->user_name;
+        $array_save_user['email'] = $request->user_email;
+        $array_save_user['user_group_id'] = $request->user_group_id;
+        $array_save_user['sex'] = $request->user_sex;
+        $array_save_user['password'] = md5($password);
+        $array_save_user['status'] = "1";
+        User::insert($array_save_user);
+
+        /*chuyển về trang danh sách và in thông báo thành công*/
+        Session::put("message", "Thêm mới thành viên thành công");
+        return redirect('/list-user');
     }
     /*end: public function save(){*/
 
