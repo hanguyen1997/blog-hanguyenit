@@ -74,6 +74,11 @@ Route::get('/dell-contact', 'ContactController@ajax_del');
 
 /*User*/
 Route::get('/list-user', 'UserController@index');
+Route::get('/form-add-user', function(){
+    return View('admin.user.add');
+});
+Route::get('/save-user', 'UserController@save');
+Route::get('/ajax-check-email-user', 'UserController@check_email_user');
 Route::get('/del-user/{user_id}', 'UserController@delete');
 
 /*User group*/

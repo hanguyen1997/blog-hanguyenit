@@ -29,6 +29,27 @@ class UserController extends Controller
     }
     /*end: public function index(){*/
 
+    /*Begin: save user new*/
+    public function save(){
+        /*Kiểm tra đăng nhập*/
+        $this->AuthLogin();
+    }
+    /*end: public function save(){*/
+
+    /*Begin: check email user */
+    public function check_email_user(Request $request){
+        $user_email = $request->user_email;
+
+        /*kiểm tra user_email đã tồn tại chưa*/
+        $array_user = User::where("email", $user_email)->first();
+
+        /*kiểm tra tồn tại email không và hiển thị thông báo*/
+        if($array_user != null) echo "not oke";
+        else echo "oke";
+
+    }
+    /*end: function check_email_user(Request $request)*/
+
     /*begin: delete user*/
     public function delete($user_id){
     	/*Kiểm tra đăng nhập*/
