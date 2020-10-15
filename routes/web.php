@@ -9,13 +9,16 @@ Route::get('/trang-chu', 'HomeController@index');
 Route::get('/about', function(){
     return View('public.pages.about');
 });
+
 /*Liên hệ*/
 Route::get('/contact', function(){
     return View('public.pages.contact');
 });
+
 /*blog*/
 Route::get('/list-blog/', 'BlogController@list_blog');
 Route::get('/detail-blog/{blog_code}', 'BlogController@detail_blog_public');
+
 /*liên hệ*/
 Route::post('/contact', 'HomeController@contact');
 
@@ -45,7 +48,6 @@ Route::get('/form-edit-blog/{id_blog}', 'BlogController@form_edit');
 Route::post('/update-blog/{id_blog}', 'BlogController@update_blog');
 Route::post('/check-title', 'BlogController@check_title');
 
-
 /*trang-danh-sach-image-about*/
 Route::get('/all-image-about',  function () {
     /*Kiểm tra đăng nhập*/
@@ -53,9 +55,9 @@ Route::get('/all-image-about',  function () {
     if($user_id == "") return Redirect::to('/admin')->send();
     else return view('admin.image_about.all_image_about');
 });
-/*hiển thị trang danh sách bằng ajax*/
-Route::get('/all-image-about-ajax',  'ImageAboutController@index');
 
+/*hiển thị trang danh sách hình ảnh trang home*/
+Route::get('/all-image-about-ajax',  'ImageAboutController@index');
 Route::post('/save-image-about', 'ImageAboutController@save_image');
 Route::get('/del-image-about', 'ImageAboutController@del');
 Route::get('/active-image-about', 'ImageAboutController@active_or_unactive_image_about');
@@ -76,12 +78,17 @@ Route::get('/dell-contact', 'ContactController@ajax_del');
 /*User*/
 Route::get('/list-user', 'UserController@index');
 Route::get('/form-add-user', function(){
+    $user_id = Session::get('user_id');
+    $user_group_id = Session::get('user_group_id');
+    if($user_id == "") return Redirect::to('/admin')->send();
+    if($user_group_id != "1") return Redirect::to('/admin')->send();
     $array_user_group = UserGroup::orderBy("id_user_group", "DESC")->get();
     return View('admin.user.add')->with("array_user_group", $array_user_group);
 });
 Route::post('/save-user', 'UserController@save');
 Route::get('/ajax-check-email-user', 'UserController@check_email_user');
 Route::get('/del-user/{user_id}', 'UserController@delete');
+Route::get('/detail-user/{user_id}', 'UserController@detail');
 
 /*User group*/
 Route::get('/list-user-group', function(){
