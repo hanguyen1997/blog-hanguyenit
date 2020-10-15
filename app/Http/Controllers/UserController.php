@@ -108,5 +108,14 @@ class UserController extends Controller
         return redirect('/list-user');
     }
     /*end: public function delete($user_id)*/
+
+    /*Begin detail user*/
+    public function detail($user_id = ""){
+        /*Kiểm tra đăng nhập*/
+        $this->AuthLogin();
+
+        $array_user = User::where("user_id", $user_id)->get();
+        return view('admin.user.detail')->with("array_user", $array_user);
+    }
 }
 /*end: class UserController extends Controller*/

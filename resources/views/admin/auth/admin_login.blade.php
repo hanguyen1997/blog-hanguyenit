@@ -20,7 +20,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- //font-awesome icons -->
 <script src="public/backend/js/jquery2.0.3.min.js"></script>
 </head>
-<body>
+<body style="height: 100vh">
 <div class="log-w3">
 <div class="w3layouts-main">
 	<h2>Đăng Nhập</h2>
