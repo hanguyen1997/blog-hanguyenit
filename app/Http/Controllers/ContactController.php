@@ -60,7 +60,7 @@ class ContactController extends Controller
 
     	$array_contact = Contact::where("id_contact",$id_contact);
     	$array_contact->delete();
-    	
+        
     	echo "done";
    	}
    	/*end: function index()*/

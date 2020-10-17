@@ -112,10 +112,23 @@ class UserController extends Controller
     /*Begin detail user*/
     public function detail($user_id = ""){
         /*Kiểm tra đăng nhập*/
-        $this->AuthLogin();
+        $user_id = Session::get('user_id');
+        if($user_id == "") return Redirect::to('/admin')->send();
 
-        $array_user = User::where("user_id", $user_id)->get();
-        return view('admin.user.detail')->with("array_user", $array_user);
+        /*nếu là admin thì có quyền xem đc tất cả detail của user và không phải thì chỉ xem đc người đó thôi*/
+        $user_group_id = Session::get('user_group_id');
+
+        if($user_group_id == "1")
+        {
+            $array_user = User::where("user_id", $user_id)->get();
+            return view('admin.user.detail')->with("array_user", $array_user);
+        }else
+        {
+            $id_user = Session::get("user_id");
+            $array_user = User::where("user_id", $id_user)->get();
+            return view('admin.user.detail')->with("array_user", $array_user);
+        }   
+        /*end: if($user_group_id == 1)*/
     }
 }
 /*end: class UserController extends Controller*/
