@@ -130,5 +130,31 @@ class UserController extends Controller
         }   
         /*end: if($user_group_id == 1)*/
     }
+
+    /*change password by admin*/
+    public function change_password(Request $request, $user_id){
+
+        /*Kiểm tra đăng nhập*/
+        $this->AuthLogin();
+
+        $user_password_new = $request->user_password_new;
+        $check_user_password_new = $request->check_user_password_new;
+
+        /*Mật khẩu xác thực không giống mật khẩu mới*/
+        if($user_password_new != $check_user_password_new){
+        Session::put("message", "Mật khẩu xác thực không khớp mật khẩu mới");
+           return redirect('/change-password-user/$user_id'); 
+        }
+        /*end: if($user_password_new != $check_user_password_new)*/
+
+        /*Lưu mật khẩu mới vào id_user*/
+        $array_change_password = User::where("user_id", $user_id)->first();
+        $array_change_password['password'] = md5($check_user_password_new);
+        $array_change_password->save();
+        Session::put("message", "Thay đổi mật khẩu thành công");
+        return redirect('/list-user'); 
+                
+    }
+    /*end: public function change_user(Request $request)*/
 }
 /*end: class UserController extends Controller*/

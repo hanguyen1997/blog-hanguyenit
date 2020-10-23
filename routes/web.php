@@ -1,6 +1,7 @@
 <?php
 use Illuminate\Support\Facades\Route;
 use App\UserGroup;
+use App\User;
 
 /*home*/
 Route::get('/', 'HomeController@index');
@@ -89,6 +90,19 @@ Route::post('/save-user', 'UserController@save');
 Route::get('/ajax-check-email-user', 'UserController@check_email_user');
 Route::get('/del-user/{user_id}', 'UserController@delete');
 Route::get('/detail-user/{user_id}', 'UserController@detail');
+Route::get('/change-password-user/{user_id}', function($user_id){
+    
+    /*Kiểm tra đăng nhập và kiểm tra phải admin không*/
+    $user_id_session = Session::get('user_id');
+    $user_group_id = Session::get('user_group_id');
+    if($user_id_session == "" || $user_group_id != "1" ) return Redirect::to('/admin')->send();
+    
+    /*Truy vấn theo user_id*/
+    $array_user = User::where("user_id", $user_id)->get();
+    return View('admin.user.change_password')->with("array_user", $array_user);
+
+});
+Route::post('/change-password/{user_id}', 'UserController@change_password');
 
 /*User group*/
 Route::get('/list-user-group', function(){
