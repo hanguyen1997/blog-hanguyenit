@@ -57,7 +57,7 @@
               <a style='color:white' href="{{URL('detail-user/'.$user->user_id)}}" >Chi tiết</a>
             </button>
             <button  style='background:#57a957;'>
-              <a style='color:white' href='#' data-id='".$user->id."'>Đổi mật khẩu</a>
+              <a style='color:white' href="{{URL('change-password-user/'.$user->user_id)}}" data-id='".$user->id."'>Đổi mật khẩu</a>
             </button>
             <button style='background:red;'>
               <a style='color:white' id="delete_user" type="button" href="{{URL('del-user/'.$user->user_id)}}" onclick="return confirm('Bạn có chắc chắn muốn xóa không?')">Xoá</a>
