@@ -103,6 +103,20 @@ Route::get('/change-password-user/{user_id}', function($user_id){
 
 });
 Route::post('/change-password/{user_id}', 'UserController@change_password');
+Route::get('/form-edit-user/{user_id}', function($user_id){
+    
+    /*Kiểm tra đăng nhập và kiểm tra phải admin không*/
+    $user_id_session = Session::get('user_id');
+    $user_group_id = Session::get('user_group_id');
+    if($user_id_session == "") return Redirect::to('/admin')->send();
+
+    /*Nếu là admin thì có quyền sửa đc tất cả, còn user không có quyền sửa người khác*/
+    if($user_group_id != "1" ) $array_user = User::where("user_id", $user_id_session)->get();
+    else $array_user = User::where("user_id", $user_id)->get();
+    
+    return View('admin.user.edit')->with("array_user", $array_user);
+
+});
 
 /*User group*/
 Route::get('/list-user-group', function(){
