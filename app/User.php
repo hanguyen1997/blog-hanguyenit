@@ -4,7 +4,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class User extends Model
 {
-    protected $filltable = ['user_group_id','name','email','sex','password'];
+    protected $filltable = ['user_group_id','name','email','image','phone','sex','password'];
     protected $primaryKey = "user_id";
     protected $table = "tbl_users";
 

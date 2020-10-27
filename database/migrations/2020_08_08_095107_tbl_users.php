@@ -18,8 +18,10 @@ class TblUsers extends Migration
             $table->integer('user_group_id');
             $table->string('name');
             $table->string('email');
+            $table->string('image');
             $table->string('password');
             $table->integer('status');
+            $table->string('phone', 11);
             $table->integer('sex');
             $table->timestamps();
         });

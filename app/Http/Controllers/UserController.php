@@ -62,6 +62,8 @@ class UserController extends Controller
         $array_save_user['sex'] = $request->user_sex;
         $array_save_user['password'] = md5($password);
         $array_save_user['status'] = "1";
+        $array_save_user['image'] = "";
+        $array_save_user['phone'] = "";
         User::insert($array_save_user);
 
         /*chuyển về trang danh sách và in thông báo thành công*/
@@ -112,8 +114,7 @@ class UserController extends Controller
     /*Begin detail user*/
     public function detail($user_id = ""){
         /*Kiểm tra đăng nhập*/
-        $user_id = Session::get('user_id');
-        if($user_id == "") return Redirect::to('/admin')->send();
+        $this->AuthLogin();
 
         /*nếu là admin thì có quyền xem đc tất cả detail của user và không phải thì chỉ xem đc người đó thôi*/
         $user_group_id = Session::get('user_group_id');

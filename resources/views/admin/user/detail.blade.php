@@ -29,7 +29,7 @@
               <div class="panel-body">
                 <div class="form-user">
                   <div class="img_user">
-                    <img src="public/uploads/">
+                    <img src="{{asset('public/backend/images/'.$user->image)}}">
                   </div>
                 </div>
                 <div class="form-user">
@@ -41,8 +41,8 @@
                 </div>
                 <div class="form-user"> 
                   <?php 
-                    if($user->sex == "0") $sex = "Nam";
-                    if($user->sex == "1") $sex = "Nữ";
+                    if($user['sex'] == "1") $sex = "Nam";
+                    if($user['sex'] == "0") $sex = "Nữ";
                   ?>
                   <label for="exampleInputPassword1">Giới tính : <text><?php echo $sex; ?></text></label>
                   
@@ -50,7 +50,7 @@
                 <div class="form-user"> 
                   <label for="exampleInputPassword1">Nhóm thành viên : <text>{{$user->user_group->user_group_name}}</text></label>
                 </div>
-                <a href="#">Chỉnh sửa thông tin</a>
+                <a href="{{URL('/form-edit-user/'.$user->user_id)}}">Chỉnh sửa thông tin</a>
               </div>
           </section>
         @endforeach
