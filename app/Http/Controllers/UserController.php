@@ -114,23 +114,57 @@ class UserController extends Controller
     /*Begin detail user*/
     public function detail($user_id = ""){
         /*Kiểm tra đăng nhập*/
-        $this->AuthLogin();
+        $id_user = Session::get("user_id");
+        if($id_user == "") return Redirect::to('/admin')->send();
 
         /*nếu là admin thì có quyền xem đc tất cả detail của user và không phải thì chỉ xem đc người đó thôi*/
         $user_group_id = Session::get('user_group_id');
 
-        if($user_group_id == "1")
-        {
-            $array_user = User::where("user_id", $user_id)->get();
-            return view('admin.user.detail')->with("array_user", $array_user);
-        }else
-        {
-            $id_user = Session::get("user_id");
-            $array_user = User::where("user_id", $id_user)->get();
-            return view('admin.user.detail')->with("array_user", $array_user);
-        }   
-        /*end: if($user_group_id == 1)*/
+        if($user_group_id == "1") $array_user = User::where("user_id", $user_id)->get();
+        else $array_user = User::where("user_id", $id_user)->get();
+
+        return view('admin.user.detail')->with("array_user", $array_user);
     }
+
+    /*Begin edit user*/
+    public function edit(Request $request, $user_id){
+        
+        /*Kiểm tra đăng nhập*/
+        $id_user = Session::get("user_id");
+        if($id_user == "") return Redirect::to('/admin')->send();
+
+        /*chỉnh sửa thông tin user từ $user_id)*/
+        $array_user = User::where("user_id",$user_id)->first();
+        $array_user->name =  $request->user_name;
+        $array_user->phone =  $request->user_phone;
+        $array_user->sex =  $request->user_sex;
+        if($request->id_user_group != "") $array_user->user_group_id = $request->id_user_group;
+
+        /*Kiểm tra có hình ảnh khong, nếu không có thì khoong luuw*/
+        if($request->file('image'))
+        {
+            $get_image = $request->file('image');
+            $get_name_image = $get_image->getClientOriginalName();
+
+            /*Hàm current lấy thâm số đầu sau dấu chấm của ảnh*/
+            $name_image = current(explode(".", $get_name_image));
+            $new_image = $name_image.rand(0,99).".".$get_image->getClientOriginalExtension();
+            $get_image->move('public/backend/images', $new_image);
+            $array_user->image = $new_image;
+
+            /*Lưu vào ảnh vào session*/
+            Session::put("image", $new_image);
+        }
+        /*End: if($get_image)*/
+
+        /*update*/
+        $array_user->save();
+
+        /*đặt thông điệp thành công và quai lại trang detail*/
+        Session::put("message", "Chỉnh sửa thành côngg");
+        return redirect('/detail-user/'.$user_id); 
+    }
+    /*end: function edit(Request $request, $user_id)*/
 
     /*change password by admin*/
     public function change_password(Request $request, $user_id){

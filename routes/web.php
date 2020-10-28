@@ -24,6 +24,7 @@ Route::get('/detail-blog/{blog_code}', 'BlogController@detail_blog_public');
 Route::post('/contact', 'HomeController@contact');
 
 ///////////////*begin : admin*/////////////////////////
+
 Route::get('/admin', function () {
 	$user_id = Session::get('user_id');
 	if($user_id != "") return Redirect::to('/dashboard');
@@ -56,8 +57,6 @@ Route::get('/all-image-about',  function () {
     if($user_id == "") return Redirect::to('/admin')->send();
     else return view('admin.image_about.all_image_about');
 });
-
-/*hiển thị trang danh sách hình ảnh trang home*/
 Route::get('/all-image-about-ajax',  'ImageAboutController@index');
 Route::post('/save-image-about', 'ImageAboutController@save_image');
 Route::get('/del-image-about', 'ImageAboutController@del');
@@ -69,12 +68,14 @@ Route::get('/add-image-about', function () {
     else return view('admin.image_about.add_image_about');
 });
 
+
 /*contact*/
 Route::get('/ajax-list-contact', 'ContactController@index');
 Route::get('/list-contact', function(){
     return View('admin.contacts.index');
 });
 Route::get('/dell-contact', 'ContactController@ajax_del');
+
 
 /*User*/
 Route::get('/list-user', 'UserController@index');
@@ -90,6 +91,7 @@ Route::post('/save-user', 'UserController@save');
 Route::get('/ajax-check-email-user', 'UserController@check_email_user');
 Route::get('/del-user/{user_id}', 'UserController@delete');
 Route::get('/detail-user/{user_id}', 'UserController@detail');
+Route::post('/edit-user/{user_id}', 'UserController@edit');
 Route::get('/change-password-user/{user_id}', function($user_id){
     
     /*Kiểm tra đăng nhập và kiểm tra phải admin không*/
@@ -110,13 +112,17 @@ Route::get('/form-edit-user/{user_id}', function($user_id){
     $user_group_id = Session::get('user_group_id');
     if($user_id_session == "") return Redirect::to('/admin')->send();
 
+    /*truy vấn nhóm user*/
+    $array_group_user = UserGroup::all();
+
     /*Nếu là admin thì có quyền sửa đc tất cả, còn user không có quyền sửa người khác*/
     if($user_group_id != "1" ) $array_user = User::where("user_id", $user_id_session)->get();
     else $array_user = User::where("user_id", $user_id)->get();
     
-    return View('admin.user.edit')->with("array_user", $array_user);
+    return View('admin.user.edit')->with("array_user", $array_user)->with("array_group_user", $array_group_user);
 
 });
+
 
 /*User group*/
 Route::get('/list-user-group', function(){

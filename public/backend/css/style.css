@@ -449,9 +449,10 @@ ul.top-menu>li>a:hover,ul.top-menu>li>a:focus {
     margin-top:20px;
 }
 .top-nav img {
-    border-radius:50%;
-    -webkit-border-radius:50%;
-    width:33px;
+    -webkit-border-radius: 50%;
+    width: 33px;
+    height: 33px;
+    object-fit: cover;
 }
 .top-nav .icon-user i {
     height: 33px;
