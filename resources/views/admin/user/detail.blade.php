@@ -10,6 +10,11 @@
     overflow: hidden;
     margin: 0px auto 20px auto;
   }
+  .img_user img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
   .panel{
     text-align: center;
   }
@@ -17,6 +22,19 @@
     font-weight: 400;
   }
 </style>
+<div>
+  <?php
+    /*Nếu có thông báo thì hiển thị*/
+    $message = Session::get("message");
+    if($message)
+    {
+      echo "<div style='text-align: center;font-size: 15px;color: #5050f0;' class='alert alert-info'>$message</div>";
+      Session::put("message", NULL);
+    }
+    /*end: if($message)*/
+  ?>
+</div>
+
 <div class="table-agile-info">
   <div class="panel panel-default">
     <div class="panel-heading">
@@ -37,7 +55,9 @@
                 </div>
                 <div class="form-user">
                   <label for="exampleInputEmail1">Email : <text>{{$user->email}}</text></label>
-                  
+                </div>
+                 <div class="form-user">
+                  <label for="exampleInputEmail1">Số điện thoại : <text>{{$user->phone}}</text></label>
                 </div>
                 <div class="form-user"> 
                   <?php 

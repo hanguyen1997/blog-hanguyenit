@@ -54,7 +54,7 @@
             @foreach($array_user as $key => $user)
             <div class="panel-body">
                 <div class="position-center">
-                    <form id="form_add_user" role="form" action="{{URL::to('/save-user')}}" method="post" enctype="multipart/form-data">
+                    <form id="form_edit_user" role="form" action="{{URL::to('/edit-user/'.$user->user_id)}}" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="_token" value="{{csrf_token()}}">
                     <div class="form-group">
                         <label style="width: 100%;">
@@ -86,12 +86,20 @@
                             <option value="0" <?php if($user['sex'] == "0") echo "selected"; ?>>Nữ</option>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Xác thực mật khẩu hiện tại(*)</label>
-                        <input type="password" name="check_user_password" class="form-control" id="check_user_password" >
-                        <div id="confim_check_password_user"></div>
-                    </div>
-                    <button type="button" onclick="checkform()" name="add_user" class="btn btn-info">Chỉnh sửa thành viên</button>
+
+                   
+                    @if(Session::get('user_group_id') == "1")
+                        <!-- Nếu là admin có thể chỉnh sủa quyền của user -->
+                        <div class="form-group"> 
+                        <label for="exampleInputPassword1">Nhóm thành viên</label>
+                        <select name="id_user_group" class="form-control input-sm m-bot15">
+                            @foreach($array_group_user as $key => $user_group)
+                                <option value="{{$user_group->id_user_group}}" <?php if($user['user_group_id'] == $user_group->id_user_group) echo "selected"; ?>>{{$user_group->user_group_name}}</option>
+                            @endforeach
+                        </select>
+                        </div>
+                    @endif
+                    <button style="margin: 0 auto;display: flex;"type="button" onclick="checkform()" name="add_user" class="btn btn-info">Chỉnh sửa thành viên</button>
                 </form>
                 </div>
             </div>
@@ -108,41 +116,26 @@
             swal("Gặp lỗi rồi !!!", "Vui lòng nhập họ và tên ");
             return;
         }
-        if(document.getElementById("user_email").value == "")
+        if(document.getElementById("user_phone").value == "")
         {
-            swal("Gặp lỗi rồi !!!", "Vui lòng nhập email");
+            swal("Gặp lỗi rồi !!!", "Vui lòng nhập họ số điện thoại");
             return;
         }
 
-        /*kiểm tra email hợp lệ khôn*/
-        if(document.getElementById("user_email").value != "")
-        {
-            var x = document.getElementById("user_email").value;
-            var atposition = x.indexOf("@");
-            var dotposition = x.lastIndexOf(".");
-            if (atposition < 1 || dotposition < (atposition + 2)
-                    || (dotposition + 2) >= x.length) {
-                swal("Gặp lỗi rồi !!!", "Email không hợp lệ");
-                return;
-            }
-        }
-        if(document.getElementById("user_password").value == "")
-        {
-            swal("Gặp lỗi rồi !!!", "Vui lòng nhập mật khẩu");
-            return;
-        }
-        if(document.getElementById("check_user_password").value == "")
-        {
-            swal("Gặp lỗi rồi !!!", "Vui lòng nhập xác thực mật khẩu");
-            return;
-        }
-        if(document.getElementById("user_password").value != document.getElementById("check_user_password").value)
-        {
-            swal("Gặp lỗi rồi !!!", "Mật khẩu và mật khẩu xác thực không chính xác");
-            return;
-        }
+        /*thông báo chắc chắn muốn sửa*/
+        swal({
+          title: "Bạn chắc chắn muốn thay đổi thông tin cá nhân không ?",
+          text: "Sau khi chỉnh sửa, bạn sẽ không thể khôi phục lại như thông tin cũ!",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+        })
+        .then((willDelete) => {
+          if (willDelete) document.getElementById("form_edit_user").submit();
+          else swal("Mọi thông tin đều không thay đổi!");
+        });
 
-        document.getElementById("form_add_user").submit();
+        
     }
     /*end:  function checkform()*/
 
