@@ -166,12 +166,16 @@ class BlogController extends Controller
 //////////////////////////////////*PUBLIC*//////////////////////////////////
     
     /*begin: list blog*/
-    public function list_blog()
+    public function list_blog(Request $request)
     {   
         /*blog_status = 1 -> hiển thị , blog_status = 2 -> ko hiển thị */
-        $array_blog = Blog::where("blog_status", "1")->orderBy("id_blog", "DESC")->paginate(6);
 
-        return View('public.pages.list_blog')->with("array_blog", $array_blog);
+        /*Nếu có tham số search thì tìm theo tham số*/
+        $search = $request->search_blog;
+        if($search != "" )  $array_blog = Blog::where("blog_status", "1")->where("blog_title", "LIKE", "%$search%")->orderBy("id_blog", "DESC")->paginate(6);
+        else $array_blog = Blog::where("blog_status", "1")->orderBy("id_blog", "DESC")->paginate(6);
+
+        return View('public.pages.list_blog')->with("array_blog", $array_blog)->with("search", $search);
     }
     /*end: function list_blog()*/
     
