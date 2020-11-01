@@ -96,11 +96,16 @@ Route::get('/change-password-user/{user_id}', function($user_id){
     
     /*Kiểm tra đăng nhập và kiểm tra phải admin không*/
     $user_id_session = Session::get('user_id');
+    if($user_id_session == "") return Redirect::to('/admin')->send();
+
+    /*Nếu là admin thì có thể thay đổi pass theo uid truyền lên*/
     $user_group_id = Session::get('user_group_id');
-    if($user_id_session == "" || $user_group_id != "1" ) return Redirect::to('/admin')->send();
+    if($user_group_id == "1")   $array_user = User::where("user_id", $user_id)->get();
     
-    /*Truy vấn theo user_id*/
-    $array_user = User::where("user_id", $user_id)->get();
+    /*ngược lại thì chỉ có thể thay đổi mk của chính user đó */
+    else $array_user = User::where("user_id", $user_id_session)->get();
+
+    
     return View('admin.user.change_password')->with("array_user", $array_user);
 
 });

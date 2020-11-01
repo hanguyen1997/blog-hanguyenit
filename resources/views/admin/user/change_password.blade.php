@@ -53,13 +53,26 @@
                         <p>{{ $user->name }}</p>
                     </div>
                     @endforeach
+                    <?php 
+                        /*Nếu là admin thì không cần hiển thị ô nhập mật khẩu hiện tại*/
+                        $user_group_id = Session::get('user_group_id');
+                        if($user_group_id != "1"){
+                    ?>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Mật Khẩu Hiện Tại(*)</label>
+                            <input type="password" name="user_password_check" class="form-control" id="user_password_check" >
+                            <p style="color: #afadad;">Nếu quên mật khẩu vui lòng liên hệ Admin</p>
+                        </div>
+                    <?php 
+                        }
+                    ?>
                     <div class="form-group">
-                        <label for="exampleInputPassword1">Mật khẩu mới (*)</label>
+                        <label for="exampleInputPassword1">Mật khẩu mới(*)</label>
                         <input type="password" name="user_password_new" class="form-control" id="user_password_new" >
                         <div id="confim_password_user"></div>
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputPassword1">Xác thực mật khẩu (*)</label>
+                        <label for="exampleInputPassword1">Xác thực mật khẩu(*)</label>
                         <input type="password" name="check_user_password_new" class="form-control" id="check_user_password_new" >
                         <div id="confim_check_password_user"></div>
                     </div>
@@ -129,6 +142,18 @@
 
     //kiem tra form
     function checkform(){
+
+        /*Kiểm tra ổ input user_password_check có tồn tại không*/
+        var user_password_check = document.getElementById('user_password_check');
+        if(typeof(user_password_check) != 'undefined' && user_password_check != null){
+            if(user_password_check.value == "")
+            {
+                swal("Gặp lỗi rồi !!!", "Vui lòng nhập mật khẩu hiện tại");
+                return;
+            }
+        } 
+
+        
         if(document.getElementById('user_password_new').value == "")
         {
             swal("Gặp lỗi rồi !!!", "Vui lòng nhập mật khẩu mới");
@@ -148,6 +173,8 @@
             swal("Gặp lỗi rồi !!!", "Mật khẩu xác thực không khớp mật khẩu mới");
             return;
         }
+
+
 
         document.getElementById('form_change_password_user').submit();
     }
