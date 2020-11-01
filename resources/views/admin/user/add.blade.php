@@ -52,6 +52,11 @@
                         <div id="confim_email_user"></div>
                     </div>
                     <div class="form-group">
+                        <label for="exampleInputEmail1">Phone(*)</label>
+                        <input type="text" name="user_phone" class="form-control" id="user_phone" required >
+                        
+                    </div>
+                    <div class="form-group">
                         <label for="exampleInputPassword1">Mật khẩu (*)</label>
                         <input type="password" name="user_password" class="form-control" id="user_password" >
                         <div id="confim_password_user"></div>
@@ -208,6 +213,21 @@
                 return;
             }
         }
+
+        /*check number phone*/
+        var vnf_regex = /((09|03|07|08|05)+([0-9]{8})\b)/g;
+        var user_phone = $('#user_phone').val();
+        if(user_phone !==''){
+            if (vnf_regex.test(user_phone) == false) 
+            {
+                swal("Gặp lỗi rồi !!!", "Số điện thoại của bạn hợp lệ!");
+                return;
+            }
+        }else{
+            swal("Gặp lỗi rồi !!!", "Vui lòng nhập số điện thoại");
+            return;
+        }
+
         if(document.getElementById("user_password").value == "")
         {
             swal("Gặp lỗi rồi !!!", "Vui lòng nhập mật khẩu");
