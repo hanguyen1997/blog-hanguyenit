@@ -170,24 +170,36 @@ class UserController extends Controller
     public function change_password(Request $request, $user_id){
 
         /*Kiểm tra đăng nhập*/
-        $this->AuthLogin();
+        $id_user = Session::get("user_id");
+        if($id_user == "") return Redirect::to('/admin')->send();
 
         $user_password_new = $request->user_password_new;
         $check_user_password_new = $request->check_user_password_new;
 
         /*Mật khẩu xác thực không giống mật khẩu mới*/
         if($user_password_new != $check_user_password_new){
-        Session::put("message", "Mật khẩu xác thực không khớp mật khẩu mới");
-           return redirect('/change-password-user/$user_id'); 
+            Session::put("message", "Mật khẩu xác thực không khớp mật khẩu mới");
+            return redirect('/change-password-user/'.$user_id); 
         }
         /*end: if($user_password_new != $check_user_password_new)*/
 
-        /*Lưu mật khẩu mới vào id_user*/
+        /*Kiểm tra mật khẩu cũ có đúng không*/
+        $user_password_check = $request->user_password_check;
         $array_change_password = User::where("user_id", $user_id)->first();
+        if($user_password_check != ""){
+            if(md5($user_password_check) != $array_change_password->password){
+                Session::put("message", "Mật khẩu hiển tại không đúng");
+                return redirect('/change-password-user/'.$user_id);
+            }
+            /*end: */
+        }
+        /*end: if($user_password_check != "")*/
+
+        /*Lưu mật khẩu mới vào id_user*/
         $array_change_password['password'] = md5($check_user_password_new);
         $array_change_password->save();
         Session::put("message", "Thay đổi mật khẩu thành công");
-        return redirect('/list-user'); 
+        return redirect('/detail-user/'.$user_id); 
                 
     }
     /*end: public function change_user(Request $request)*/

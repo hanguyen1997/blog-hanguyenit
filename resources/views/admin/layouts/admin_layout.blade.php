@@ -97,7 +97,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </a>
             <ul class="dropdown-menu extended logout">
                 <li><a href="{{URL('/detail-user/'.$user_id)}}"><i class=" fa fa-suitcase"></i>Hồ Sơ</a></li>
-                <li><a href="#"><i class="fa fa-cog"></i> Thay đổi mật khẩu</a></li>
+                <li><a href="{{URL('/change-password-user/'.$user_id)}}"><i class="fa fa-cog"></i> Thay đổi mật khẩu</a></li>
                 <li><a href="{{URL::to('/logout')}}"><i class="fa fa-key"></i> Đăng Xuất</a></li>
             </ul>
         </li>
