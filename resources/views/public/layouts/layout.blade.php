@@ -45,6 +45,9 @@
   <link rel="shortcut icon" href="{{asset('public/fontend/images/logo-chữ-N-59.gif')}}">
 </head>
 <body>
+   <!-- begin Back To Top -->
+  <button onclick="topFunction()" id="btn_on_top" title="Go to top">^</button>
+
   <!-- start section navbar -->
     @yield('menu')
   <!-- End section navbar -->
@@ -72,7 +75,29 @@
   <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v8.0&appId=219426959419501&autoLogAppEvents=1" nonce="e4T6g9wP"></script>
   <!-- Contact Form JavaScript ajax-->
   <script type="text/javascript">
+  //Get the button:
+  btn_on_top = document.getElementById("btn_on_top");
+
+  // When the user scrolls down 20px from the top of the document, show the button
+  window.onscroll = function() {scrollFunction()};
+
+  function scrollFunction() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+      btn_on_top.style.display = "block";
+    } else {
+      btn_on_top.style.display = "none";
+    }
+  }
+  // When the user clicks on the button, scroll to the top of the document
+  function topFunction() {
+    var data_id = $(this).attr('#btn_on_top');
+    $('html, body').animate({
+      scrollTop: $(data_id).offset().top
+    }, '500');
+  }
+
   $(document).ready(function(){
+           
     //Contact
     $('form.contactForm').submit(function() {
       var name_contact = $('#name_contact').val();
