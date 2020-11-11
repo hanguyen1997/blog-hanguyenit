@@ -148,14 +148,18 @@ class BlogController extends Controller
         $array_blog_edit->created_at = date("Y-m-d H:i:s");
         $array_blog_edit->blog_status = $request->blog_status;
         
-        $get_image = $request->file('blog_image');
-        $get_name_image = $get_image->getClientOriginalName();
+        if($request->file('image'))
+        {
+            $get_image = $request->file('image');
+            $get_name_image = $get_image->getClientOriginalName();
 
-        /*Hàm current lấy thâm số đầu sau dấu chấm của ảnh*/
-        $name_image = current(explode(".", $get_name_image));
-        $new_image = $name_image.rand(0,99).".".$get_image->getClientOriginalExtension();
-        $get_image->move('public/uploads', $new_image);
-        $array_blog_edit->blog_image = $new_image;
+            /*Hàm current lấy thâm số đầu sau dấu chấm của ảnh*/
+            $name_image = current(explode(".", $get_name_image));
+            $new_image = $name_image.rand(0,99).".".$get_image->getClientOriginalExtension();
+            $get_image->move('public/uploads', $new_image);
+            $array_blog_edit->blog_image = $new_image;
+        }
+        
         $array_blog_edit->save();
         
         Session::put('message','Thành công');
