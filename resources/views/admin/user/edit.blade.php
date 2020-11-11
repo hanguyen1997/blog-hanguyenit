@@ -64,8 +64,6 @@
                              <input type="file" name="image" class="form-control" id="image" onchange="show_image()" style="visibility: hidden;">
                             <!-- <input type="file" /> -->
                         </label>
-
-                       
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Email : <text>{{$user->email}}</text></label>

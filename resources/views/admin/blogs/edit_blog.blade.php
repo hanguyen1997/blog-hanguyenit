@@ -1,4 +1,4 @@
-@extends('admin.layouts.admin_layout');
+@extends('admin.layouts.admin_layout')  
 @section('content')
         <section class="panel">
             <header class="panel-heading">
@@ -19,7 +19,7 @@
                     <img style="width: auto; height: 300px;" src="{{asset('public/uploads/'.$array_blog_edit->blog_image)}}"></img>
                     <div class="form-group">
                         <label for="exampleInputPassword1">Hình ảnh tiêu đề</label>
-                        <input type="file" name="blog_image" class="form-control" id="blog_image" value="{!!$array_blog_edit->blog_image!!}">
+                        <input type="file" name="blog_image" class="form-control" id="blog_image" value="alo" onchange="show_image()">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">Mô tả ngắn gọn</label>
