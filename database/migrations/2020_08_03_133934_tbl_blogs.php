@@ -22,7 +22,7 @@ class TblBlogs extends Migration
             $table->text('blog_content');
             $table->string('blog_image');
             $table->integer('blog_status');
-            $table->integer('viewcount');
+            $table->string('viewcount', 100);
             $table->integer('id_user_create');
             $table->timestamps();
         });

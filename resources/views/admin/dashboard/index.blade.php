@@ -9,7 +9,7 @@
 			</div>
 			 <div class="col-md-8 market-update-left">
 			 <h4>Sô lượt truy cập bài viết</h4>
-			<h3>500</h3>
+			<h3>{{$count_view_blog}}</h3>
 		  </div>
 		  <div class="clearfix"> </div>
 		</div>

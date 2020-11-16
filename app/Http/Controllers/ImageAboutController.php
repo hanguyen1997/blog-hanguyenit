@@ -78,7 +78,6 @@ class ImageAboutController extends Controller
 		$array_about['status'] = "1";
 
 		DB::table('tbl_about')->insert($array_about);
-		Session::put('message','Thêm hình ảnh thành công');
 		return Redirect::to('all-image-about');
     }
     /*end: public function save_image(Request $require)*/
