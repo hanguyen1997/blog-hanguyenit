@@ -43,5 +43,37 @@
 </div>	
 <div class="clearfix"> </div>
 
+<div class="col-md-12 stats-info stats-last widget-shadow">
+	<div class="stats-last-agile">
+		<table class="table stats-table ">
+			<thead>
+				<tr>
+					<th>Blog</th>
+					<th>Tổng view</th>
+					<th>Trạng thái</th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php 
+					$array_status = array("1"=>"Hiển thị", "0"=>"Đang ẩn");
+				?> 
+				@foreach($array_blog_most_view as $key => $row)
+					<tr>
+						<td>{{$row->blog_title}}</td>
+						<td><span class="label label-info">{{$row->viewcount}}</span></td>
+						<?php 
+							$status = $array_status[$row->blog_status];
+
+							if($row->blog_status == "1") $class_status = "label label-success";
+							else $class_status = "label label-danger";
+						?>
+
+						<td><span class="<?= $class_status ?>"><?= $status ?></span></td>
+					</tr>
+				@endforeach
+			</tbody>
+		</table>
+	</div>
+</div>
 
 @endsection

@@ -119,7 +119,7 @@
                 </span>
                 <span style="padding-left: 5px;"><i class="ion-android-person"></i> {{$post->user->name}}</span>
               </div>
-              <p style="overflow: hidden;-webkit-line-clamp: 5;display: -webkit-box; -webkit-box-orient: vertical;" class="separator">{{$post->blog_description}}</p>
+              <p style="overflow: hidden;-webkit-line-clamp: 5;display: -webkit-box; -webkit-box-orient: vertical;min-height: 125px;" class="separator">{{$post->blog_description}}</p>
             </div>
           </div>
         </div>
@@ -164,13 +164,13 @@
               </div>
               <div class="col-lg-6">
                 <div class="form-group">
-                  <input type="email" class="form-control" name="email" id="email_contact" placeholder="Email của bạn" data-rule="email" data-msg="Please enter a valid email" />
+                  <input type="email" class="form-control" name="email" id="email_contact" placeholder="Emailn" data-rule="email" data-msg="Please enter a valid email" />
                   <div class="validation"></div>
                 </div>
               </div>
               <div class="col-lg-12">
                 <div class="form-group">
-                  <textarea class="form-control" name="message" rows="12" id="message_contact" data-msg="Please write something for us" placeholder="Tin Nhắn"></textarea>
+                  <textarea class="form-control" name="message" rows="12" id="message_contact" data-msg="Please write something for us" placeholder="Lời Nhắn"></textarea>
                   <div class="validation"></div>
                 </div>
               </div>

@@ -24,7 +24,7 @@ class BlogController extends Controller
     	$this->AuthLogin();
 
         /*(blogs_tatus =  3) -> dell*/
-        $array_blog = Blog::where("blog_status" ,"<>","3")->paginate(10);
+        $array_blog = Blog::where("blog_status" ,"<>","3")->orderBy("id_blog", "DESC")->paginate(10);
     	return view('admin.blogs.all_blog')->with(compact('array_blog'));
     }
     /*end: public function index()*/
@@ -211,9 +211,9 @@ class BlogController extends Controller
         $array_more_blog = Blog::where("id_blog", "<>", $id_blog)->get();
 
         /*Cập nhập +1 view vào blog khi truy cập chi tiết*/
-        $update_view = Blog::where("id_blog", $id_blog)->first();
-        $update_view->viewcount = $update_view->viewcount + 1;
-        $update_view->save();
+        $array_update_view = Blog::where("id_blog", $id_blog)->first();
+        $array_update_view->viewcount = $array_update_view->viewcount + 1;
+        $array_update_view->save();
 
         return View('public.pages.detail_blog')->with(compact('array_detail_blog','blog_title','blog_keyword','blog_description','url_image', 'array_more_blog'));
     }

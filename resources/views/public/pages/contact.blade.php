@@ -55,7 +55,7 @@
       </div>
     </div>
     <div style="margin-top: 50px">
-      <h1 style="text-align:center;font-size: 18px;">Nếu có gì cần liên hệ các bạn có thể gửi mail cho mình đến địa chỉ <a href="#">truongbahanguyen@gmail.com</a> hoặc có thể để lại thông tin ở bên trên. Cảm ơn !<h1>
+      <h1 style="text-align:center;font-size: 18px;">Nếu cần liên hệ các bạn có thể gửi mail cho mình đến địa chỉ <a href="#">truongbahanguyen@gmail.com</a> hoặc có thể để lại thông tin ở bên trên. Cảm ơn !<h1>
     </div>
   </div>
 </div>
