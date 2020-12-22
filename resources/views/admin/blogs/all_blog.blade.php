@@ -9,6 +9,17 @@
     border: solid #d2cece;
   }
 </style>
+<?php
+  /*Lấy Thông báo Session::get*/
+  $message = Session::get('message');
+
+  /*Kiểm tra nếu có thông báo thì hiển thị*/
+  if(isset($message)) 
+  {
+    echo "<div style='text-align: center;font-size: 15px;color: #5050f0;' class='alert alert-info'>$message</div>";
+    Session::put('message', NULL);
+  }
+?>
 <div class="table-agile-info">
   <div class="panel panel-default">
     <div class="panel-heading">
@@ -28,17 +39,6 @@
     </div>
     <div class="table">
       <table style="width: 100%;">
-        <?php
-          /*Lấy Thông báo Session::get*/
-          $message = Session::get('message');
-
-          /*Kiểm tra nếu có thông báo thì hiển thị*/
-          if(isset($message)) 
-          {
-            echo "<div><span style='color:blue; text-aline:center'>$message</span></div>";
-            Session::put('message', NULL);
-          }
-        ?>
         <thead class="head_table">
           <tr>
             <th>Tiêu đề</th>
