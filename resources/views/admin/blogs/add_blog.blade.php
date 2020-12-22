@@ -54,6 +54,9 @@
     /*Khi thay đổi tiêu đề bài viết thì cập nhật giá trị nội dung vào ô url_key*/
     $(document).ready(function()
     {
+        document.getElementById("menu-blogs").className = "dcjq-parent active";
+        document.getElementById("add_blog").className = "active";
+
         $("#blog_title").blur(function(){
             var _token = $('input[name="_token"]').val();
             var title = (document.getElementById("blog_title").value);

@@ -70,4 +70,11 @@
     </div>
   </div>
 </div>
+<script type="text/javascript">
+  $(document).ready(function()
+  {
+    document.getElementById("menu-users").className = "dcjq-parent active";
+    document.getElementById("list_user").className = "active";
+  })
+</script>
 @endsection

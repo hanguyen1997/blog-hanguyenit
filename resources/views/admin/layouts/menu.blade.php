@@ -10,13 +10,13 @@
                     </a>
                 </li>
                 <li class="sub-menu">
-                    <a href="javascript:;">
+                    <a href="javascript:;" id="menu-blogs">
                         <i class="fa fa-sticky-note-o"></i>
                         <span>Bài viết</span>
                     </a>
                     <ul class="sub">
-						<li><a href="{{URL::to('/all-blog')}}">Danh sách bài viết</a></li>
-						<li><a href="{{URL::to('/add-blog')}}">Thêm bài viết</a></li>
+						<li id="list_blog" ><a href="{{URL::to('/all-blog')}}">Danh sách bài viết</a></li>
+						<li id="add_blog" ><a href="{{URL::to('/add-blog')}}">Thêm bài viết</a></li>
                     </ul>
                 </li>
                 <li class="sub-menu">
@@ -38,14 +38,14 @@
                 {;
                 ?>
                 <li class="sub-menu">
-                    <a href="javascript:;">
+                    <a href="javascript:;"  id="menu-users">
                         <i class="fa fa-user-plus"></i>
                         <span>Thành viên</span>
                     </a>
                     <ul class="sub">
-                        <li><a href="{{URL::to('/list-user')}}">Danh sách thành viên</a></li>
-                        <li><a href="{{URL::to('/form-add-user')}}">Thêm thành viên mới</a></li>
-                        <li><a href="{{URL::to('/list-user-group')}}">Danh sách nhóm thành viên</a></li>
+                        <li id="list_user" ><a href="{{URL::to('/list-user')}}">Danh sách thành viên</a></li>
+                        <li id="add_user" ><a href="{{URL::to('/form-add-user')}}">Thêm thành viên mới</a></li>
+                        <li id="list_group_user" ><a href="{{URL::to('/list-user-group')}}">Danh sách nhóm thành viên</a></li>
                     </ul>
                 </li>
                 <?php 

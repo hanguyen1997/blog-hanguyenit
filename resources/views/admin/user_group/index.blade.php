@@ -69,6 +69,11 @@
 </div>
 
 <script type="text/javascript">
+$(document).ready(function(){
+  /*active menu*/
+  document.getElementById("menu-users").className = "dcjq-parent active";
+  document.getElementById("list_group_user").className = "active";
+});
 /*dùng ajax để hiện thị danh sách*/
 function fetch_data(){
   $.ajax({

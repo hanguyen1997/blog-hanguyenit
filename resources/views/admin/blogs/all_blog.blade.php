@@ -100,4 +100,12 @@
     </footer>
   </div>
 </div>
+<script type="text/javascript">
+  $(document).ready(function()
+  {
+    document.getElementById("menu-blogs").className = "dcjq-parent active";
+    document.getElementById("list_blog").className = "active";
+
+  })
+</script>
 @endsection

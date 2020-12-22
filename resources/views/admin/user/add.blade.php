@@ -90,6 +90,10 @@
 </div>
 <script type="text/javascript">
     $(document).ready(function(){
+ 
+        document.getElementById("menu-users").className = "dcjq-parent active";
+        document.getElementById("add_user").className = "active";
+
         /*Kiểm tra email đã tồn tại chưa*/
         $("#user_email").blur(function(){
             var user_email = document.getElementById('user_email').value;
