@@ -1,1 +1,1 @@
-<p align="center">Dự án website blog chia sẽ thông tin</p>
+<p align="center">Project website blog to share information</p>
